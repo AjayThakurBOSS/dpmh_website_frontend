@@ -150,11 +150,11 @@ const DocImageContainer = styled.div`
   display:flex;
   align-items: center;
   justify-content: center;
-
+    height: 200px;
 `
 const DoctorImage = styled.img`
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
   object-fit: cover;
   border:2px solid #ff1010ff;
   border-radius: 50%;

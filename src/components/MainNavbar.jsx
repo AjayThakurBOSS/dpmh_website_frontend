@@ -17,10 +17,10 @@ const MainNavbar = () => {
 
     // Color palette for Center of Excellence submenus
     const submenuColors = [
-        '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7', 
-        '#DDA0DD', '#98D8C8', '#F7DC6F', '#BB8FCE', '#85C1E9',
-        '#F8C471', '#82E0AA', '#F1948A', '#85C1E9', '#D7BDE2',
-        '#76D7C4', '#F9E79F'
+        '#ffe8ec', '#fff3e0', '#e8f4f8', '#fce4ec', '#f3e5f5',
+        '#e8f5e9', '#fff8e1', '#e3f2fd', '#fbe9e7', '#e8eaf6',
+        '#e0f2f1', '#fff3e0', '#fce4ec', '#e3f2fd', '#e8f5e9',
+        '#bed8d3', '#f5eccc'
     ];
 
     const navItems = [
@@ -277,7 +277,7 @@ const SubMenuItem = styled(Link)`
 
     &:hover {
         background-color: #f0f0f0;
-        color: #00bfff;
+        color: #000000;
         transform: translateY(-2px);
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
@@ -287,11 +287,11 @@ const SubMenuItem = styled(Link)`
             flex-basis: 32%; 
             padding: 10px 15px;
             box-sizing: border-box;
-            color: #345FA5; 
+            color: #000000; 
             background-color: ${props.backgroundColor || '#a4e0f4ff'};
             border-radius: 5px;
             margin: 3px;
-            border-left: 4px solid ${props.backgroundColor ? darkenColor(props.backgroundColor, 0.2) : '#345FA5'};
+            /* border-left: 4px solid ${props.backgroundColor ? darkenColor(props.backgroundColor, 0.2) : '#345FA5'}; */
             
             &:hover {
                 background-color: ${props.backgroundColor ? lightenColor(props.backgroundColor, 0.1) : '#f0f0f0'};
@@ -303,7 +303,7 @@ const SubMenuItem = styled(Link)`
     `}
 
     @media (max-width: 992px) {
-        color: white;
+        color: #000000;
         padding-left: 30px;
         border-top: 1px solid rgba(255, 255, 255, 0.05);
         background-color: ${props => props.isSpecial ? props.backgroundColor || '#4c62a5' : 'transparent'};

@@ -29,7 +29,7 @@ const DipartmentLink = () => {
     { name: 'Nephrology', link: '/departments/nephrology', icon: FaBrain },
     { name: 'Gynecology + obstetrician', link: '/departments/gynecology-obstetrician', icon: FaBaby },
     { name: 'Orthopedic', link: '/departments/orthopedic', icon: FaBone },
-    { name: 'Gastroenterology', link: '/departments/gastroenterology', icon: FaFlask },
+    { name: 'Gastroenterology', link: '/departments/gastroenterology', icon: FaBrain },
     { name: 'Neurology', link: '/departments/neurology', icon: FaBrain },
     { name: 'Paediatrics', link: '/departments/paediatrics', icon: FaChild },
     { name: 'Neuro-surgery', link: '/departments/neuro-surgery', icon: FaSkull },
@@ -43,10 +43,10 @@ const DipartmentLink = () => {
 
   // Same color palette as the navbar
   const departmentColors = [
-    '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7', 
-    '#DDA0DD', '#98D8C8', '#F7DC6F', '#BB8FCE', '#85C1E9',
-    '#F8C471', '#82E0AA', '#F1948A', '#85C1E9', '#D7BDE2',
-    '#76D7C4', '#F9E79F'
+    '#ffe8ec', '#fff3e0', '#e8f4f8', '#fce4ec', '#f3e5f5',
+        '#e8f5e9', '#fff8e1', '#e3f2fd', '#fbe9e7', '#e8eaf6',
+        '#e0f2f1', '#fff3e0', '#fce4ec', '#e3f2fd', '#e8f5e9',
+    '#bed8d3', '#f5eccc'
   ]
 
   return (
@@ -161,13 +161,13 @@ const DepartmentsList = styled.ul`
 
 const DepartmentItem = styled.li`
   background: ${props => props.bgColor || '#f8f9fa'};
-  border: 2px solid ${props => props.borderColor || '#e9ecef'};
+  /* border: 2px solid ${props => props.borderColor || '#e9ecef'}; */
   border-radius: 10px;
   transition: all 0.3s ease;
   opacity: 0;
   animation: ${slideIn} 0.5s ease-out forwards;
   animation-delay: ${props => props.delay || '0s'};
-  border-left: 4px solid ${props => props.borderColor || '#e9ecef'};
+ /*  border-left: 4px solid ${props => props.borderColor || '#e9ecef'}; */
 
   &:hover {
     transform: translateX(8px) scale(1.02);

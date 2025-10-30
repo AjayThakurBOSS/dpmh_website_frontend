@@ -542,9 +542,9 @@ const diagnostic = [
   "Pathology & Laboratory Services (Biochemistry, Hematology, Microbiology)",
   "X-ray",
   "CT Scan",
-  "MRI",
+
   "Ultrasound",
-  "Digital Mammography",
+  
   "ECG, 2D Echo, TMT, Holter",
   "Endoscopy / Colonoscopy",
 ];
