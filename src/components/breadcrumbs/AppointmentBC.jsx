@@ -49,15 +49,17 @@ const Title = styled.h1`
   font-size: 2.8rem;
   font-weight: 700;
   margin-bottom: 12px;
+  padding: 0 20px;
 
   @media (max-width: 768px) {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 `;
 
 const SubText = styled.p`
   font-size: 1.2rem;
   opacity: 0.9;
+  padding: 0 20px;
 
   @media (max-width: 768px) {
     font-size: 1rem;

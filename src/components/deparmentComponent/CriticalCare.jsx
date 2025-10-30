@@ -1045,7 +1045,7 @@ const CriticalCare = () => {
               🏥 Emergency Critical Care - Immediate Assistance
             </CTAButton>
             <Text style={{ color: '#0066cc', fontWeight: '600', marginTop: '1rem' }}>
-              📍 Bailey Road, Patna • 📞 24/7 Critical Care Helpline
+              📍 Dinkar Golamber, Rajendar Nagar, Patna • 📞 24/7 Critical Care Helpline
             </Text>
           </div>
         </Section>

@@ -17,11 +17,11 @@ const TopBar = () => {
   };
 
   const handleEmailClick = () => {
-    window.open('mailto:info@prabhatmemorialhospital.com', '_self');
+    window.open('mailto:info@info@dpmhhospital.com', '_self');
   };
 
   const handleAmbulanceClick = () => {
-    window.open('tel:+91-8612402010', '_self');
+    window.open('tel:+918406000555', '_self');
   };
 
   const handleLocationClick = () => {
@@ -42,11 +42,11 @@ const TopBar = () => {
           <ContactItem  href="https://share.google/t9m45GaXpkdnObcsr" onClick={handleLocationClick}>
             <FaMapMarkerAlt /> Patna, Bihar
           </ContactItem>
-          <ContactItem onClick={() => handlePhoneClick('+918612402010')} style={{ cursor: 'pointer' }}>
-            <FaPhoneAlt /> +91-8612402010
+          <ContactItem onClick={() => handlePhoneClick('+918406000555')} style={{ cursor: 'pointer' }}>
+            <FaPhoneAlt /> +918406000555
           </ContactItem>
-          <ContactItem onClick={() => handlePhoneClick('+91940000444')} style={{ cursor: 'pointer' }}>
-            <FaPhoneAlt /> +91-940000444
+          <ContactItem onClick={() => handlePhoneClick('+918406000444')} style={{ cursor: 'pointer' }}>
+            <FaPhoneAlt /> +91-8406000444
           </ContactItem>
           <ContactItem onClick={handleAmbulanceClick} style={{ cursor: 'pointer' }}>
             <FaAmbulance /> Call Ambulance
@@ -84,7 +84,7 @@ const TopBar = () => {
           <MobileContactItem onClick={handleEmailClick}>
             <FaEnvelope /> 
             <div>
-              <div>info@prabhatmemorialhospital.com</div>
+              <div>info@dpmhhospital.com</div>
               <MobileContactHint>Click to send email</MobileContactHint>
             </div>
           </MobileContactItem>
@@ -97,18 +97,18 @@ const TopBar = () => {
             </div>
           </MobileContactItem>
           
-          <MobileContactItem onClick={() => handlePhoneClick('+918612402010')}>
+          <MobileContactItem onClick={() => handlePhoneClick('+918406000555')}>
             <FaPhoneAlt /> 
             <div>
-              <div>+91-8612402010</div>
+              <div>+91-8406000555</div>
               <MobileContactHint>Click to call</MobileContactHint>
             </div>
           </MobileContactItem>
           
-          <MobileContactItem onClick={() => handlePhoneClick('+91940000444')}>
+          <MobileContactItem onClick={() => handlePhoneClick('+9184060 00555')}>
             <FaPhoneAlt /> 
             <div>
-              <div>+91-940000444</div>
+              <div>+91-84060 00444</div>
               <MobileContactHint>Click to call</MobileContactHint>
             </div>
           </MobileContactItem>

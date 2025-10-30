@@ -36,6 +36,7 @@ import {
   Menu,
   X,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 // ===== Animations =====
 const fadeInUp = keyframes`
@@ -689,7 +690,8 @@ export default function FacilitiesComponent() {
               whileTap={{ scale: 0.95 }}
             >
               <MonitorPlay size={18} />
-              <a href="tel:+918406000555">Start Teleconsult</a>
+              <Link to='/book-appointment'>Book OPD</Link>
+             {/*  <a href="tel:+918406000555">Start Teleconsult</a> */}
               <ArrowRight size={14} />
             </CTAButton>
           </Sidebar>

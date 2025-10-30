@@ -115,7 +115,7 @@ const AboutUsDetails = () => {
               <TechItem>Digital Imaging & Diagnostics</TechItem>
               <TechItem>Minimally Invasive Surgery</TechItem>
               <TechItem>Electronic Health Records</TechItem>
-              <TechItem>Telemedicine Services</TechItem>
+       {/*        <TechItem>Telemedicine Services</TechItem> */}
             </TechHighlight>
               </div>             
 
@@ -549,6 +549,10 @@ const Div1 = styled.div`
       align-items: center;
       justify-content: flex-start;
       flex-direction: column-reverse;
+
+      img{
+        margin-top: 10px;
+      }
 
     }
 `

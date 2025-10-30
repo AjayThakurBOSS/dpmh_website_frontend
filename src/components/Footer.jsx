@@ -59,7 +59,7 @@ const Footer = () => {
         <Column>
           <ColumnTitle>Contact Us</ColumnTitle>
           <ContactInfo>
-            <ContactItem><FaPhoneAlt /> +91-8612402010</ContactItem>
+            <ContactItem><FaPhoneAlt /> <a href='tel:84060 00555'>+91-84060 00555</a> </ContactItem>
             <ContactItem><FaEnvelope /> info@prabhatmemorialhospital.com/</ContactItem>
             <ContactItem address>
               <FaMapMarkerAlt /> 
@@ -83,7 +83,7 @@ const Footer = () => {
       <CopyrightSection>
         <p>Copyright © 2025 Dr. Prabhat Memorial Hiramati Hospital. All Rights Reserved.</p>
         <ChatButtonWrapper>
-            <ChatButton href="https://wa.me/91940000444" target="_blank">
+            <ChatButton href="https://wa.me/+919297900142" target="_blank">
                 Need Help? Chat with us
                 <FaWhatsapp />
             </ChatButton>

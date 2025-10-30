@@ -46,6 +46,9 @@ import Sitemap from './util/Sitemap';
 import FacilitiesForHomePage from './components/FacilitiesForHomePage';
 import AppointmentPage from './pages/appointment/AppointmentPage';
 
+import LogoImg from './assets/logo.jpeg'
+import Loader from './util/Loader';
+
 
 // Page Components
 const Home = () => (
@@ -158,13 +161,9 @@ const AnimatedRoutes = () => {
 
 // Loading Component
 const LoadingSpinner = () => (
-  <div className="fixed inset-0 flex items-center justify-center bg-white z-50">
-    <motion.div
-      className="w-16 h-16 border-4 border-indigo-600 border-t-transparent rounded-full"
-      animate={{ rotate: 360 }}
-      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-    />
-  </div>
+  <>
+    <Loader/>
+  </>
 );
 
 // Main App Component

@@ -193,7 +193,7 @@ const EmergencyComponent = () => {
   return (
     <Container>
       <ImageContainer role="img" aria-label="Medical professional organizing emergency vials and medication." >
-         <img src={EmergImg} alt="Emergency image" />
+         <img src={EmergImg} alt="Emergency" />
       </ImageContainer>
       
       <MainTitle>Emergency Medicine Department at Dr Prabhat Memorial Hiramati Hospital, Patna</MainTitle>
@@ -264,7 +264,7 @@ const EmergencyComponent = () => {
             For immediate assistance, please call the Dr. Prabhat Memorial Hiramati Hospital Emergency Helpline. Every second counts in an emergency, and our team is ready to provide life-saving care the moment you arrive.
         </Paragraph>
         <Paragraph style={{color: 'white', fontSize: '1.2em'}}>
-            Emergency Helpline: <ContactLink href="tel:+918406000444">8406000444</ContactLink>
+            Emergency Helpline: <ContactLink href="tel:+918406000555">8406000555</ContactLink>
         </Paragraph>
       </ContactInfo>
     </Container>

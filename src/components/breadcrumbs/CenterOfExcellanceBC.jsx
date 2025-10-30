@@ -50,7 +50,7 @@ const Title = styled.h1`
   font-size: ${props => props.titleSize || "2.8rem"};
   font-weight: 700;
   margin-bottom: 12px;
-  max-width: ${props => props.titleMaxWidth || "800px"};
+  max-width: ${props => props.titleMaxWidth || "1500px"};
   padding: 0 20px;
 
   @media (max-width: 768px) {
@@ -61,7 +61,7 @@ const Title = styled.h1`
 const SubText = styled.p`
   font-size: ${props => props.subTextSize || "1.2rem"};
   opacity: 0.9;
-  max-width: ${props => props.subTextMaxWidth || "600px"};
+  max-width: ${props => props.subTextMaxWidth || "1500px"};
   padding: 0 20px;
   line-height: 1.5;
 

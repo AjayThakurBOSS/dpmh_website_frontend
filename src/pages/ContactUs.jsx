@@ -8,6 +8,7 @@ import { MdAttachEmail, MdLocationOn } from "react-icons/md";
 import { FaHospitalAlt, FaHome } from "react-icons/fa";
 import { RiArrowRightSLine } from "react-icons/ri";
 import ContactBC from "../components/ContactBC";
+import { PiPhoneCallFill } from "react-icons/pi";
 
 const ContactUs = () => {
   const [message, setMessage] = useState("");
@@ -76,10 +77,11 @@ const ContactUs = () => {
             <ContactInfoDiv>
               <InfoCard>
                 <CallDiv>
-                  <FcEndCall className="info-icon" />
+
+                  <PiPhoneCallFill className="info-icon" />
                   <InfoContent>
                     <InfoLabel>Call us on</InfoLabel>
-                    <InfoValue>+91 63071 80154</InfoValue>
+                    <InfoValue>+91 8406000555</InfoValue>
                   </InfoContent>
                 </CallDiv>
               </InfoCard>
@@ -89,7 +91,7 @@ const ContactUs = () => {
                   <MdAttachEmail className="info-icon email-icon" />
                   <InfoContent>
                     <InfoLabel>Email us on</InfoLabel>
-                    <InfoValue>info@mangalamhospitaldeoria.com</InfoValue>
+                    <InfoValue>info@dpmhhospital.com</InfoValue>
                   </InfoContent>
                 </EmailDiv>
               </InfoCard>
@@ -100,8 +102,7 @@ const ContactUs = () => {
                   <InfoContent>
                     <InfoLabel>Our Address</InfoLabel>
                     <InfoValue>
-                      Aura, near Polytechnic college, Aurachowri, 
-                      Ruciapar, Deoria, UP 274001
+                     Rajendra Nagar, Road no. 2, Near Dinkar Golamber, Patna - 800016
                     </InfoValue>
                   </InfoContent>
                 </AddressDiv>
@@ -122,7 +123,7 @@ const ContactUs = () => {
               <ContactInfoDiv>
                 <InfoCard>
                   <CallDiv>
-                    <FcEndCall className="info-icon" style={{color:'#ffffff'}} />
+                    <PiPhoneCallFill className="info-icon" style={{color:'#ffffff'}} />
                     <InfoContent>
                       <InfoLabel>Call us on</InfoLabel>
                       <InfoValue>+91 8406000555</InfoValue>
@@ -135,7 +136,7 @@ const ContactUs = () => {
                     <MdAttachEmail className="info-icon email-icon" style={{color:'#fff'}}/>
                     <InfoContent>
                       <InfoLabel>Email us on</InfoLabel>
-                      <InfoValue>info@prabhatmemorialhospital.com</InfoValue>
+                      <InfoValue>info@dpmhhospital.com</InfoValue>
                     </InfoContent>
                   </EmailDiv>
                 </InfoCard>
@@ -146,7 +147,7 @@ const ContactUs = () => {
                     <InfoContent>
                       <InfoLabel>Our Address</InfoLabel>
                       <InfoValue>
-                        107-B, Plot No-106, Road No. 2, neaoo.oomr, Dinkar Golamber, Rajendra Nagar, Patna, Bihar 800016
+                       Rajendra Nagar, Road no. 2, Near Dinkar Golamber, Patna - 800016
                       </InfoValue>
                     </InfoContent>
                   </AddressDiv>
@@ -212,6 +213,7 @@ export default ContactUs;
 // Styled Components
 const LegacyContainer = styled.div`
   margin-bottom: 2rem;
+  background-color: #ffffffff;
 `;
 
 const HeroSection = styled.div`

@@ -314,27 +314,27 @@ const RequestAppointmentFormHero = () => {
         <h1>Appointment Booked Successfully!</h1>
         <AppointmentDetails>
           <DetailItem>
-            <Label>Patient Name:</Label>
+            <Label style={{color:'#004AAD'}}>Patient Name:</Label>
             <Value>{formData?.patient_name}</Value>
           </DetailItem>
           <DetailItem>
-            <Label>Contact:</Label>
+            <Label style={{color:'#004AAD'}}>Contact:</Label>
             <Value>{formData?.patient_phone}</Value>
           </DetailItem>
           <DetailItem>
-            <Label>Email:</Label>
+            <Label style={{color:'#004AAD'}}>Email:</Label>
             <Value>{formData?.patient_email}</Value>
           </DetailItem>
           <DetailItem>
-            <Label>Doctor:</Label>
+            <Label style={{color:'#004AAD'}}>Doctor:</Label>
             <Value>Dr. {formData?.doctor_name}</Value>
           </DetailItem>
           <DetailItem>
-            <Label>Department:</Label>
+            <Label style={{color:'#004AAD'}}>Department:</Label>
             <Value>{formData?.department_name}</Value>
           </DetailItem>
           <DetailItem>
-            <Label>Appointment Date:</Label>
+            <Label style={{color:'#004AAD'}}>Appointment Date:</Label>
             <Value>{dayjs(formData?.booking_date).format('DD-MM-YYYY')}</Value>
           </DetailItem>
           <DetailItem>
@@ -437,7 +437,7 @@ const RequestAppointmentFormHero = () => {
           <Header className="text-center">Appointment Confirmation</Header>
           <AppointmentDetails>
             <DetailItem>
-              <Label>Patient Name:</Label>
+              <Label style={{color:'#004AAD'}}>Patient Name:</Label>
               <Value>{formData?.patient_name} | {formData?.patient_gender} </Value>
             </DetailItem>
             <DetailItem>
@@ -528,10 +528,11 @@ const RequestAppointmentFormHero = () => {
 
         <hr />
         <Row gutter={[16, 8]}>
-          <Col xs={24} md={12}>
+          <Col xs={24} md={12}  style={{color:'#004AAD'}}>
             <Form.Item
               label="Patient Name"
               name="firstName"
+              style={{color:'#004AAD'}}
               required
               rules={[{ required: true, message: "Please enter patient name" }]}
             >
@@ -589,6 +590,19 @@ const RequestAppointmentFormHero = () => {
 
           <Col xs={24} md={12}>
             <Form.Item
+              label="Email (Optional)"
+              name="email"
+              rules={[
+                { message: "Please enter email" },
+                { type: 'email', message: 'Please enter a valid email' }
+              ]}
+            >
+              <Input type="email" placeholder="Enter email address" />
+            </Form.Item>
+          </Col>
+
+          <Col xs={24} md={12}>
+            <Form.Item
               name="department"
               label="Department"
               rules={[{ required: true, message: "Please select department" }]}
@@ -608,18 +622,7 @@ const RequestAppointmentFormHero = () => {
             </Form.Item>
           </Col>
 
-          <Col xs={24} md={12}>
-            <Form.Item
-              label="Email (Optional)"
-              name="email"
-              rules={[
-                { message: "Please enter email" },
-                { type: 'email', message: 'Please enter a valid email' }
-              ]}
-            >
-              <Input type="email" placeholder="Enter email address" />
-            </Form.Item>
-          </Col>
+          
 
           <Col xs={24} md={24}>
             <Form.Item
@@ -670,7 +673,7 @@ const RequestAppointmentFormHero = () => {
           </Col>
         </Row>
 
-        <div className="submit-button-container">
+        <div className="submit-button-container mt-5" >
           <button 
             type="submit" 
             className="submit-button" 
@@ -798,7 +801,7 @@ const SuccessIconStatic = styled.div`
 // Rest of the styled components remain the same...
 const Header = styled.div`
   padding-bottom: 10px;
-  color: #3B82F6;
+  color: #004AAD;
   font-size: clamp(1.5rem, 4vw, 2rem);
   font-weight: 600;
   text-transform: capitalize;
@@ -1040,7 +1043,7 @@ const DetailItem = styled.div`
 
 const Label = styled.span`
   font-weight: 600;
-  color: #374151;
+  color: #004AAD;
 `;
 
 const Value = styled.span`
