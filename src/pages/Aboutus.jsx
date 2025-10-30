@@ -27,7 +27,5 @@ export default Aboutus
 const AboutusContainer = styled.div``
 const HeroSection = styled.div`
    background: linear-gradient(180deg, rgba(25, 81, 248, 0.8) 0%, rgba(20, 155, 210, 0.8) 100%);
-   height:400px;
-
 `
 

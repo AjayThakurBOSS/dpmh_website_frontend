@@ -5,6 +5,7 @@ import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaWhatsapp, FaFacebookF, FaInst
 
 // Assuming your logo path is correct
 import Logo from '../../src/assets/logo-3.png'; // Update this path to your actual logo image
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -13,11 +14,7 @@ const Footer = () => {
         {/* Column 1: Logo & Description */}
         <Column>
           <LogoWrapper>
-            {/* The image in the original screenshot seems to be a combination of the logo and text */}
-            {/* For exact replication, you might need to use an image for this whole section,
-                or carefully restyle the text here to match the image's font/layout.
-                I'm using a simple img tag as per your previous logo usage. */}
-            <img src={Logo} alt="Dr. Prabhat Memorial Hiramati Hospital Logo" />
+              <img src={Logo} alt="Dr. Prabhat Memorial Hiramati Hospital Logo" />
           </LogoWrapper>
           <HospitalDescription>
             Dr. Prabhat Memorial Hiramati Hospital, one of Patna's leading superspeciality medical centers, renowned for  its advanced healthcare solutions and compassionate care.
@@ -28,22 +25,33 @@ const Footer = () => {
         <Column>
           <ColumnTitle>Quick Links</ColumnTitle>
           <LinkList>
-            <LinkItem><StyledFaAngleRight /> <FooterLink href="#">Home</FooterLink></LinkItem>
-            <LinkItem><StyledFaAngleRight /> <FooterLink href="#">About</FooterLink></LinkItem>
-            <LinkItem><StyledFaAngleRight /> <FooterLink href="#">Services</FooterLink></LinkItem>
-            <LinkItem><StyledFaAngleRight /> <FooterLink href="#">Doctors</FooterLink></LinkItem>
-            <LinkItem><StyledFaAngleRight /> <FooterLink href="#">Contact Us</FooterLink></LinkItem>
+            <LinkItem><FaRegCalendarAlt /> <FooterLink to="/book-appointment">Appointments</FooterLink></LinkItem>
+            <LinkItem><StyledFaAngleRight /> <FooterLink to="/">Home</FooterLink></LinkItem>
+            <LinkItem><StyledFaAngleRight /> <FooterLink to="/about-us">About</FooterLink></LinkItem>
+            <LinkItem><StyledFaAngleRight /> <FooterLink to="/facilities">Facilities</FooterLink></LinkItem>
+            <LinkItem><FaUserMd /> <FooterLink to="/doctors">Our Doctors</FooterLink></LinkItem>
+            <LinkItem><StyledFaAngleRight /> <FooterLink to="/contact-us">Contact Us</FooterLink></LinkItem>
+            <LinkItem><FaLock /> <FooterLink to="#">Privacy Policy</FooterLink></LinkItem>
+            <LinkItem><FaLock /> <FooterLink to="/sitemap">Sitemap</FooterLink></LinkItem>
           </LinkList>
         </Column>
 
         {/* Column 3: Useful Links */}
         <Column>
-          <ColumnTitle>Useful Links</ColumnTitle>
+          <ColumnTitle>Our Specialization</ColumnTitle>
           <LinkList>
-            <LinkItem><FaRegCalendarAlt /> <FooterLink href="#">Appointments</FooterLink></LinkItem>
-            <LinkItem><FaUserMd /> <FooterLink href="#">Our Doctors</FooterLink></LinkItem>
-            <LinkItem><FaBriefcase /> <FooterLink href="#">Careers</FooterLink></LinkItem>
-            <LinkItem><FaLock /> <FooterLink href="#">Privacy Policy</FooterLink></LinkItem>
+            <LinkItem><StyledFaAngleRight /> <FooterLink to="/emergency">Emergency</FooterLink></LinkItem>
+            <LinkItem><StyledFaAngleRight /> <FooterLink to="/trauma">Trauma Care</FooterLink></LinkItem>
+            <LinkItem><StyledFaAngleRight /> <FooterLink to="/critical-care">Critical Care</FooterLink></LinkItem>
+            <LinkItem><StyledFaAngleRight /> <FooterLink to="/cardiology">Cardiology</FooterLink></LinkItem>
+            <LinkItem><StyledFaAngleRight /> <FooterLink to="/nephrology">Nephrology</FooterLink></LinkItem>
+            <LinkItem><StyledFaAngleRight /> <FooterLink to="/neurology">Neurology</FooterLink></LinkItem>
+            <LinkItem><StyledFaAngleRight /> <FooterLink to="/general-medicine">General-Medicine</FooterLink></LinkItem>
+            <LinkItem><StyledFaAngleRight /> <FooterLink to="/general-surgery">General-Surgery</FooterLink></LinkItem>
+            <LinkItem><StyledFaAngleRight /> <FooterLink to="/laproscopic-surgery">Laproscopic-Surgery</FooterLink></LinkItem>
+            <LinkItem><StyledFaAngleRight /> <FooterLink to="/oncology-chemotherapy">Oncology-Chemotherapy</FooterLink></LinkItem>
+            <LinkItem><StyledFaAngleRight /> <FooterLink to="/gynecology-obstetrician">Gynecology-Obstetrician</FooterLink></LinkItem>
+
           </LinkList>
         </Column>
 
@@ -56,17 +64,17 @@ const Footer = () => {
             <ContactItem address>
               <FaMapMarkerAlt /> 
               <div>
-                Plot No-106 & 107-B, Road No. 2, near<br />
-                Dinkar Golamber, Rajendra Nagar, Patna,<br />
+                Plot No-106 & 107-B, Road No. 2, near
+                Dinkar Golamber, Rajendra Nagar, Patna,
                 Bihar 800016
               </div>
             </ContactItem>
           </ContactInfo>
           <SocialIcons>
-            <SocialIcon href="#" target="_blank"><FaFacebookF /></SocialIcon>
-            <SocialIcon href="#" target="_blank"><FaInstagram /></SocialIcon>
-            <SocialIcon href="#" target="_blank"><FaYoutube /></SocialIcon>
-            <SocialIcon href="#" target="_blank"><FaLinkedinIn /></SocialIcon>
+            <SocialIcon href="https://www.facebook.com/Prabhatmemorialhiramati" target="_blank"><FaFacebookF /></SocialIcon>
+            <SocialIcon href="https://www.instagram.com/dpmh_hospital/" target="_blank"><FaInstagram /></SocialIcon>
+            <SocialIcon href="https://www.youtube.com/@drprabhatmemorialhospital" target="_blank"><FaYoutube /></SocialIcon>
+          
           </SocialIcons>
         </Column>
       </FooterContent>
@@ -115,6 +123,8 @@ const Column = styled.div`
   min-width: 250px; 
   margin-bottom: 30px; 
   padding: 0 15px; 
+  max-width:450px;
+  
 
   &:first-child {
     flex-basis: 30%; 
@@ -123,8 +133,12 @@ const Column = styled.div`
 
   @media (max-width: 992px) {
     flex-basis: 100%;
-    text-align: center;
+    text-align: left;
     min-width: unset;
+    display: flex;
+    align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction:column;
 
     &:first-child {
       flex-basis: 100%;
@@ -191,6 +205,12 @@ const LinkList = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
+  @media (max-width: 600px){
+      display:flex;
+  align-items:flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  }
 `;
 
 const LinkItem = styled.li`
@@ -231,7 +251,7 @@ const StyledFaAngleRight = styled(FaAngleRight)`
 `;
 
 
-const FooterLink = styled.a`
+const FooterLink = styled(Link)`
   color: #ffffff;
   text-decoration: none;
   transition: color 0.3s;
@@ -243,6 +263,13 @@ const FooterLink = styled.a`
 
 const ContactInfo = styled.div`
   margin-bottom: 20px;
+
+  @media (max-width:600px){
+    display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  }
 `;
 
 const ContactItem = styled.div`

@@ -67,6 +67,7 @@ const FeatureItem = styled.div`
   align-items: center;
   text-align: center;
   width: 48%; /* Ensures two items per row */
+  
 `;
 
 const IconCircle = styled.div`

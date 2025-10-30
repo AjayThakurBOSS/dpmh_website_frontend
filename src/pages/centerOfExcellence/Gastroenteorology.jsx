@@ -28,8 +28,6 @@ const Gastroenteorology=() => {
               <AnimatedSection delay="0.1s">
                   <GastroComponent/>
               </AnimatedSection>
-
-
             </ContentContainer>
             
             <RightSideContainer>

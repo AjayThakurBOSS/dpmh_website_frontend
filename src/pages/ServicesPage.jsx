@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import styled, { keyframes, css } from 'styled-components';
 import ServicesBC from '../components/breadcrumbs/ServicesBC';
 import FreeTreatment from '../components/FreeTreatment';
+import FacilitiesComponent from '../components/FacilitiesComponent';
 
 // NEW ANIMATIONS
 const slideInFromBottom = keyframes`
@@ -375,14 +376,15 @@ const ServicesPage = () => {
   return (
     <ServicesContainer>
     <ServicesBC/>
-    <PageContainer>
+    <FacilitiesComponent />
+{/*     <PageContainer>
       <ServicesSection>
         <SectionTitle>Our Specialized Medical Services</SectionTitle>
         <ServicesGrid>
           {servicesData.map((service, index) => (
             <ServiceCard 
               key={service.id} 
-              /* Staggered delay for the slideInFromBottom effect */
+             
               delay={`${index * 0.1}s`} 
             >
               <ServiceImage image={service.image} />
@@ -404,7 +406,7 @@ const ServicesPage = () => {
           ))}
         </ServicesGrid>
       </ServicesSection>
-    </PageContainer>
+    </PageContainer> */}
     <FreeTreatment/>
     </ServicesContainer>
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+ import  imageUrl from "../../assets/pedia.webp"; 
 
 // --- Styled Components ---
 
@@ -60,7 +61,7 @@ const ContactText = styled(Paragraph)`
 
 const PaediatricsNeonatology = () => {
   // Placeholder image source (replace with your actual image path)
-  const imageUrl = "path/to/your/neonatology-image.jpg"; 
+ 
 
   return (
     <Container>

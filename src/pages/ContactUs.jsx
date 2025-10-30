@@ -9,7 +9,6 @@ import { FaHospitalAlt, FaHome } from "react-icons/fa";
 import { RiArrowRightSLine } from "react-icons/ri";
 import ContactBC from "../components/ContactBC";
 
-
 const ContactUs = () => {
   const [message, setMessage] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -64,13 +63,9 @@ const ContactUs = () => {
     <LegacyContainer>
       {/* Breadcrumbs */}
 
-
       {/* Hero Section */}
       <HeroSection>
-        <HeroOverlay>
           <ContactBC/>
-        </HeroOverlay>
-       
       </HeroSection>
 
       <ContactUsForm>
@@ -219,18 +214,13 @@ const LegacyContainer = styled.div`
   margin-bottom: 2rem;
 `;
 
-
-
 const HeroSection = styled.div`
   position: relative;
-  height: 400px;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
 `;
-
-
 
 const HeroOverlay = styled.div`
   position: absolute;
@@ -238,18 +228,18 @@ const HeroOverlay = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(180deg, rgba(25, 81, 248, 0.8) 0%, rgba(20, 155, 210, 0.8) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
 `;
 
-
-
 const ContactUsForm = styled.div`
   padding: 0 3%;
   
+  @media (max-width: 768px) {
+    padding: 0 1rem;
+  }
 `;
 
 const SectionTitle = styled.h1`
@@ -260,8 +250,14 @@ const SectionTitle = styled.h1`
   font-weight: 600;
 
   @media (max-width: 768px) {
-    font-size: 2rem;
-    margin: 2rem 0;
+    font-size: 1.8rem;
+    margin: 2rem 0 1.5rem;
+    line-height: 1.3;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.5rem;
+    margin: 1.5rem 0 1rem;
   }
 `;
 
@@ -272,12 +268,21 @@ const ContactUsContainer = styled.div`
   justify-content: space-between;
   gap: 3rem;
   margin-bottom: 4rem;
-  
+
+  @media (max-width: 1024px) {
+    gap: 2rem;
+  }
 
   @media (max-width: 900px) {
     flex-direction: column;
     align-items: center;
     gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 1.5rem;
+    margin-bottom: 2rem;
   }
 `;
 
@@ -289,6 +294,11 @@ const ContactInfoDiv = styled.div`
 
   @media (max-width: 900px) {
     width: 100%;
+    gap: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 0.8rem;
   }
 `;
 
@@ -297,6 +307,12 @@ const InfoCard = styled.div`
   
   &:hover {
     transform: translateY(-5px);
+  }
+
+  @media (max-width: 768px) {
+    &:hover {
+      transform: none;
+    }
   }
 `;
 
@@ -315,6 +331,27 @@ const ContactInfoBase = styled.div`
   &:hover {
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
   }
+
+  @media (max-width: 1024px) {
+    padding: 1.5rem;
+    gap: 1.2rem;
+    min-height: 110px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 1.2rem;
+    gap: 1rem;
+    min-height: auto;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1rem;
+    gap: 0.8rem;
+    border-radius: 12px;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
 `;
 
 const CallDiv = styled(ContactInfoBase)`
@@ -323,20 +360,26 @@ const CallDiv = styled(ContactInfoBase)`
 `;
 
 const EmailDiv = styled(ContactInfoBase)`
- background: linear-gradient(180deg, rgba(25, 81, 248, 0.8) 0%, rgba(20, 155, 210, 0.8) 100%);
+  background: linear-gradient(180deg, rgba(25, 81, 248, 0.8) 0%, rgba(20, 155, 210, 0.8) 100%);
   color: white;
 `;
 
 const AddressDiv = styled(ContactInfoBase)`
- background: linear-gradient(180deg, rgba(25, 81, 248, 0.8) 0%, rgba(20, 155, 210, 0.8) 100%);
+  background: linear-gradient(180deg, rgba(25, 81, 248, 0.8) 0%, rgba(20, 155, 210, 0.8) 100%);
   color: white;
   min-height: 140px;
+
+  @media (max-width: 768px) {
+    min-height: auto;
+  }
 `;
-
-
 
 const InfoContent = styled.div`
   flex: 1;
+
+  @media (max-width: 480px) {
+    width: 100%;
+  }
 `;
 
 const InfoLabel = styled.div`
@@ -346,12 +389,35 @@ const InfoLabel = styled.div`
   opacity: 0.9;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+
+  @media (max-width: 768px) {
+    font-size: 0.85rem;
+    margin-bottom: 0.3rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+    letter-spacing: 0.3px;
+  }
 `;
 
 const InfoValue = styled.div`
   font-size: 1.1rem;
   font-weight: 600;
   line-height: 1.4;
+
+  @media (max-width: 1024px) {
+    font-size: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.95rem;
+    line-height: 1.3;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+  }
 `;
 
 const ContactUsFormDiv = styled.form`
@@ -361,9 +427,19 @@ const ContactUsFormDiv = styled.form`
   border-radius: 20px;
   box-shadow: 0 15px 35px rgba(25, 81, 248, 0.3);
 
+  @media (max-width: 1024px) {
+    padding: 2.5rem;
+  }
+
   @media (max-width: 900px) {
     width: 100%;
     padding: 2rem;
+    border-radius: 16px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1.5rem;
+    border-radius: 12px;
   }
 `;
 
@@ -373,6 +449,17 @@ const FormTitle = styled.h3`
   margin-bottom: 2rem;
   font-size: 1.5rem;
   font-weight: 500;
+
+  @media (max-width: 768px) {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.1rem;
+    margin-bottom: 1.2rem;
+    line-height: 1.4;
+  }
 `;
 
 const Fieldinput = styled.input`
@@ -395,6 +482,20 @@ const Fieldinput = styled.input`
 
   &::placeholder {
     color: #6c757d;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.9rem 1.2rem;
+    margin-bottom: 1.2rem;
+    font-size: 0.95rem;
+    border-radius: 10px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.8rem 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    border-radius: 8px;
   }
 `;
 
@@ -422,6 +523,22 @@ const MessageTextarea = styled.textarea`
   &::placeholder {
     color: #6c757d;
   }
+
+  @media (max-width: 768px) {
+    padding: 0.9rem 1.2rem;
+    margin-bottom: 1.2rem;
+    font-size: 0.95rem;
+    border-radius: 10px;
+    min-height: 100px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.8rem 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    min-height: 80px;
+  }
 `;
 
 const SubmitButton = styled.button`
@@ -448,6 +565,18 @@ const SubmitButton = styled.button`
     cursor: not-allowed;
     transform: none;
   }
+
+  @media (max-width: 768px) {
+    padding: 0.9rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 10px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.8rem 1.2rem;
+    font-size: 0.95rem;
+    border-radius: 8px;
+  }
 `;
 
 const ThankYouMessage = styled.div`
@@ -459,12 +588,34 @@ const ThankYouMessage = styled.div`
   max-width: 600px;
   color: white;
   box-shadow: 0 15px 35px rgba(25, 81, 248, 0.3);
+
+  @media (max-width: 768px) {
+    padding: 3rem 1.5rem;
+    margin: 1.5rem auto;
+    border-radius: 16px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 2rem 1rem;
+    margin: 1rem auto;
+    border-radius: 12px;
+  }
 `;
 
 const SuccessIcon = styled.div`
   font-size: 4rem;
   margin-bottom: 1.5rem;
   color: #4ade80;
+
+  @media (max-width: 768px) {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 2.5rem;
+    margin-bottom: 0.8rem;
+  }
 `;
 
 const ThankYouTitle = styled.h1`
@@ -472,16 +623,44 @@ const ThankYouTitle = styled.h1`
   margin-bottom: 1rem;
   font-size: 2.5rem;
   font-weight: 600;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+    margin-bottom: 0.8rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.5rem;
+    margin-bottom: 0.6rem;
+  }
 `;
 
 const ThankYouText = styled.p`
   font-size: 1.2rem;
   line-height: 1.6;
   opacity: 0.9;
+
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+    line-height: 1.4;
+  }
 `;
 
 const MapSection = styled.div`
   margin-top: 4rem;
+
+  @media (max-width: 768px) {
+    margin-top: 3rem;
+  }
+
+  @media (max-width: 480px) {
+    margin-top: 2rem;
+  }
 `;
 
 const MapTitle = styled.h2`
@@ -490,6 +669,16 @@ const MapTitle = styled.h2`
   margin-bottom: 2rem;
   font-size: 2rem;
   font-weight: 600;
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
 `;
 
 const MapContainer = styled.div`
@@ -501,8 +690,23 @@ const MapContainer = styled.div`
     border: none;
     display: block;
   }
-`;
 
+  @media (max-width: 768px) {
+    border-radius: 12px;
+    
+    iframe {
+      height: 350px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    border-radius: 8px;
+    
+    iframe {
+      height: 300px;
+    }
+  }
+`;
 
 // Add CSS for icons
 const style = document.createElement('style');
@@ -526,6 +730,20 @@ style.textContent = `
   
   .breadcrumb-icon {
     font-size: 0.9rem;
+  }
+
+  @media (max-width: 768px) {
+    .info-icon {
+      font-size: 2rem;
+      width: 50px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .info-icon {
+      font-size: 1.8rem;
+      width: 45px;
+    }
   }
 `;
 document.head.appendChild(style);

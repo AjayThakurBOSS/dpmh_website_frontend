@@ -5,28 +5,27 @@ import DipartmentLink from '../../components/DipartmentLink'
 import EachDeparmentDoctor from '../../components/EachDeparmentDoctor'
 import RequestAppointmentFormHero from '../appointment/OnlineAppointment2'
 import FreeTreatment from '../../components/FreeTreatment'
-import CardiologyComponent from '../../components/deparmentComponent/CardiologyComponent'
-import OncologyComponent from '../../components/deparmentComponent/OncologyComponent'
+import TraumaComponent from '../../components/deparmentComponent/TraumaComponent'
 
 
-const Oncology = () => {
+const TraumaCarePage = () => {
 
   return (
     <PageContainer>
       <DiparmantContainer>
-       	 <DepartmentHero
+        <DepartmentHero
             breadcrumbs={[
               { label: "Home", href: "/" },
-              { label: "Onchology", href: null }
+              { label: "Trauma Care", href: null }
             ]}
-            title="Fighting Cancer with Hope and Healing"
-            subText="Comprehensive cancer diagnosis, surgery, and therapy — guided by compassion and excellence."
+            title="We are available to rescue you for 24*7"
+            subText="We are the best trauma care, multispecialy hospital in Patna."
           />
         <DepartmentBody>
           <MainContentWrapper>
             <ContentContainer>
               <AnimatedSection delay="0.1s">
-                  <OncologyComponent/>
+                  <TraumaComponent/>
               </AnimatedSection>
 
 
@@ -59,7 +58,7 @@ const Oncology = () => {
   )
 }
 
-export default Oncology
+export default TraumaCarePage
 
 // Animations
 const fadeInUp = keyframes`
@@ -127,7 +126,7 @@ const MainContentWrapper = styled.div`
 const ContentContainer = styled.div`
   flex: 1;
   background: #fff;
-  
+ 
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 

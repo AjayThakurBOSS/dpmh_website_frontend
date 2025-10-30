@@ -16,8 +16,8 @@ const Hero = () => {
         </InsuranceInfo>
 
         <ButtonContainer>
-          <StyledLink to="/about">READ MORE</StyledLink>
-          <StyledLink to="/appointment" primary>Book Appointment</StyledLink>
+          <StyledLink to="/about-us">READ MORE</StyledLink>
+          <StyledLink to="/book-appointment" primary>Book OPD</StyledLink>
         </ButtonContainer>
       </Content>
 

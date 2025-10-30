@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import EmergImg from '../../assets/Emeregncy-Medicine-4.webp'
 
 // --- Styled Components ---
 
 const Container = styled.div`
   max-width: 900px;
   margin: 0 auto;
-  padding: 20px;
+  
   font-family: Arial, sans-serif;
   line-height: 1.6;
   color: #333;
@@ -15,13 +16,17 @@ const Container = styled.div`
 const ImageContainer = styled.div`
   width: 100%;
   /* Placeholder for the image */
-  height: 200px; 
-  background-color: #f0f0f0; 
+ 
+
   background-size: cover;
   background-position: center;
   margin-bottom: 25px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+
+  img{
+    border-radius: 10px;
+  }
 `;
 
 const MainTitle = styled.h1`
@@ -187,7 +192,9 @@ const EmergencyComponent = () => {
 
   return (
     <Container>
-      <ImageContainer role="img" aria-label="Medical professional organizing emergency vials and medication." />
+      <ImageContainer role="img" aria-label="Medical professional organizing emergency vials and medication." >
+         <img src={EmergImg} alt="Emergency image" />
+      </ImageContainer>
       
       <MainTitle>Emergency Medicine Department at Dr Prabhat Memorial Hiramati Hospital, Patna</MainTitle>
       

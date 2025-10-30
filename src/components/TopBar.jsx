@@ -25,7 +25,7 @@ const TopBar = () => {
   };
 
   const handleLocationClick = () => {
-    window.open('https://maps.google.com/?q=Patna,Bihar', '_blank');
+    window.open('https://share.google/t9m45GaXpkdnObcsr', '_blank');
   };
 
   return (
@@ -36,7 +36,10 @@ const TopBar = () => {
           <ContactItem onClick={handleEmailClick} style={{ cursor: 'pointer' }}>
             <FaEnvelope /> info@prabhatmemorialhospital.com
           </ContactItem>
-          <ContactItem>
+{/*           <SocialIcon href="https://share.google/t9m45GaXpkdnObcsr" onClick={handleLocationClick}>
+            <FaMapMarkerAlt />
+          </SocialIcon> */}
+          <ContactItem  href="https://share.google/t9m45GaXpkdnObcsr" onClick={handleLocationClick}>
             <FaMapMarkerAlt /> Patna, Bihar
           </ContactItem>
           <ContactItem onClick={() => handlePhoneClick('+918612402010')} style={{ cursor: 'pointer' }}>
@@ -52,16 +55,16 @@ const TopBar = () => {
 
         {/* Social Icons - Always Visible on Both Desktop and Mobile */}
         <SocialIconsWrapper>
-          <SocialIcon href="#" onClick={handleLocationClick}>
+          <SocialIcon href="https://share.google/t9m45GaXpkdnObcsr" onClick={handleLocationClick}>
             <VscLocation />
           </SocialIcon>
-          <SocialIcon href="https://facebook.com" target="_blank">
+          <SocialIcon href="https://www.facebook.com/Prabhatmemorialhiramati" target="_blank">
             <FaFacebookF />
           </SocialIcon>
-          <SocialIcon href="https://instagram.com" target="_blank">
+          <SocialIcon href="https://www.instagram.com/dpmh_hospital/" target="_blank">
             <FaInstagram />
           </SocialIcon>
-          <SocialIcon href="https://youtube.com" target="_blank">
+          <SocialIcon href="https://www.youtube.com/@drprabhatmemorialhospital" target="_blank">
             <FaYoutube />
           </SocialIcon>
         </SocialIconsWrapper>
@@ -230,7 +233,7 @@ const MobileMenu = styled.div`
   top: 50px;
   left: 0;
   right: 0;
-  background-color: #00bfff;
+  background-color: #ffffff;
   padding: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   z-index: 999;
@@ -250,6 +253,9 @@ const MobileContactInfo = styled.div`
   flex-direction: column;
   gap: 15px;
   width: 100%;
+  background-color: #fff;
+  padding: 5px 15px;
+  border-radius: 5px;
 `;
 
 const MobileContactItem = styled.div`
@@ -264,7 +270,7 @@ const MobileContactItem = styled.div`
   gap: 12px;
 
   &:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(200, 164, 164, 0.1);
     padding-left: 10px;
     padding-right: 10px;
     margin: 0 -10px;

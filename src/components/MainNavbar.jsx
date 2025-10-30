@@ -15,6 +15,14 @@ const MainNavbar = () => {
         return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
     };
 
+    // Color palette for Center of Excellence submenus
+    const submenuColors = [
+        '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7', 
+        '#DDA0DD', '#98D8C8', '#F7DC6F', '#BB8FCE', '#85C1E9',
+        '#F8C471', '#82E0AA', '#F1948A', '#85C1E9', '#D7BDE2',
+        '#76D7C4', '#F9E79F'
+    ];
+
     const navItems = [
         { name: 'Home', link: '/' },
         { name: 'Doctors', link: '/doctors' },
@@ -23,8 +31,10 @@ const MainNavbar = () => {
             dropdown: true, 
             isSpecial: true, 
             submenu: [
-                { name: 'Cardiology', link: '/departments/cardiology' },
                 { name: 'Emergency', link: '/departments/emergency' },
+                { name: 'Trauma', link:'/departments/trauma' },
+                { name: 'Critical Care', link:'/departments/critical-care' },
+                { name: 'Cardiology', link: '/departments/cardiology' },
                 { name: 'Nephrology', link: '/departments/nephrology' },
                 { name: 'Gynecology + obstetrician', link: '/departments/gynecology-obstetrician' },
                 { name: 'Orthopedic', link: '/departments/orthopedic' },
@@ -32,10 +42,10 @@ const MainNavbar = () => {
                 { name: 'Neurology', link: '/departments/neurology' },
                 { name: 'Paediatrics', link: '/departments/paediatrics' },
                 { name: 'Neuro-surgery', link: '/departments/neuro-surgery' },
-                { name: 'Oncology + Chemotherapy', link: '/departments/oncology-chemotherapy' },
-                { name: 'General Medicine', link: '/departments/general-medicine' },
                 { name: 'General Surgery', link: '/departments/general-surgery' },
                 { name: 'Laproscopic Surgery', link: '/departments/laproscopic-surgery' },
+                { name: 'Oncology + Chemotherapy', link: '/departments/oncology-chemotherapy' },
+                { name: 'General Medicine', link: '/departments/general-medicine' },
                 { name: 'Urology', link: '/departments/urology' },
                 { name: 'Pulmonology', link: '/departments/pulmonology' }
             ] 
@@ -45,8 +55,8 @@ const MainNavbar = () => {
             name: 'Facilities', 
             link: '/facilities'
            
-        },
-        { 
+        }, 
+        /* { 
             name: 'Resources', 
             dropdown: true, 
             submenu: [
@@ -56,10 +66,18 @@ const MainNavbar = () => {
                 { name: 'Testimonials', link: '/resources/testimonials' },
                 { name: 'Videos', link: '/resources/videos' }
             ] 
-        },
+        }, */
          { name: 'Career', link: '/careers' },
         { name: 'Contact Us', link: '/contact-us' },
     ];
+
+    // Function to get background color for submenu item
+    const getSubmenuColor = (itemName, index) => {
+        if (itemName === 'Center of Excellence') {
+            return submenuColors[index % submenuColors.length];
+        }
+        return '#a4e0f4ff'; // Default color for other dropdowns
+    };
 
     const toggleSubMenu = (itemName) => {
         if (window.innerWidth <= 992) {
@@ -143,12 +161,13 @@ const MainNavbar = () => {
                                     }
                                 }}
                             >
-                                {item.submenu.map((subItem) => (
+                                {item.submenu.map((subItem, index) => (
                                     <SubMenuItem 
                                         key={subItem.name} 
                                         as={Link} 
                                         to={subItem.link}
                                         isSpecial={item.isSpecial}
+                                        backgroundColor={getSubmenuColor(item.name, index)}
                                         onClick={() => {
                                             if (window.innerWidth <= 992) {
                                                 setIsOpen(false);
@@ -166,7 +185,7 @@ const MainNavbar = () => {
             </NavLinks>
 
             <AppointmentButton as={Link} to="/book-appointment">
-                <FaCalendarCheck /> BOOK APPOINTMENT
+                <FaCalendarCheck /> BOOK OPD
             </AppointmentButton>
         </NavContainer>
     );
@@ -176,7 +195,6 @@ const MainNavbar = () => {
 
 const NavContainer = styled.nav`
     background-color: #345FA5;
- 
     padding: 10px 2.5%;
     display: flex;
     justify-content: space-between;
@@ -223,8 +241,9 @@ const SubMenu = styled.div`
             left: 50%;
             transform: translateX(-50%);
             padding: 10px;
-            background-color: #f7f7f7;
-            border-top: 3px solid #ffc107;
+            border-radius: 8px;
+
+            
         }
     `}
 
@@ -247,7 +266,7 @@ const SubMenuItem = styled(Link)`
     text-decoration: none;
     font-size: 0.9rem;
     font-weight: 500;
-    transition: background-color 0.2s;
+    transition: all 0.2s;
     white-space: nowrap;
     color: #3b508f; 
     border: none;
@@ -259,6 +278,8 @@ const SubMenuItem = styled(Link)`
     &:hover {
         background-color: #f0f0f0;
         color: #00bfff;
+        transform: translateY(-2px);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
     ${props => props.isSpecial && `
@@ -267,13 +288,16 @@ const SubMenuItem = styled(Link)`
             padding: 10px 15px;
             box-sizing: border-box;
             color: #345FA5; 
-            background-color: #a4e0f4ff;
+            background-color: ${props.backgroundColor || '#a4e0f4ff'};
             border-radius: 5px;
             margin: 3px;
+            border-left: 4px solid ${props.backgroundColor ? darkenColor(props.backgroundColor, 0.2) : '#345FA5'};
             
             &:hover {
-              background-color: #f0f0f0;
-              color: #00bfff;
+                background-color: ${props.backgroundColor ? lightenColor(props.backgroundColor, 0.1) : '#f0f0f0'};
+                color: #00bfff;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
             }
         }
     `}
@@ -282,11 +306,40 @@ const SubMenuItem = styled(Link)`
         color: white;
         padding-left: 30px;
         border-top: 1px solid rgba(255, 255, 255, 0.05);
+        background-color: ${props => props.isSpecial ? props.backgroundColor || '#4c62a5' : 'transparent'};
+        
         &:hover {
             background-color: #4c62a5;
+            transform: none;
+            box-shadow: none;
         }
     }
 `;
+
+// Helper functions for color manipulation
+const lightenColor = (color, percent) => {
+    // Simple color lightening function
+    const num = parseInt(color.replace("#", ""), 16);
+    const amt = Math.round(2.55 * percent * 100);
+    const R = (num >> 16) + amt;
+    const G = (num >> 8 & 0x00FF) + amt;
+    const B = (num & 0x0000FF) + amt;
+    return "#" + (0x1000000 + (R < 255 ? R < 1 ? 0 : R : 255) * 0x10000 +
+            (G < 255 ? G < 1 ? 0 : G : 255) * 0x100 +
+            (B < 255 ? B < 1 ? 0 : B : 255)).toString(16).slice(1);
+};
+
+const darkenColor = (color, percent) => {
+    // Simple color darkening function
+    const num = parseInt(color.replace("#", ""), 16);
+    const amt = Math.round(2.55 * percent * 100);
+    const R = (num >> 16) - amt;
+    const G = (num >> 8 & 0x00FF) - amt;
+    const B = (num & 0x0000FF) - amt;
+    return "#" + (0x1000000 + (R > 0 ? R > 255 ? 255 : R : 0) * 0x10000 +
+            (G > 0 ? G > 255 ? 255 : G : 0) * 0x100 +
+            (B > 0 ? B > 255 ? 255 : B : 0)).toString(16).slice(1);
+};
 
 const NavItem = styled.div`
     position: relative;
@@ -368,8 +421,8 @@ const NavLinks = styled.div`
 `;
 
 const AppointmentButton = styled(Link)`
-    background-color: #00bfff;
-    color: white;
+    background-color: #ffffffff;
+    color: #00bfff;
     border: none;
     padding: 8px 15px;
     font-size: 12px;
@@ -392,10 +445,14 @@ const AppointmentButton = styled(Link)`
     }
 
     @media (max-width: 992px) {
-        width: 100%;
+    position: absolute;
+        top: -52px;
+        left: 10px;
+        z-index: 99999;
+       font-size: 0.7rem;
         order: 3;
         margin-top: 10px;
-        padding: 12px;
+        padding: 6px;
         justify-content: center;
     }
 `;
@@ -404,7 +461,7 @@ const Hamburger = styled.div`
     display: none;
     position: absolute;
     right: 5%;
-    top: 25%;
+    top: 40%;
     transform: translateY(-25%);
     font-size: 1.5rem;
     cursor: pointer;
@@ -412,8 +469,8 @@ const Hamburger = styled.div`
     z-index: 100;
     border-radius: 5px;
     padding: 7px 15px;
-    background-color: #00bfff;
-    
+    background-color: #ffffff;
+    color: #00bfff;
     @media (max-width: 992px) {
         display: block;
     }

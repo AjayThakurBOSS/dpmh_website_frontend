@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import ScrollToTop from './util/ScrollToTop'
 import MainNavbar from './components/MainNavbar';
 import TopBar from './components/TopBar';
 import Footer from './components/Footer';
@@ -39,6 +40,11 @@ import GeneralSurgery from './pages/centerOfExcellence/GeneralSurgery';
 import LaproscopicSurgery from './pages/centerOfExcellence/LaproscopicSurgery';
 import Urology from './pages/centerOfExcellence/Urology';
 import Pulmonology from './pages/centerOfExcellence/Pulmonology';
+import TraumaCarePage from './pages/centerOfExcellence/TraumaCarePage';
+import CriticalCarePage from './pages/centerOfExcellence/CriticalCarePage';
+import Sitemap from './util/Sitemap';
+import FacilitiesForHomePage from './components/FacilitiesForHomePage';
+import AppointmentPage from './pages/appointment/AppointmentPage';
 
 
 // Page Components
@@ -54,7 +60,8 @@ const Home = () => (
   <DoctorSlider/>
   <TPASlider/>
   <CancerCare/>
-    <AboutUsComponent/>
+  <FacilitiesForHomePage/>
+  <AboutUsComponent/>
   <Testimonials /> 
   
   </>
@@ -123,7 +130,7 @@ const AnimatedRoutes = () => {
         <Route path="/careers" element={<Career />} />
         <Route path="/resources/blogs" element={<BlogsPage />} />
         <Route path='/resources/gallery' element={<GalleryPage/>} />
-        <Route path='/book-appointment' element={<OnlineAppointment2/>} />
+        <Route path='/book-appointment' element={<AppointmentPage/>} />
          <Route path='/doctors' element={<DoctorPage/>} />
          <Route path='/departments/cardiology' element={<Cardiology/>} />
          <Route path='/departments/emergency' element={<Emergency/>} />
@@ -140,6 +147,10 @@ const AnimatedRoutes = () => {
          <Route path='/departments/laproscopic-surgery' element={<LaproscopicSurgery/>} />
          <Route path='/departments/urology' element={<Urology/>} />
          <Route path='/departments/pulmonology' element={<Pulmonology/>} />
+         <Route path='/departments/trauma' element={<TraumaCarePage/>} />
+         <Route path='/departments/critical-care' element={<CriticalCarePage/>} />
+          <Route path='/sitemap' element={<Sitemap/>} />
+          
       </Routes>
     </AnimatePresence>
   );
@@ -172,6 +183,7 @@ export default function App() {
 
   return (
     <Router>
+      <ScrollToTop />
       <div className="App">
         <Navigation />
         <main>

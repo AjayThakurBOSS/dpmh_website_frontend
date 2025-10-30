@@ -5,6 +5,7 @@ import { FaStethoscope, FaHeartbeat, FaUsers, FaAward, FaCheckCircle } from 'rea
 import Compassion from '../assets/presonalised_care.jpeg'
 import Inovative from '../assets/innovative.jpg'
 import LegecyIg from '../assets/legecyofcare.jpg'
+import { Link } from 'react-router-dom';
 
 const AboutUsDetails = () => {
   const features = [
@@ -53,12 +54,12 @@ const AboutUsDetails = () => {
           </LocationTag>
 
           <ActionSection>
-            <BlueButton>
-              Book Appointment
+            <BlueButton> <Link to='/book-appointment' >Book OPD</Link>
+              
             </BlueButton>
-            <SecondaryButton>
+           {/*  <SecondaryButton>
               Virtual Consultation
-            </SecondaryButton>
+            </SecondaryButton> */}
           </ActionSection>
         </ContentWrapper>
       </HospitalContainer>
@@ -311,6 +312,7 @@ const FeatureItem = styled.div`
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   transition: transform 0.2s ease;
+  border: 1px solid #007bff;
 
   &:hover {
     transform: translateY(-2px);
@@ -457,6 +459,10 @@ const SectionTitle = styled.h2`
   font-weight: 700;
   color: #1e293b;
   margin: 0;
+  @media (max-width: 600px){
+    font-size: 1rem;
+    color: blue;
+  }
 `;
 
 const BenefitsList = styled.ul`
@@ -539,4 +545,10 @@ const Div1 = styled.div`
       border-radius:10px;
     }
 
+    @media (max-width: 600px){
+      align-items: center;
+      justify-content: flex-start;
+      flex-direction: column-reverse;
+
+    }
 `
