@@ -8,110 +8,125 @@ import { Link } from 'react-router-dom';
 
 // Data for all medical departments
 const departments = [
+    { 
+    name: "Emergency", 
+    icon: Ambulance, 
+    description: "24/7 critical care for sudden illnesses and injuries. Staffed by trauma specialists with life-saving technology.",
+    gradient: "from-orange-500 to-red-500",
+    link: "/departments/emergency"
+  },
+    { 
+    name: "Trauma", 
+    icon: Ambulance, 
+    description: "24/7 critical care for sudden illnesses and injuries. Staffed by trauma specialists with life-saving technology.",
+    gradient: "from-orange-500 to-red-500",
+    link: "/departments/trauma"
+  },
+    { 
+    name: "Critical Care", 
+    icon: Ambulance, 
+    description: "24/7 critical care for sudden illnesses and injuries. Staffed by trauma specialists with life-saving technology.",
+    gradient: "from-orange-500 to-red-500",
+    link: "/departments/critical-care"
+  },
   { 
     name: "Cardiology", 
     icon: HeartPulse, 
     description: "Experts in heart and vascular disorders. We use advanced diagnostics for hypertension, coronary disease, and heart failure.",
     gradient: "from-red-500 to-pink-500",
-    link: "/cardiology"
+    link: "/departments/cardiology"
   },
-  { 
-    name: "Emergency", 
-    icon: Ambulance, 
-    description: "24/7 critical care for sudden illnesses and injuries. Staffed by trauma specialists with life-saving technology.",
-    gradient: "from-orange-500 to-red-500",
-    link: "/emergency"
-  },
+
   { 
     name: "Nephrology", 
     icon: Target, 
     description: "Specialized care for kidney diseases, including chronic failure, dialysis, and electrolyte management.",
     gradient: "from-green-500 to-teal-500",
-    link: "/nephrology"
+    link: "/departments/nephrology"
   },
   { 
     name: "Gynecology & Obstetrics", 
     icon: Baby, 
     description: "Comprehensive women's health for reproductive care, pregnancy, and childbirth with routine screenings.",
     gradient: "from-pink-500 to-purple-500",
-    link: "/gynae-obs"
+    link: "/departments/gynecology-obstetrician"
   },
   { 
     name: "Orthopedics", 
     icon: Bone, 
     description: "Treatment for bones, joints, and muscle injuries. We restore mobility through advanced surgical techniques.",
     gradient: "from-gray-600 to-blue-400",
-    link: "/orthopedics"
+    link: "/departments/orthopedic"
   },
   { 
     name: "Gastroenterology", 
     icon: Pill, 
     description: "Focusing on the digestive tract with services including endoscopy and colonoscopy for digestive disorders.",
     gradient: "from-yellow-500 to-orange-500",
-    link: "/gastroenterology"
+    link: "/departments/gastroenterology"
   },
   { 
     name: "Neurology", 
     icon: Brain, 
     description: "Diagnosis and treatment of nervous system disorders using advanced imaging for optimal recovery.",
     gradient: "from-purple-500 to-indigo-500",
-    link: "/neurology"
+    link: "/departments/neurology"
   },
   { 
     name: "Paediatrics", 
     icon: Stethoscope, 
     description: "Specialized medical care for children and adolescents with preventive health and vaccinations.",
     gradient: "from-cyan-500 to-blue-500",
-    link: "/paediatrics"
+    link: "/departments/paediatrics"
   },
   { 
     name: "Neuro-surgery", 
     icon: Skull, 
     description: "Surgical intervention for brain tumors and spinal injuries using micro-surgical precision techniques.",
     gradient: "from-indigo-500 to-purple-600",
-    link: "/neurosurgery"
+    link: "/departments/neuro-surgery"
   },
   { 
     name: "Oncology & Chemotherapy", 
     icon: Radiation, 
     description: "Multidisciplinary cancer treatment with chemotherapy, radiation, and personalized care approaches.",
     gradient: "from-green-600 to-emerald-500",
-    link: "/oncology"
+    link: "/departments/oncology-chemotherapy"
   },
   { 
     name: "General Medicine", 
     icon: Syringe, 
     description: "Primary care for adults, diagnosing and treating a broad range of common and complex conditions.",
     gradient: "from-blue-500 to-cyan-500",
-    link: "/general-medicine"
+    link: "/departments/general-medicine"
   },
   { 
     name: "General Surgery", 
     icon: Scissors, 
     description: "Broad surgical expertise for abdominal procedures with commitment to patient safety and recovery.",
     gradient: "from-slate-600 to-gray-500",
-    link: "/general-surgery"
+    link: "/departments/general-surgery"
   },
   { 
     name: "Laproscopic Surgery", 
     icon: Telescope, 
     description: "Minimally invasive keyhole surgery techniques that reduce recovery time and post-operative pain.",
     gradient: "from-teal-500 to-green-500",
-    link: "/laproscopic-surgery"
+    link: "/departments/laproscopic-surgery"
   },
   { 
     name: "Urology", 
     icon: Droplet, 
     description: "Care for urinary tracts and reproductive system with minimally invasive treatment options.",
     gradient: "from-blue-600 to-indigo-500",
-    link: "/urology"
+    link: "/departments/urology"
   },
   { 
     name: "Pulmonology", 
     icon: AirVent, 
     description: "Focus on respiratory health, treating asthma and COPD with advanced diagnostic tools.",
     gradient: "from-sky-500 to-blue-400",
-    link: "/pulmonology"
+    link: "/departments/pulmonology"
   },
 ];
 
@@ -151,6 +166,7 @@ const DepartmentCard = ({ department, index }) => {
   const IconComponent = department.icon;
 
   return (
+    <Link to={department.link}>
     <div 
       ref={cardRef} 
       className={`
@@ -208,6 +224,7 @@ const DepartmentCard = ({ department, index }) => {
         </Link>
       </div>
     </div>
+    </Link>
   );
 };
 

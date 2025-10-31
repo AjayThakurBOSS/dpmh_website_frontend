@@ -40,17 +40,17 @@ const Footer = () => {
         <Column>
           <ColumnTitle>Our Specialization</ColumnTitle>
           <LinkList>
-            <LinkItem><StyledFaAngleRight /> <FooterLink to="/emergency">Emergency</FooterLink></LinkItem>
-            <LinkItem><StyledFaAngleRight /> <FooterLink to="/trauma">Trauma Care</FooterLink></LinkItem>
-            <LinkItem><StyledFaAngleRight /> <FooterLink to="/critical-care">Critical Care</FooterLink></LinkItem>
-            <LinkItem><StyledFaAngleRight /> <FooterLink to="/cardiology">Cardiology</FooterLink></LinkItem>
-            <LinkItem><StyledFaAngleRight /> <FooterLink to="/nephrology">Nephrology</FooterLink></LinkItem>
-            <LinkItem><StyledFaAngleRight /> <FooterLink to="/neurology">Neurology</FooterLink></LinkItem>
-            <LinkItem><StyledFaAngleRight /> <FooterLink to="/general-medicine">General-Medicine</FooterLink></LinkItem>
-            <LinkItem><StyledFaAngleRight /> <FooterLink to="/general-surgery">General-Surgery</FooterLink></LinkItem>
-            <LinkItem><StyledFaAngleRight /> <FooterLink to="/laproscopic-surgery">Laproscopic-Surgery</FooterLink></LinkItem>
-            <LinkItem><StyledFaAngleRight /> <FooterLink to="/oncology-chemotherapy">Oncology-Chemotherapy</FooterLink></LinkItem>
-            <LinkItem><StyledFaAngleRight /> <FooterLink to="/gynecology-obstetrician">Gynecology-Obstetrician</FooterLink></LinkItem>
+            <LinkItem><StyledFaAngleRight /> <FooterLink to="/departments/emergency">Emergency</FooterLink></LinkItem>
+            <LinkItem><StyledFaAngleRight /> <FooterLink to="/departments/trauma">Trauma Care</FooterLink></LinkItem>
+            <LinkItem><StyledFaAngleRight /> <FooterLink to="/departments/critical-care">Critical Care</FooterLink></LinkItem>
+            <LinkItem><StyledFaAngleRight /> <FooterLink to="/departments/cardiology">Cardiology</FooterLink></LinkItem>
+            <LinkItem><StyledFaAngleRight /> <FooterLink to="/departments/nephrology">Nephrology</FooterLink></LinkItem>
+            <LinkItem><StyledFaAngleRight /> <FooterLink to="/departments/neurology">Neurology</FooterLink></LinkItem>
+            <LinkItem><StyledFaAngleRight /> <FooterLink to="/departments/general-medicine">General-Medicine</FooterLink></LinkItem>
+            <LinkItem><StyledFaAngleRight /> <FooterLink to="/departments/general-surgery">General-Surgery</FooterLink></LinkItem>
+            <LinkItem><StyledFaAngleRight /> <FooterLink to="/departments/laproscopic-surgery">Laproscopic-Surgery</FooterLink></LinkItem>
+            <LinkItem><StyledFaAngleRight /> <FooterLink to="/departments/oncology-chemotherapy">Oncology-Chemotherapy</FooterLink></LinkItem>
+            <LinkItem><StyledFaAngleRight /> <FooterLink to="/departments/gynecology-obstetrician">Gynecology-Obstetrician</FooterLink></LinkItem>
 
           </LinkList>
         </Column>
