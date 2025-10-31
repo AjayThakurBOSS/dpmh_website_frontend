@@ -34,13 +34,13 @@ const TopBar = () => {
         {/* Desktop View */}
         <DesktopContactInfo>
           <ContactItem onClick={handleEmailClick} style={{ cursor: 'pointer' }}>
-            <FaEnvelope /> info@prabhatmemorialhospital.com
+            <FaEnvelope /> info@dpmhhospital.com
           </ContactItem>
 {/*           <SocialIcon href="https://share.google/t9m45GaXpkdnObcsr" onClick={handleLocationClick}>
             <FaMapMarkerAlt />
           </SocialIcon> */}
           <ContactItem  href="https://share.google/t9m45GaXpkdnObcsr" onClick={handleLocationClick}>
-            <FaMapMarkerAlt /> Patna, Bihar
+            <FaMapMarkerAlt />Rajendra Nagar,  Patna, Bihar
           </ContactItem>
           <ContactItem onClick={() => handlePhoneClick('+918406000555')} style={{ cursor: 'pointer' }}>
             <FaPhoneAlt /> +918406000555
@@ -92,7 +92,7 @@ const TopBar = () => {
           <MobileContactItem>
             <FaMapMarkerAlt /> 
             <div>
-              <div>Patna, Bihar</div>
+              <div>Rajendar Nagar, Patna, Bihar</div>
               <MobileContactHint>Hospital Location</MobileContactHint>
             </div>
           </MobileContactItem>

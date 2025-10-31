@@ -107,7 +107,7 @@ align-items:center;
   width: 100%;
   overflow: hidden;
   padding: 2rem 0;
-  background: #f8f9fa; /* Optional: Add background for better visibility */
+  background: #ffffff; /* Optional: Add background for better visibility */
 `;
 
 // Styled component for the track

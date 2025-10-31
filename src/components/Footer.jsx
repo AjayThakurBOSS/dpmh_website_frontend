@@ -59,14 +59,12 @@ const Footer = () => {
         <Column>
           <ColumnTitle>Contact Us</ColumnTitle>
           <ContactInfo>
-            <ContactItem><FaPhoneAlt /> <a href='tel:84060 00555'>+91-84060 00555</a> </ContactItem>
-            <ContactItem><FaEnvelope /> info@prabhatmemorialhospital.com/</ContactItem>
+            <ContactItem><FaPhoneAlt /> <a href='tel:8406000555'>+91-840 6000 555</a> </ContactItem>
+            <ContactItem><FaEnvelope /> info@dpmhhospital.com/</ContactItem>
             <ContactItem address>
               <FaMapMarkerAlt /> 
               <div>
-                Plot No-106 & 107-B, Road No. 2, near
-                Dinkar Golamber, Rajendra Nagar, Patna,
-                Bihar 800016
+                Rajendra Nagar, Road no. 2, Near Dinkar Golamber, Patna - 800016
               </div>
             </ContactItem>
           </ContactInfo>

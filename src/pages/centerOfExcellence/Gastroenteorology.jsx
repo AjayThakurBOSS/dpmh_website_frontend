@@ -5,7 +5,6 @@ import DipartmentLink from '../../components/DipartmentLink'
 import EachDeparmentDoctor from '../../components/EachDeparmentDoctor'
 import RequestAppointmentFormHero from '../appointment/OnlineAppointment2'
 import FreeTreatment from '../../components/FreeTreatment'
-import CardiologyComponent from '../../components/deparmentComponent/CardiologyComponent'
 import GastroComponent from '../../components/deparmentComponent/GastroComponent'
 
 
@@ -46,8 +45,8 @@ const Gastroenteorology=() => {
           
           <RelatedDoctorsDiv>
             <AnimatedSection delay="0.6s">
-              <SectionTitle>Our Cardiology Specialists</SectionTitle>
-             <EachDeparmentDoctor specialization="Cardiologist" />
+              <SectionTitle>Our Gastroenteorology Specialists</SectionTitle>
+             <EachDeparmentDoctor specialization="Gastroenterologist" />
             </AnimatedSection>
           </RelatedDoctorsDiv>
         </DepartmentBody>
@@ -189,6 +188,7 @@ const SectionTitle = styled.h2`
   margin-bottom: 1.5rem;
   padding-bottom: 0.5rem;
   border-bottom: 2px solid #3498db;
+  font-weight: 700;
 `
 
 // Additional Services Section

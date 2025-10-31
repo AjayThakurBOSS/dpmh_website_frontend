@@ -56,17 +56,17 @@ const MainNavbar = () => {
             link: '/facilities'
            
         }, 
-        /* { 
+        { 
             name: 'Resources', 
             dropdown: true, 
             submenu: [
-                { name: 'Blog', link: '/resources/blogs' },
+                /* { name: 'Blog', link: '/resources/blogs' }, */
                 { name: 'Gallery', link: '/resources/gallery' },
-                { name: 'News-Latter', link: '/resources/newsletter' },
+              /*   { name: 'News-Latter', link: '/resources/newsletter' },
                 { name: 'Testimonials', link: '/resources/testimonials' },
-                { name: 'Videos', link: '/resources/videos' }
+                { name: 'Videos', link: '/resources/videos' } */
             ] 
-        }, */
+        }, 
          { name: 'Career', link: '/careers' },
         { name: 'Contact Us', link: '/contact-us' },
     ];

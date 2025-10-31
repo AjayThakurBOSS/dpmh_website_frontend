@@ -10,6 +10,7 @@ import Dr2 from '../assets/Dr2.jpeg'
 import Dr3 from '../assets/Dr3.jpeg'
 import { Link } from 'react-router-dom';
 import DoctorComponent from './DoctorComponent';
+import DoctorsForHome from './DoctorsForHome';
 
 // Mock doctor data - replace with actual data
 const doctorsData = [
@@ -93,8 +94,9 @@ const DoctorSlider = () => {
         <SectionTitle>Our Team of Expert  Doctors</SectionTitle>
         <SectionSubtitle>Book appointments with our specialized healthcare professionals</SectionSubtitle>
       </SectionHeader>
-      <DoctorComponent/>
-{/*       <Swiper {...swiperParams}>
+      <DoctorsForHome/>
+     {/*  <DoctorComponent/> */}
+{/*     <Swiper {...swiperParams}>
         {doctorsData.map((doctor) => (
           <SwiperSlide key={doctor.id}>
             <DoctorCard>
@@ -230,7 +232,8 @@ const SectionTitle = styled.h2`
   font-weight: 700;
   
   @media (max-width: 768px) {
-    font-size: 2.2rem;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
   }
 `;
 

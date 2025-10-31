@@ -267,7 +267,7 @@ const CenterofExcellance = () => {
               Our patient care coordinators are here to help you find the right specialist.
             </p>
             <button className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-8 py-2 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-              Contact Our Team
+              <Link to='/contact-us'> Contact Our Team</Link> 
             </button>
           </div>
         </footer>

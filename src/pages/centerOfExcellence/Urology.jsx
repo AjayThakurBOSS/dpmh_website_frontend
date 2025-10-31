@@ -47,8 +47,8 @@ const Urology = () => {
           
           <RelatedDoctorsDiv>
             <AnimatedSection delay="0.6s">
-              <SectionTitle>Our Cardiology Specialists</SectionTitle>
-             <EachDeparmentDoctor specialization="Cardiologist" />
+              <SectionTitle>Our Urology Specialists</SectionTitle>
+             <EachDeparmentDoctor specialization="Urologist" />
             </AnimatedSection>
           </RelatedDoctorsDiv>
         </DepartmentBody>
@@ -190,6 +190,7 @@ const SectionTitle = styled.h2`
   margin-bottom: 1.5rem;
   padding-bottom: 0.5rem;
   border-bottom: 2px solid #3498db;
+  font-weight: 700;
 `
 
 // Additional Services Section

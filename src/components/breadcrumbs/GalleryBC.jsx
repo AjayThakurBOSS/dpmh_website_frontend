@@ -52,7 +52,7 @@ const Title = styled.h1`
     padding: 0 20px;
 
   @media (max-width: 768px) {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 `;
 

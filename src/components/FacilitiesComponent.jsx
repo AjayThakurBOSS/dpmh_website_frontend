@@ -531,51 +531,142 @@ const MobileCardGrid = styled.div`
 
 // ===== Data =====
 const coreFacilities = [
-  "24×7 Emergency Department",
-  "Intensive Care Units (ICU, NICU, PICU, SICU, CCU)",
-  "Modular Operation Theatres",
-  "Trauma & Critical Care Unit",
-  "Dialysis Unit",
-  "Cath Lab (Cardiac)",
+ {
+    title: "24×7 Emergency Department",
+    desc: "Immediate, life-saving care for all critical cases, staffed by experienced emergency physicians and support teams round the clock.",
+  },
+  {
+    title: "Intensive Care Units (ICU, NICU, PICU, SICU, CCU)",
+    desc: "Specialized, high-level monitoring and treatment for critically ill patients across various medical disciplines and age groups.",
+  },
+  {
+    title: "Modular Operation Theatres",
+    desc: "State-of-the-art operating environments with HEPA filters and advanced equipment to ensure maximum safety and sterility for all surgical procedures.",
+  },
+  {
+    title: "Trauma & Critical Care Unit",
+    desc: "Dedicated resources and specialist teams for rapid response and comprehensive management of severe injuries and life-threatening conditions.",
+  },
+  {
+    title: "Dialysis Unit",
+    desc: "High-quality renal replacement therapy services provided by skilled nephrology nurses using advanced dialysis machines in a comfortable setting.",
+  },
+  {
+    title: "Cath Lab (Cardiac)",
+    desc: "Advanced cardiac catheterization laboratory for emergency and elective procedures like angiography, angioplasty, and stent placement.",
+  },
 ];
 
 const diagnostic = [
-  "Pathology & Laboratory Services (Biochemistry, Hematology, Microbiology)",
-  "X-ray",
-  "CT Scan",
-
-  "Ultrasound",
-  
-  "ECG, 2D Echo, TMT, Holter",
-  "Endoscopy / Colonoscopy",
+  {
+    title: "Pathology & Laboratory Services (Biochemistry, Hematology, Microbiology)",
+    desc: "Comprehensive, accredited laboratory testing providing precise results for diagnosis and monitoring, available 24/7.",
+  },
+  {
+    title: "X-ray",
+    desc: "Standard and portable X-ray imaging for immediate skeletal and chest assessment, supporting rapid diagnosis in all units.",
+  },
+  {
+    title: "CT Scan",
+    desc: "Advanced Computed Tomography (CT) imaging for detailed cross-sectional views of the body, aiding in complex diagnoses.",
+  },
+  {
+    title: "Ultrasound",
+    desc: "Non-invasive imaging using sound waves for real-time visualization of internal organs and blood flow, including Doppler studies.",
+ },
+  {
+    title: "ECG, 2D Echo, TMT, Holter",
+    desc: "A full range of non-invasive cardiac diagnostic tests for assessing heart function, rhythm, and stress response.",
+  },
+  {
+    title: "Endoscopy / Colonoscopy",
+    desc: "Minimally invasive procedures for direct visualization and treatment of the upper and lower gastrointestinal tracts.",
+  },
 ];
 
 const inPatient = [
-  "General Ward, Private Rooms, Deluxe Rooms, Suite Rooms",
-  "Centralized Oxygen System",
-  "Pharmacy (24x7)",
-  "Ambulance Services",
-  "Cafeteria / Canteen",
-  "Waiting Lounge & Visitor Management",
-  "Parking Facilities",
-  "Cashless Mediclaim & TPA Support",
+   {
+    title: "General Ward, Private Rooms, Deluxe Rooms, Suite Rooms",
+    desc: "A range of comfortable accommodation options, from shared wards to luxurious suites, catering to different patient needs and preferences.",
+  },
+  {
+    title: "Centralized Oxygen System",
+    desc: "Reliable, piped medical gas delivery to all patient beds and critical care areas, ensuring a continuous supply for respiratory support.",
+  },
+  {
+    title: "Pharmacy (24x7)",
+    desc: "In-house, fully stocked pharmacy providing genuine medicines and surgical supplies to both inpatients and outpatients at any time.",
+  },
+  {
+    title: "Ambulance Services",
+    desc: "Advanced, well-equipped ambulance fleet with trained staff for emergency transfers and patient transport.",
+  },
+  {
+    title: "Cafeteria / Canteen",
+    desc: "A clean and comfortable dining space offering nutritious meals and refreshments for patients' families and staff.",
+  },
+  {
+    title: "Waiting Lounge & Visitor Management",
+    desc: "Dedicated, comfortable areas for visitors and a systematic process to manage access and ensure patient rest and privacy.",
+  },
+  {
+    title: "Parking Facilities",
+    desc: "Secure and ample parking for patients and visitors, ensuring hassle-free access to the hospital premises.",
+  },
+  {
+    title: "Cashless Mediclaim & TPA Support",
+    desc: "Dedicated desk for streamlined processing of insurance claims and coordination with Third Party Administrators (TPA) for cashless treatment.",
+  },
 ];
 
 const tech = [
-  "Modular OT with advanced sterilization",
-  "Computerized medical records (EMR)",
-  "Telemedicine / Online Consultation",
-  "Advanced Ventilators & Monitors",
-  "Infection Control & Safety Systems",
-  "Fire & Disaster Safety Systems",
+  {
+    title: "Modular OT with advanced sterilization",
+    desc: "Operating theaters designed with positive pressure and laminar flow for maximum infection control and patient safety during surgery.",
+  },
+  {
+    title: "Computerized medical records (EMR)",
+    desc: "Secure, digital system for maintaining all patient records, ensuring quick access to medical history and reducing errors.",
+  },
+  {
+    title: "Telemedicine / Online Consultation",
+    desc: "Remote consultation services allowing patients to connect with specialists via video, extending care beyond the hospital walls.",
+  },
+  {
+    title: "Advanced Ventilators & Monitors",
+    desc: "State-of-the-art life support systems and continuous monitoring devices used in ICUs and critical care for precise patient management.",
+  },
+  {
+    title: "Infection Control & Safety Systems",
+    desc: "Strict protocols, dedicated personnel, and modern equipment to prevent and manage hospital-acquired infections.",
+  },
+  {
+    title: "Fire & Disaster Safety Systems",
+    desc: "Comprehensive fire suppression, detection, and evacuation plans to ensure the safety of all patients, visitors, and staff.",
+  },
 ];
 
 const patientServices = [
-  "Online Appointment Booking",
-  "Health Packages / Preventive Checkups",
-  "Insurance & TPA Desk",
-  "Ayushman Desk",
-  "Patient Counseling Services",
+  {
+    title: "Online Appointment Booking",
+    desc: "Convenient web-based system for scheduling OPD appointments, reducing wait times and streamlining the patient registration process.",
+  },
+  {
+    title: "Health Packages / Preventive Checkups",
+    desc: "Customized health screening packages designed for early detection and prevention of common diseases across all age groups.",
+  },
+  {
+    title: "Insurance & TPA Desk",
+    desc: "A help desk dedicated to assisting patients with health insurance queries, documentation, and coordination with TPAs.",
+  },
+  {
+    title: "Ayushman Desk",
+    desc: "Specific support counter to facilitate easy access and utilization of services under government health schemes like Ayushman Bharat.",
+  },
+  {
+    title: "Patient Counseling Services",
+    desc: "Professional counseling for patients and families on treatment plans, emotional support, and rehabilitation following discharge.",
+  },
 ];
 
 const trust = [
@@ -587,19 +678,28 @@ const trust = [
 ];
 
 const optional = [
-  "International Patient Desk",
-  "Nutrition & Diet Counseling",
-  "Organ Transplant Facility",
-  "Palliative & Pain Management Unit",
+  {
+    title: "International Patient Desk",
+    desc: "Dedicated services for overseas patients, including visa assistance, travel planning, accommodation, and language interpretation.",
+  },
+  {
+    title: "Nutrition & Diet Counseling",
+    desc: "Personalized dietary plans and counseling provided by certified nutritionists to support recovery and promote long-term health.",
+  },
+  {
+    title: "Organ Transplant Facility",
+    desc: "Comprehensive program and infrastructure for complex organ transplantation surgeries, requiring highly specialized teams and equipment.",
+  },
+  {
+    title: "Palliative & Pain Management Unit",
+    desc: "Specialized care focused on providing relief from symptoms and stress of a serious illness to improve quality of life for patients and families.",
+  },
 ];
 
 // ===== Component =====
 export default function FacilitiesComponent() {
   const [searchTerm, setSearchTerm] = useState("");
 
-  const filteredCoreFacilities = coreFacilities.filter(facility =>
-    facility.toLowerCase().includes(searchTerm.toLowerCase())
-  );
 
   return (
     <Page>
@@ -707,7 +807,7 @@ export default function FacilitiesComponent() {
           </SectionHeader>
 
           <Grid>
-            {filteredCoreFacilities.map((f, i) => (
+            {coreFacilities.map((f, i) => (
               <FeatureCard
                 key={f}
                 initial={{ opacity: 0, y: 20 }}
@@ -721,10 +821,9 @@ export default function FacilitiesComponent() {
                   <Activity size={20} color="#06b6d4" />
                 </IconWrap>
                 <FeatureContent>
-                  <FeatureTitle>{f}</FeatureTitle>
+                  <FeatureTitle>{f.title}</FeatureTitle>
                   <FeatureDesc>
-                    Well-equipped & specialized medical team available round the clock with 
-                    state-of-the-art equipment and monitoring systems.
+                   {f.desc}
                   </FeatureDesc>
                 </FeatureContent>
               </FeatureCard>
@@ -759,10 +858,9 @@ export default function FacilitiesComponent() {
                   <Microscope size={20} color="#8b5cf6" />
                 </IconWrap>
                 <FeatureContent>
-                  <FeatureTitle>{d}</FeatureTitle>
+                  <FeatureTitle>{d.title}</FeatureTitle>
                   <FeatureDesc>
-                    High-fidelity imaging machines & certified technicians ensuring 
-                    accurate diagnostics and comprehensive reporting.
+                    {d.desc}
                   </FeatureDesc>
                 </FeatureContent>
               </FeatureCard>
@@ -804,10 +902,9 @@ export default function FacilitiesComponent() {
                   {i === 7 && <CreditCard size={20} color="#059669" />}
                 </IconWrap>
                 <FeatureContent>
-                  <FeatureTitle>{p}</FeatureTitle>
+                  <FeatureTitle>{p.title}</FeatureTitle>
                   <FeatureDesc>
-                    Comfort-focused services with clean rooms, nutrition support, and 
-                    seamless administrative processes for hassle-free healthcare.
+                   {p.desc}
                   </FeatureDesc>
                 </FeatureContent>
               </FeatureCard>
@@ -828,7 +925,7 @@ export default function FacilitiesComponent() {
           </SectionHeader>
 
           <Grid>
-            {tech.map((t, i) => (
+            {tech.map((t,i) => (
               <FeatureCard 
                 key={t}
                 initial={{ opacity: 0, y: 20 }}
@@ -847,10 +944,9 @@ export default function FacilitiesComponent() {
                   {i === 5 && <Flame size={20} color="#f59e0b" />}
                 </IconWrap>
                 <FeatureContent>
-                  <FeatureTitle>{t}</FeatureTitle>
+                  <FeatureTitle>{t.title}</FeatureTitle>
                   <FeatureDesc>
-                    Regular maintenance, automated backups, and trained technical staff 
-                    ensure uninterrupted healthcare services and patient safety.
+                   { t.desc}
                   </FeatureDesc>
                 </FeatureContent>
               </FeatureCard>
@@ -885,10 +981,9 @@ export default function FacilitiesComponent() {
                   <Calendar size={20} color="#06b6d4" />
                 </IconWrap>
                 <FeatureContent>
-                  <FeatureTitle>{s}</FeatureTitle>
+                  <FeatureTitle>{s.title}</FeatureTitle>
                   <FeatureDesc>
-                    Simple digital workflows, friendly support staff, and transparent 
-                    processes to make healthcare accessible and stress-free.
+                   {s.desc}
                   </FeatureDesc>
                 </FeatureContent>
               </FeatureCard>
@@ -955,10 +1050,9 @@ export default function FacilitiesComponent() {
                   {i === 3 && <Activity size={20} color="#8b5cf6" />}
                 </IconWrap>
                 <FeatureContent>
-                  <FeatureTitle>{o}</FeatureTitle>
+                  <FeatureTitle>{o.title}</FeatureTitle>
                   <FeatureDesc>
-                    Specialized services available on request or with dedicated 
-                    medical teams for comprehensive healthcare solutions.
+                    {o.desc}
                   </FeatureDesc>
                 </FeatureContent>
               </FeatureCard>

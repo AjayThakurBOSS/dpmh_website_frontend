@@ -39,10 +39,11 @@ const MainTitle = styled.h1`
 const SectionTitle = styled.h2`
   color: #333;
   font-size: 22px;
-  margin-top: 30px;
+  
   margin-bottom: 15px;
   border-bottom: 2px solid #eee;
   padding-bottom: 5px;
+  font-weight: 700;
 `;
 
 const Paragraph = styled.p`

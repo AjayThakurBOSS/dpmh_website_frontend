@@ -67,7 +67,7 @@ const DoctorComponent = () => {
 
   const filteredDoctors = activeSpeciality === "All" ? doctors : doctors.filter((doc) => doc.specialization === activeSpeciality)
 
-  console.log("Doctor List", doctors)
+  console.log("Doctors", doctors )
   
   return (
     <>
@@ -123,13 +123,13 @@ const DoctorComponent = () => {
                       <span>{doctor.rating || '4.5'}/5</span>
                     </InfoItem>
                     <InfoItem>
-                      <InfoIcon>🕒</InfoIcon>
+                      <InfoIcon>Exp:</InfoIcon>
                       <span>{doctor.experience || '5'} Yrs</span>
                     </InfoItem>
                   </DoctorInfo>
 
                   <BookButton>
-                    <Link to='/book-appointment'>Book Appointment</Link>
+                    <Link to='/book-appointment'>Book OPD</Link>
                   </BookButton>
                 </CardContent>
               </DoctorCard>
@@ -146,33 +146,41 @@ export default DoctorComponent;
 // Styled Components
 
 const DocImageContainer = styled.div`
-  background-color: #228be6;
+  background:linear-gradient(to right, #8fffff, #8cc9ff);
   display:flex;
   align-items: center;
   justify-content: center;
-    height: 200px;
+  height: 200px;
+  
+  @media (max-width: 768px) {
+    height: 160px;
+  }
 `
+
 const DoctorImage = styled.img`
-  width: 180px;
-  height: 180px;
+  width: 160px;
+  height: 160px;
   object-fit: cover;
-  border:2px solid #ff1010ff;
+  border:2px solid #004AAD;
   border-radius: 50%;
+  
+  @media (max-width: 768px) {
+    width: 120px;
+    height: 120px;
+  }
 `;
 
 const SpecialitySection = styled.div`
-  padding: 2rem 1rem;
-  
-
+  //padding: 2rem 1rem;
 `;
 
 const FilterContainer = styled.div`
-  max-width: 1200px;
+  max-width: 1600px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 0.3rem;
 
   @media (min-width: 768px) {
     flex-direction: row;
@@ -216,8 +224,8 @@ const FilterButton = styled.button`
   }
 
   @media (max-width: 480px) {
-    padding: 0.5rem 1rem;
-    font-size: 0.85rem;
+    padding: 5px 10px;
+    font-size: 12px;
   }
 `;
 
@@ -242,12 +250,27 @@ const NoDoctorsMessage = styled.div`
 `;
 
 const DoctorCardContainer = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
   align-items: flex-start;
   justify-content: center;
-  flex-wrap: wrap;
   padding: 1rem;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 0.5rem;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.4rem;
+    padding: 8px;
+  }
 `;
 
 const SliderContainer = styled.div`
@@ -257,7 +280,6 @@ const SliderContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  
 
   .swiper {
     padding: 20px 10px 60px;
@@ -345,13 +367,22 @@ const DoctorCard = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  width: 300px;
+  width: 100%;
   max-width: 350px;
   margin: 0 auto;
 
   &:hover {
     transform: translateY(-8px);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  }
+
+  @media (max-width: 768px) {
+    max-width: none;
+    border-radius: 16px;
+    min-width:160px;
+    &:hover {
+      transform: translateY(-4px);
+    }
   }
 `;
 
@@ -361,6 +392,10 @@ const CardContent = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
 `;
 
 const DoctorName = styled.h3`
@@ -369,6 +404,11 @@ const DoctorName = styled.h3`
   margin-bottom: 0.5rem;
   font-weight: 600;
   line-height: 1.3;
+
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+    margin-bottom: 0.3rem;
+  }
 `;
 
 const DoctorQualification = styled.p`
@@ -377,6 +417,11 @@ const DoctorQualification = styled.p`
   color: #000000;
   font-weight: 600;
   margin-bottom: 0.5rem;
+
+  @media (max-width: 768px) {
+    font-size: 10px;
+    margin-bottom: 0.3rem;
+  }
 `;
 
 const DoctorSpeciality = styled.p`
@@ -385,6 +430,11 @@ const DoctorSpeciality = styled.p`
   font-weight: 500;
   margin-bottom: 1.5rem;
   letter-spacing: 0.5px;
+
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
 `;
 
 const DoctorInfo = styled.div`
@@ -394,6 +444,12 @@ const DoctorInfo = styled.div`
   padding: 12px 0;
   border-top: 1px solid #e2e8f0;
   border-bottom: 1px solid #e2e8f0;
+
+  @media (max-width: 768px) {
+    margin-bottom: 1rem;
+    padding: 8px 0;
+     padding: 5px 0;
+  }
 `;
 
 const InfoItem = styled.div`
@@ -403,10 +459,19 @@ const InfoItem = styled.div`
   color: #64748b;
   font-size: 0.9rem;
   font-weight: 500;
+
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+    gap: 6px;
+  }
 `;
 
 const InfoIcon = styled.span`
   font-size: 1rem;
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+  }
 `;
 
 const BookButton = styled.button`
@@ -445,5 +510,11 @@ const BookButton = styled.button`
     transform: none;
     box-shadow: none;
   }
-`;
 
+  @media (max-width: 768px) {
+    padding: 6px 10px;
+    font-size: 0.9rem;
+    border-radius: 10px;
+    
+  }
+`;

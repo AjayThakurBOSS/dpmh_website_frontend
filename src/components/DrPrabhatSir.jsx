@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import DrPrabhat from '../assets/dr-prabhat-4.webp'
+import { Link } from 'react-router-dom';
 
 const HospitalContainer = styled.div`
   display: flex;
@@ -142,7 +143,7 @@ const DrPrabhatSir = () => {
         <Paragraph>
           At <BoldText>Dr. Prabhat Memorial Hiramati Hospital</BoldText>, we are dedicated to building a first-class, patient-focused healthcare service, grounded in high-quality, evidence-based medical practice. Whether you require emergency services, specialized treatment, or preventive care, you can trust us to be your partner in health.
         </Paragraph>
-        <BlueButton>Read More</BlueButton>
+        <BlueButton><Link to='/about-us'>Read More</Link>  </BlueButton>
        
       </ContentWrapper>
     </HospitalContainer>

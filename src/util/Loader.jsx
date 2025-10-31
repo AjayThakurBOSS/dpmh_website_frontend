@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import LogoImg from '../assets/logo.jpeg'
+import LogoImg from '../assets/logo_h.png'
 
 const Loader = ({ 
   logoUrl = LogoImg,
@@ -57,7 +57,7 @@ const Loader = ({
     <div className="fixed inset-0 flex flex-col items-center justify-center bg-white z-50">
       {/* Logo with progressive reveal */}
       <div 
-        className="w-100 h-100 mb-4 relative"
+        className="w-60 h-60 mb-4 relative"
         style={maskStyle}
       >
         <img

@@ -528,11 +528,10 @@ const RequestAppointmentFormHero = () => {
 
         <hr />
         <Row gutter={[16, 8]}>
-          <Col xs={24} md={12}  style={{color:'#004AAD'}}>
+          <Col xs={24} md={12}>
             <Form.Item
-              label="Patient Name"
+              label={<span style={{ color: "#004AAD" }}>Patient Name</span>}
               name="firstName"
-              style={{color:'#004AAD'}}
               required
               rules={[{ required: true, message: "Please enter patient name" }]}
             >
@@ -542,7 +541,7 @@ const RequestAppointmentFormHero = () => {
 
           <Col xs={24} md={12}>
             <Form.Item
-              label="Contact Number"
+            label={<span style={{ color: "#004AAD" }}>Contact Number</span>}
               name="phone"
               required
               rules={[
@@ -556,7 +555,7 @@ const RequestAppointmentFormHero = () => {
 
           <Col xs={24} md={12}>
             <Form.Item
-              label="Appointment Date"
+            label={<span style={{ color: "#004AAD" }}>Appointment Date</span>}
               name="date"
               rules={[{ required: true, message: "Please select a date!" }]}
             >
@@ -573,8 +572,8 @@ const RequestAppointmentFormHero = () => {
 
           <Col xs={24} md={12}>
             <Form.Item
+            label={<span style={{ color: "#004AAD" }}>Gender</span>}
               name="gender"
-              label="Gender"
               rules={[{ required: true, message: "Please select gender" }]}
             >
               <Select
@@ -590,7 +589,7 @@ const RequestAppointmentFormHero = () => {
 
           <Col xs={24} md={12}>
             <Form.Item
-              label="Email (Optional)"
+            label={<span style={{ color: "#004AAD" }}>Email (Optional)</span>}
               name="email"
               rules={[
                 { message: "Please enter email" },
@@ -603,8 +602,8 @@ const RequestAppointmentFormHero = () => {
 
           <Col xs={24} md={12}>
             <Form.Item
+            label={<span style={{ color: "#004AAD" }}>Department</span>}
               name="department"
-              label="Department"
               rules={[{ required: true, message: "Please select department" }]}
             >
               <Select
@@ -626,8 +625,8 @@ const RequestAppointmentFormHero = () => {
 
           <Col xs={24} md={24}>
             <Form.Item
+            label={<span style={{ color: "#004AAD" }}>Select Doctor</span>}
               name="doctor"
-              label="Select Doctor"
               rules={[{ required: true, message: "Please select doctor" }]}
             >
               <Select
@@ -657,7 +656,7 @@ const RequestAppointmentFormHero = () => {
 
           <Col xs={24}>
             <Form.Item
-              label="Symptoms in brief"
+            label={<span style={{ color: "#004AAD" }}>Symptoms in brief</span>}
               name="symptoms"
               rules={[{ required: true, message: "Please describe symptoms!" }]}
             >
