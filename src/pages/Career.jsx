@@ -596,7 +596,7 @@ const Career = () => {
              */}
             <JobsGrid>
 
-               <h1 style={{color: '#004AAD', fontSize:'4rem', fontWeight: '600'}}>Currently No  Openings</h1>
+               <h1 style={{color: '#004AAD', fontSize:'4rem', fontWeight: '600', textAlign:'center'}}>Currently No  Openings</h1>
              {/*  {jobs[activeDepartment].map((job, index) => (
                 <JobCard key={index}>
                   <h3>{job.title}</h3>
