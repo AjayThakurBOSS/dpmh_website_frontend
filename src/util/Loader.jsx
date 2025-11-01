@@ -83,7 +83,7 @@ const Loader = ({
       {showProgressBar && (
         <div className="mt-2 w-48 bg-gray-200 rounded-full h-1">
           <div 
-            className="bg-indigo-600 h-1 rounded-full transition-all duration-300"
+            className="bg-[#84CEE0] h-1 rounded-full transition-all duration-300"
             style={{ width: `${progress}%` }}
           />
         </div>

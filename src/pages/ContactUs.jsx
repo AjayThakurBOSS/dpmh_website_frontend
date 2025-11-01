@@ -584,7 +584,7 @@ const SubmitButton = styled.button`
 const ThankYouMessage = styled.div`
   text-align: center;
   padding: 4rem 2rem;
-  background: linear-gradient(135deg, #1951F8 0%, #00f2fe 100%);
+  background: linear-gradient(135deg, #004AAD 0%, #00f2fe 100%);
   border-radius: 20px;
   margin: 2rem auto;
   max-width: 600px;

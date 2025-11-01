@@ -93,6 +93,7 @@ const MainNavbar = () => {
             submenu: [
                 /* { name: 'Blog', link: '/resources/blogs' }, */
                 { name: 'Gallery', link: '/resources/gallery' },
+                { name: 'Career', link: '/careers' },
               /*   { name: 'News-Latter', link: '/resources/newsletter' },
                 { name: 'Testimonials', link: '/resources/testimonials' },
                 { name: 'Videos', link: '/resources/videos' } */
