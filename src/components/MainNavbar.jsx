@@ -1,6 +1,6 @@
-// MainNavbar.js (FIXED MOBILE SUBMENU VISIBILITY WITH LINKS)
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+// MainNavbar.js (FIXED WITH ACTIVE NAVBAR HIGHLIGHTING)
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { FaCalendarCheck, FaBars, FaTimes } from 'react-icons/fa';
 import { FaCaretDown } from "react-icons/fa6";
@@ -9,10 +9,42 @@ import Logo1 from '../../src/assets/logo-3.png';
 const MainNavbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [openSubmenu, setOpenSubmenu] = useState(null); 
+    const [activeNav, setActiveNav] = useState('/');
+    const location = useLocation();
 
-    // Function to generate URL-friendly slugs
-    const generateSlug = (text) => {
-        return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    // Update active nav when location changes
+    useEffect(() => {
+        setActiveNav(location.pathname);
+        
+        // Auto-close mobile menu when route changes
+        if (window.innerWidth <= 992) {
+            setIsOpen(false);
+            setOpenSubmenu(null);
+        }
+    }, [location]);
+
+    // Function to check if a nav item is active
+    const isNavItemActive = (item) => {
+        if (item.link === '/') {
+            return activeNav === '/';
+        }
+        if (item.link && activeNav.startsWith(item.link)) {
+            return true;
+        }
+        
+        // Check submenu items
+        if (item.submenu) {
+            return item.submenu.some(subItem => 
+                subItem.link && activeNav.startsWith(subItem.link)
+            );
+        }
+        
+        return false;
+    };
+
+    // Function to check if a submenu item is active
+    const isSubmenuItemActive = (subItemLink) => {
+        return activeNav === subItemLink || activeNav.startsWith(subItemLink);
     };
 
     // Color palette for Center of Excellence submenus
@@ -54,7 +86,6 @@ const MainNavbar = () => {
         { 
             name: 'Facilities', 
             link: '/facilities'
-           
         }, 
         { 
             name: 'Resources', 
@@ -67,7 +98,7 @@ const MainNavbar = () => {
                 { name: 'Videos', link: '/resources/videos' } */
             ] 
         }, 
-         { name: 'Career', link: '/careers' },
+        /* { name: 'Career', link: '/careers' }, */
         { name: 'Contact Us', link: '/contact-us' },
     ];
 
@@ -111,11 +142,13 @@ const MainNavbar = () => {
                         hasDropdown={item.dropdown} 
                         isSpecial={item.isSpecial}
                         isMobileOpen={openSubmenu === item.name}
+                        isActive={isNavItemActive(item)}
                     >
                         {item.dropdown ? (
                             <NavLink 
                                 as="div"
                                 isSpecial={item.isSpecial} 
+                                isActive={isNavItemActive(item)}
                                 onClick={(e) => {
                                     if (window.innerWidth <= 992) {
                                         e.preventDefault();
@@ -140,6 +173,7 @@ const MainNavbar = () => {
                                 as={Link} 
                                 to={item.link}
                                 isSpecial={item.isSpecial} 
+                                isActive={isNavItemActive(item)}
                                 onClick={() => handleNavLinkClick(item)}
                             >
                                 {item.name}
@@ -168,6 +202,7 @@ const MainNavbar = () => {
                                         to={subItem.link}
                                         isSpecial={item.isSpecial}
                                         backgroundColor={getSubmenuColor(item.name, index)}
+                                        isActive={isSubmenuItemActive(subItem.link)}
                                         onClick={() => {
                                             if (window.innerWidth <= 992) {
                                                 setIsOpen(false);
@@ -184,7 +219,7 @@ const MainNavbar = () => {
                 ))}
             </NavLinks>
 
-            <AppointmentButton as={Link} to="/book-appointment">
+            <AppointmentButton as={Link} to="/book-appointment" isActive={activeNav === '/book-appointment'}>
                 <FaCalendarCheck /> BOOK OPD
             </AppointmentButton>
         </NavContainer>
@@ -242,8 +277,6 @@ const SubMenu = styled.div`
             transform: translateX(-50%);
             padding: 10px;
             border-radius: 8px;
-
-            
         }
     `}
 
@@ -255,7 +288,7 @@ const SubMenu = styled.div`
         min-width: auto;
         box-shadow: none;
         border-top: none;
-        background-color: #3b508f;
+        background-color: #ffffffff;
         padding: 0;
     }
 `;
@@ -268,12 +301,26 @@ const SubMenuItem = styled(Link)`
     font-weight: 500;
     transition: all 0.2s;
     white-space: nowrap;
-    color: #3b508f; 
+    color: ${props => props.isActive ? '#00bfff' : '#3b508f'}; 
     border: none;
     background: none;
     width: 100%;
     text-align: left;
     cursor: pointer;
+    position: relative;
+
+    // Active indicator for submenu items
+    ${props => props.isActive && `
+        &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: #00bfff;
+        }
+    `}
 
     &:hover {
         background-color: #f0f0f0;
@@ -287,11 +334,15 @@ const SubMenuItem = styled(Link)`
             flex-basis: 32%; 
             padding: 10px 15px;
             box-sizing: border-box;
-            color: #000000; 
+            color: ${props.isActive ? '#00bfff' : '#000000'}; 
             background-color: ${props.backgroundColor || '#a4e0f4ff'};
             border-radius: 5px;
             margin: 3px;
-            /* border-left: 4px solid ${props.backgroundColor ? darkenColor(props.backgroundColor, 0.2) : '#345FA5'}; */
+            
+            ${props.isActive && `
+                border-left: 4px solid #00bfff;
+                font-weight: 600;
+            `}
             
             &:hover {
                 background-color: ${props.backgroundColor ? lightenColor(props.backgroundColor, 0.1) : '#f0f0f0'};
@@ -303,10 +354,11 @@ const SubMenuItem = styled(Link)`
     `}
 
     @media (max-width: 992px) {
-        color: #000000;
+        color: ${props => props.isActive ? '#00bfff' : '#000000'};
         padding-left: 30px;
         border-top: 1px solid rgba(255, 255, 255, 0.05);
         background-color: ${props => props.isSpecial ? props.backgroundColor || '#4c62a5' : 'transparent'};
+        font-weight: ${props => props.isActive ? '600' : '500'};
         
         &:hover {
             background-color: #4c62a5;
@@ -315,31 +367,6 @@ const SubMenuItem = styled(Link)`
         }
     }
 `;
-
-// Helper functions for color manipulation
-const lightenColor = (color, percent) => {
-    // Simple color lightening function
-    const num = parseInt(color.replace("#", ""), 16);
-    const amt = Math.round(2.55 * percent * 100);
-    const R = (num >> 16) + amt;
-    const G = (num >> 8 & 0x00FF) + amt;
-    const B = (num & 0x0000FF) + amt;
-    return "#" + (0x1000000 + (R < 255 ? R < 1 ? 0 : R : 255) * 0x10000 +
-            (G < 255 ? G < 1 ? 0 : G : 255) * 0x100 +
-            (B < 255 ? B < 1 ? 0 : B : 255)).toString(16).slice(1);
-};
-
-const darkenColor = (color, percent) => {
-    // Simple color darkening function
-    const num = parseInt(color.replace("#", ""), 16);
-    const amt = Math.round(2.55 * percent * 100);
-    const R = (num >> 16) - amt;
-    const G = (num >> 8 & 0x00FF) - amt;
-    const B = (num & 0x0000FF) - amt;
-    return "#" + (0x1000000 + (R > 0 ? R > 255 ? 255 : R : 0) * 0x10000 +
-            (G > 0 ? G > 255 ? 255 : G : 0) * 0x100 +
-            (B > 0 ? B > 255 ? 255 : B : 0)).toString(16).slice(1);
-};
 
 const NavItem = styled.div`
     position: relative;
@@ -359,31 +386,60 @@ const NavItem = styled.div`
 const NavLink = styled(Link)`
     display: flex;
     align-items: start;
-    justify-content: flex-start;
+     text-align: left;
     gap: 5px; 
-    color: white;
+    color: ${props => props.isActive ? '#00bfff' : 'white'};
     text-decoration: none;
     font-size: 0.95rem;
-    font-weight: 600;
+    font-weight: ${props => props.isActive ? '700' : '600'};
     padding: 10px 15px;
     transition: background-color 0.2s, color 0.2s;
     cursor: pointer;
     white-space: nowrap;
-    justify-content: ${props => (props.isSpecial || window.innerWidth > 992) ? 'center' : 'flex-start'};
+    justify-content: ${props => (props.isSpecial || window.innerWidth > 992) ? 'flex-start' : 'flex-start'};
     border: none;
     background: none;
+    position: relative;
+
+    // Active indicator for main nav items
+    ${props => props.isActive && `
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 3px;
+            background-color: #00bfff;
+            border-radius: 2px;
+        }
+    `}
 
     &:hover {
-        color: ${props => props.isSpecial ? 'white' : '#ffffffff'};
+        color: ${props => props.isActive ? '#000000' : (props.isSpecial ? 'white' : '#ffffffff')};
         background-color: ${props => props.isSpecial ? '#345FA5' : 'transparent'};
     }
 
     @media (max-width: 992px) {
         width: 100%;
-        justify-content: center;
+        justify-content: flex-start;
+        text-align: left;
+        padding-left:25px;
         border-top: 1px solid rgba(255, 255, 255, 0.1);
         background-color: ${props => props.isSpecial ? '#345FA5' : 'transparent'};
-        color: ${props => props.isSpecial ? '#white' : 'white'};
+        color: ${props => props.isActive ? '#00bfff' : (props.isSpecial ? 'white' : 'white')};
+        font-weight: ${props => props.isActive ? '700' : '600'};
+
+        ${props => props.isActive && `
+            &::after {
+                left: 10px;
+                transform: none;
+                width: 4px;
+                height: 80%;
+                top: 10%;
+            }
+        `}
 
         &:hover {
             background-color: ${props => props.isSpecial ? '#00bfff;' : '#00bfff'};
@@ -393,11 +449,15 @@ const NavLink = styled(Link)`
     ${props => props.isSpecial && `
         @media (min-width: 993px) {
             background-color: #345FA5;
-            color: #ffffffff;
-            font-weight: 700;
+            color: ${props.isActive ? '#00bfff' : '#ffffffff'};
+            font-weight: ${props.isActive ? '800' : '700'};
             padding: 5px 10px;
             border-radius: 4px;
             margin: 0 5px;
+            
+            ${props.isActive && `
+                //border: 2px solid #00bfff;
+            `}
         }
     `}
 `;
@@ -421,9 +481,9 @@ const NavLinks = styled.div`
 `;
 
 const AppointmentButton = styled(Link)`
-    background-color: #ffffffff;
-    color: #00bfff;
-    border: none;
+    background-color: ${props => props.isActive ? '#00bfff' : '#ffffffff'};
+    color: ${props => props.isActive ? 'white' : '#00bfff'};
+    border: ${props => props.isActive ? '2px solid white' : 'none'};
     padding: 8px 15px;
     font-size: 12px;
     font-weight: 700;
@@ -434,6 +494,7 @@ const AppointmentButton = styled(Link)`
     border-radius: 4px;
     white-space: nowrap;
     text-decoration: none;
+    transition: all 0.2s;
 
     svg {
         margin-right: 8px;
@@ -442,14 +503,15 @@ const AppointmentButton = styled(Link)`
     &:hover {
         background-color: #0099cc;
         color: white;
+        border-color: #0099cc;
     }
 
     @media (max-width: 992px) {
-    position: absolute;
+        position: absolute;
         top: -52px;
         left: 10px;
         z-index: 99999;
-       font-size: 0.7rem;
+        font-size: 0.7rem;
         order: 3;
         margin-top: 10px;
         padding: 6px;
@@ -475,5 +537,28 @@ const Hamburger = styled.div`
         display: block;
     }
 `;
+
+// Helper functions for color manipulation
+const lightenColor = (color, percent) => {
+    const num = parseInt(color.replace("#", ""), 16);
+    const amt = Math.round(2.55 * percent * 100);
+    const R = (num >> 16) + amt;
+    const G = (num >> 8 & 0x00FF) + amt;
+    const B = (num & 0x0000FF) + amt;
+    return "#" + (0x1000000 + (R < 255 ? R < 1 ? 0 : R : 255) * 0x10000 +
+            (G < 255 ? G < 1 ? 0 : G : 255) * 0x100 +
+            (B < 255 ? B < 1 ? 0 : B : 255)).toString(16).slice(1);
+};
+
+const darkenColor = (color, percent) => {
+    const num = parseInt(color.replace("#", ""), 16);
+    const amt = Math.round(2.55 * percent * 100);
+    const R = (num >> 16) - amt;
+    const G = (num >> 8 & 0x00FF) - amt;
+    const B = (num & 0x0000FF) - amt;
+    return "#" + (0x1000000 + (R > 0 ? R > 255 ? 255 : R : 0) * 0x10000 +
+            (G > 0 ? G > 255 ? 255 : G : 0) * 0x100 +
+            (B > 0 ? B > 255 ? 255 : B : 0)).toString(16).slice(1);
+};
 
 export default MainNavbar;

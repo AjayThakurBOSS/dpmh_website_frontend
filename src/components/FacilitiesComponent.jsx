@@ -678,18 +678,18 @@ const trust = [
 ];
 
 const optional = [
-  {
+/*   {
     title: "International Patient Desk",
     desc: "Dedicated services for overseas patients, including visa assistance, travel planning, accommodation, and language interpretation.",
-  },
+  }, */
   {
     title: "Nutrition & Diet Counseling",
     desc: "Personalized dietary plans and counseling provided by certified nutritionists to support recovery and promote long-term health.",
   },
-  {
+  /* {
     title: "Organ Transplant Facility",
     desc: "Comprehensive program and infrastructure for complex organ transplantation surgeries, requiring highly specialized teams and equipment.",
-  },
+  }, */
   {
     title: "Palliative & Pain Management Unit",
     desc: "Specialized care focused on providing relief from symptoms and stress of a serious illness to improve quality of life for patients and families.",
@@ -781,7 +781,7 @@ export default function FacilitiesComponent() {
             <CardMini whileHover={{ y: -5 }} whileTap={{ scale: 0.98 }}>
               <div style={{ fontSize: "0.85rem", color: "#64748b", marginBottom: "4px" }}>Visiting Hours</div>
               <div style={{ fontWeight: 700, fontSize: "1rem", display: "flex", alignItems: "center", gap: "6px" }}>
-                8:00 AM — 8:00 PM <ChevronDown size={14} />
+                10:00 AM — 6:00 PM <ChevronDown size={14} />
               </div>
             </CardMini>
 

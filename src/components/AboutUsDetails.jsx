@@ -455,13 +455,13 @@ const SectionIcon = styled.span`
 `;
 
 const SectionTitle = styled.h2`
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 700;
-  color: #1e293b;
+  color: #004AAD;
   margin: 0;
   @media (max-width: 600px){
     font-size: 1rem;
-    color: blue;
+    color: #004AAD;
   }
 `;
 
