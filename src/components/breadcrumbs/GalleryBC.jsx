@@ -77,7 +77,7 @@ const GalleryBC = () => {
         <span>Gallery</span>
       </Breadcrumb>
       <Title>Enjoy our Lagecy through our gallery</Title>
-      <SubText></SubText>
+      <SubText>Explore our Hospital, events, and activities through our image gallery</SubText>
     </HeroContainer>
   );
 };

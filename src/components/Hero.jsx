@@ -9,10 +9,10 @@ const Hero = () => {
       <Content>
         <Title>Dr. Prabhat Memorial Hiramati Hospital</Title>
         <Subtitle>
-          Center of Excellence for Cardiology, Surgery, Trauma, Emergency and Critical Care Services
+          A Dediacted Emergency, Critical Care, Trauma Center Cum Multi-Super-Speciality Hospital 
         </Subtitle>
         <InsuranceInfo>
-          CGHS, CAPF, CMRF, Ayushman Card और सभी TPA के अन्तर्गत निःशुल्क ईलाज |
+          CGHS, CAPF, CMRF, Ayushman Bharat और सभी TPA के अन्तर्गत निःशुल्क ईलाज |
         </InsuranceInfo>
 
         <ButtonContainer>
@@ -95,7 +95,7 @@ const FormWrapper = styled.div`
 
 const Title = styled.h1`
   color: white;
-  font-size: 3rem;
+  font-size: 4rem;
   font-weight: 700;
   margin: 0;
   line-height: 1.2;
@@ -106,11 +106,11 @@ const Title = styled.h1`
   }
 
   @media (max-width: 768px) {
-    font-size: 1.7rem;
+    font-size: 2rem;
   }
 
   @media (max-width: 480px) {
-    font-size: 1.4rem;
+    font-size: 1.8rem;
   }
 `;
 

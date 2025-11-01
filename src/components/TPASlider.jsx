@@ -82,10 +82,15 @@ const TPASlider = () => {
 export default TPASlider;
 
 const Title = styled.h1`
+text-align: center;
   font-size: 3rem;
   margin-bottom: 20px;
   font-weight: 600;
-  color: #0ab5d3ff;
+  color: #004AAD;
+
+  @media (max-width: 500px){
+    font-size: 1.8rem;
+  }
 
 `
 // Animation for left scroll

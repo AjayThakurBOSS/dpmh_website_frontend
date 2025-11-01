@@ -524,7 +524,7 @@ const RequestAppointmentFormHero = () => {
       <Form layout="vertical" onFinish={handleAppointmentRequest} form={form}>
         <Header className="text-center">Book your OPD</Header>
         <SubHeader style={{marginBottom:0}}>Book your doctor appointment in simple steps.</SubHeader>
-        <SubHeader style={{marginTop:0, marginBottom:'20px', color:'red'}}>  Please fill the form with the Patients details. (all the fields are mandatory)</SubHeader>
+{/*         <SubHeader style={{marginTop:0, marginBottom:'20px', color:'red'}}>  Please fill the form with the Patients details. (all the fields are mandatory)</SubHeader> */}
 
         <hr />
         <Row gutter={[16, 8]}>
@@ -799,13 +799,13 @@ const SuccessIconStatic = styled.div`
 
 // Rest of the styled components remain the same...
 const Header = styled.div`
-  padding-bottom: 10px;
+
   color: #004AAD;
   font-size: clamp(1.5rem, 4vw, 2rem);
   font-weight: 600;
   text-transform: capitalize;
   text-align: center;
-  margin-bottom: 0.5rem;
+ 
 `;
 
 const SubHeader = styled.p`
@@ -813,6 +813,7 @@ const SubHeader = styled.p`
   color: #6B7280;
   margin-bottom: 1.5rem;
   font-size: 1rem;
+    padding-bottom: 10px;
 `;
 
 const RequestContainer = styled.div`

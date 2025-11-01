@@ -48,7 +48,7 @@ const TraumaCarePage = () => {
           <RelatedDoctorsDiv>
             <AnimatedSection delay="0.6s">
               <SectionTitle>Our Trauma Care Specialists</SectionTitle>
-             <EachDeparmentDoctor specialization="General Surgeon" />
+             <EachDeparmentDoctor specialization="General Physician" />
             </AnimatedSection>
           </RelatedDoctorsDiv>
         </DepartmentBody>

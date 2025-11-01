@@ -7,6 +7,7 @@ import DoctorPageBC from '../components/breadcrumbs/DoctorPageBC';
 const EachDeparmentDoctor = ({ specialization = "All" }) => {
     const [doctors, setDoctors] = useState([])
     const [activeSpeciality, setActiveSpeciality] = useState(specialization)
+    const [loading, setLoading] = useState(true) 
 
     const fetchDoctorsList = async () => {
         try {
@@ -17,6 +18,9 @@ const EachDeparmentDoctor = ({ specialization = "All" }) => {
         } catch {
             console.log('Error in getting Doctors list')
         }
+        finally {
+        setLoading(false); // Stop loading regardless of success/error
+    }
     }
 
     useEffect(() => {
@@ -39,7 +43,17 @@ const EachDeparmentDoctor = ({ specialization = "All" }) => {
         <>
           
            <SliderContainer>
-                {filteredDoctors.length === 0 ? (
+                {
+            loading ? (
+          // Loader Section
+          <LoaderContainer>
+            <Loader>
+              <Spinner />
+              <LoaderText>Loading Doctors...</LoaderText>
+            </Loader>
+          </LoaderContainer>
+        ):
+                filteredDoctors.length === 0 ? (
                     <NoDoctorsMessage>
                         No doctors found for the selected speciality.
                     </NoDoctorsMessage>
@@ -81,6 +95,43 @@ const EachDeparmentDoctor = ({ specialization = "All" }) => {
 };
 
 export default EachDeparmentDoctor;
+
+const LoaderContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  width: 100%;
+`;
+
+const Loader = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+`;
+
+const Spinner = styled.div`
+  width: 50px;
+  height: 50px;
+  border: 4px solid #f3f4f6;
+  border-top: 4px solid #2563eb;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+`;
+
+const LoaderText = styled.p`
+  font-size: 1.1rem;
+  color: #64748b;
+  font-weight: 500;
+`;
+
+
 const DocImageContainer = styled.div`
   background:linear-gradient(to right, #8fffff, #8cc9ff);
   display:flex;
@@ -97,7 +148,7 @@ const DoctorImage = styled.img`
   width: 160px;
   height: 160px;
   object-fit: cover;
-  border:2px solid #ff1010ff;
+  border:2px solid #004AAD;
   border-radius: 50%;
   
   @media (max-width: 768px) {

@@ -58,13 +58,14 @@ const Subtitle = styled.h3`
 `;
 
 const Title = styled.h1`
-  font-size: 2em;
-  color: #333;
+  font-size: 1.8rem;
+  color: #004AAD;
   margin-bottom: 20px;
   text-align: center;
+  font-weight: 600;
 
   @media (min-width: 768px) {
-    font-size: 2.5em;
+    font-size: 2.0em;
     text-align: left;
   }
 `;

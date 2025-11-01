@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 // Styled Components
@@ -555,7 +556,7 @@ const GeneralSurgeryComponent = () => {
           
           <div style={{ textAlign: 'center', marginTop: '2rem' }}>
             <CTAButton>
-              Schedule Surgical Consultation
+              <Link to='/book-appointment'>Schedule Surgical Consultation</Link>
             </CTAButton>
             <Text style={{ color: '#666', fontSize: '0.9rem', marginTop: '1rem' }}>
               📞 <strong>Emergency Hotline:</strong> Available 24/7 for urgent surgical needs

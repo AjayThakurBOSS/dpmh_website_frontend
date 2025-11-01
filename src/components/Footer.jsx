@@ -31,7 +31,7 @@ const Footer = () => {
             <LinkItem><StyledFaAngleRight /> <FooterLink to="/facilities">Facilities</FooterLink></LinkItem>
             <LinkItem><FaUserMd /> <FooterLink to="/doctors">Our Doctors</FooterLink></LinkItem>
             <LinkItem><StyledFaAngleRight /> <FooterLink to="/contact-us">Contact Us</FooterLink></LinkItem>
-            <LinkItem><FaLock /> <FooterLink to="#">Privacy Policy</FooterLink></LinkItem>
+            <LinkItem><FaLock /> <FooterLink to="/privacy-policy">Privacy Policy</FooterLink></LinkItem>
             <LinkItem><FaLock /> <FooterLink to="/sitemap">Sitemap</FooterLink></LinkItem>
           </LinkList>
         </Column>

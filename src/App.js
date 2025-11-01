@@ -48,6 +48,7 @@ import AppointmentPage from './pages/appointment/AppointmentPage';
 
 import LogoImg from './assets/logo.jpeg'
 import Loader from './util/Loader';
+import PrivacyPolicy from './util/PrivacyPolicy';
 
 
 // Page Components
@@ -153,7 +154,8 @@ const AnimatedRoutes = () => {
          <Route path='/departments/trauma' element={<TraumaCarePage/>} />
          <Route path='/departments/critical-care' element={<CriticalCarePage/>} />
           <Route path='/sitemap' element={<Sitemap/>} />
-          
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+
       </Routes>
     </AnimatePresence>
   );

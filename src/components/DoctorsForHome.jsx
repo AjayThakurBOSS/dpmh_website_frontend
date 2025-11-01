@@ -12,49 +12,22 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import DoctorPageBC from '../components/breadcrumbs/DoctorPageBC';
 
-// Mock doctor data - replace with actual data
-const doctorsData = [
-  {
-    id: 1,
-    name: "Dr Satish Kumar Singh",
-    speciality: "Consultant Emergency Medicine",
-    experience: "12 years",
-    rating: 4.8,
-    image: Dr1,
-    nextAvailable: "Today, 4:00 PM"
-  },
-  {
-    id: 2,
-    name: "Dr. Atul Kumar Tiwari",
-    speciality: "Consultant Emergency Medicine",
-    experience: "15 years",
-    rating: 4.9,
-    image: Dr2,
-    nextAvailable: "Tomorrow, 10:00 AM"
-  },
-  {
-    id: 3,
-    name: "Dr. Ghanshyam Timilsina",
-    speciality: "Consultant Emergency Medicine",
-    experience: "8 years",
-    rating: 4.7,
-    image: Dr3,
-    nextAvailable: "Today, 2:30 PM"
-  },
-];
-
 const DoctorsForHome = () => {
     const [doctors, setDoctors] = useState([])
     const [activeSpeciality, setActiveSpeciality] = useState("All")
+    const [loading, setLoading] = useState(true) 
 
   const fetchDoctorsList = async () => {
     try{
+        setLoading(true); // Start loading
         const response = await axios.get(
             "https://app.prabhatmemorialhospital.com/api/doctors"
         )
         setDoctors(response.data)
     }catch{
         console.log('Error in getting Doctors list')
+    } finally {
+        setLoading(false); // Stop loading regardless of success/error
     }
   }
 
@@ -71,14 +44,11 @@ const DoctorsForHome = () => {
     : doctors.filter((doc) => doc.specialization === activeSpeciality)
   ).slice(0, 8); // Only take first 8 doctors
 
-
   
   return (
     <>
-      
       <SpecialitySection>
         <FilterContainer>
-         {/*  <FilterTitle>Filter by Speciality:</FilterTitle> */}
           <ButtonContainer>
             <FilterButton 
               active={activeSpeciality === "All"}
@@ -97,15 +67,18 @@ const DoctorsForHome = () => {
             ))}
           </ButtonContainer>
         </FilterContainer>
-        
-        {/* <ResultsCount>
-          Showing {filteredDoctors.length} doctor{filteredDoctors.length !== 1 ? 's' : ''}
-          {activeSpeciality !== "All" && ` in ${activeSpeciality}`}
-        </ResultsCount> */}
       </SpecialitySection>
       
       <SliderContainer>
-        {filteredDoctors.length === 0 ? (
+        {loading ? (
+          // Loader Section
+          <LoaderContainer>
+            <Loader>
+              <Spinner />
+              <LoaderText>Loading Doctors...</LoaderText>
+            </Loader>
+          </LoaderContainer>
+        ) : filteredDoctors.length === 0 ? (
           <NoDoctorsMessage>
             No doctors found for the selected speciality.
           </NoDoctorsMessage>
@@ -148,6 +121,42 @@ const DoctorsForHome = () => {
 export default DoctorsForHome;
 
 // Styled Components
+
+// Add these new styled components for the loader
+const LoaderContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  width: 100%;
+`;
+
+const Loader = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+`;
+
+const Spinner = styled.div`
+  width: 50px;
+  height: 50px;
+  border: 4px solid #f3f4f6;
+  border-top: 4px solid #2563eb;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+`;
+
+const LoaderText = styled.p`
+  font-size: 1.1rem;
+  color: #64748b;
+  font-weight: 500;
+`;
 
 const DocImageContainer = styled.div`
   background:linear-gradient(to right, #8fffff, #8cc9ff);
@@ -389,7 +398,6 @@ const DoctorCard = styled.div`
     }
   }
 `;
-
 
 const CardContent = styled.div`
   padding: 24px;

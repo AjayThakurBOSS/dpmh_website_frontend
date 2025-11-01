@@ -126,7 +126,7 @@ const ContactUs = () => {
                     <PiPhoneCallFill className="info-icon" style={{color:'#ffffff'}} />
                     <InfoContent>
                       <InfoLabel>Call us on</InfoLabel>
-                      <InfoValue>+91 8406000555</InfoValue>
+                      <InfoValue> <a href='tel:+91 8406000444'>+91 8406000444</a> </InfoValue>
                     </InfoContent>
                   </CallDiv>
                 </InfoCard>
@@ -247,7 +247,7 @@ const ContactUsForm = styled.div`
 const SectionTitle = styled.h1`
   text-align: center;
   margin: 3rem 0;
-  color: #1951F8;
+  color: #004AAD;
   font-size: 2.5rem;
   font-weight: 600;
 
@@ -667,7 +667,7 @@ const MapSection = styled.div`
 
 const MapTitle = styled.h2`
   text-align: center;
-  color: #1951F8;
+  color: #004AAD;
   margin-bottom: 2rem;
   font-size: 2rem;
   font-weight: 600;

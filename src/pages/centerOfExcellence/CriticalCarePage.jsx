@@ -47,8 +47,8 @@ const CriticalCarePage = () => {
           
           <RelatedDoctorsDiv>
             <AnimatedSection delay="0.6s">
-              <SectionTitle>Our Cardiology Specialists</SectionTitle>
-             <EachDeparmentDoctor specialization="Cardiologist" />
+              <SectionTitle>Our Critical Care Specialists</SectionTitle>
+             <EachDeparmentDoctor specialization="General Physician" />
             </AnimatedSection>
           </RelatedDoctorsDiv>
         </DepartmentBody>

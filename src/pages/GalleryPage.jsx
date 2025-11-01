@@ -228,15 +228,15 @@ const GalleryPage = () => {
         <>
             <GalleryBC />
             <div className="min-h-screen bg-gray-50 font-inter text-gray-800 p-4 sm:p-8 ">
-                <header className="text-center mb-12 pt-8">
-                    <h1 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">
+                {/* <header className="text-center mb-12 pt-8">
+                  <h1 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">
                         Dr Prabhat Memorial Hiramati Hospital
-                    </h1>
+                    </h1> 
                     <p className="mt-2 text-lg text-gray-600">
                         Explore our Hospital, events, and activities through our image gallery
                     </p>
-                </header>
-
+                </header> */}
+                
                 <main>
                     {images.length === 0 ? (
                         <div className="text-center py-12">

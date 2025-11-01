@@ -15,7 +15,7 @@ const PageContainer = styled.div`
 const MainContent = styled.div`
   max-width: 1500px;
   margin: 0 auto;
-  padding: 30px 20px;
+  padding: 15px 20px;
 `;
 
 const TopGrid = styled.div`
@@ -147,9 +147,9 @@ const StatsContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 25px;
-  margin-top: 60px;
+  margin-top: 30px;
   padding: 40px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #004AAD 0%, #00BFFF 100%);
   border-radius: 20px;
   color: white;
 `;
@@ -177,7 +177,7 @@ const EmergencySection = styled.div`
   padding: 30px;
   border-radius: 15px;
   text-align: center;
-  margin-top: 60px;
+  margin-top: 30px;
   box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
 `;
 
@@ -252,7 +252,7 @@ const AppointmentPage = () => {
 
         {/* Benefits Section */}
         <BenefitsSection>
-          <SectionTitle>Why Choose Our Online Appointment?</SectionTitle>
+          <SectionTitle>Why Book Online Appointment?</SectionTitle>
           <BenefitsGrid>
             {benefits.map((benefit, index) => (
               <BenefitCard key={index}>
@@ -267,7 +267,7 @@ const AppointmentPage = () => {
         {/* Stats */}
         <StatsContainer>
           <StatItem>
-            <StatNumber>50K+</StatNumber>
+            <StatNumber>10K+</StatNumber>
             <StatLabel>Happy Patients</StatLabel>
           </StatItem>
           <StatItem>
