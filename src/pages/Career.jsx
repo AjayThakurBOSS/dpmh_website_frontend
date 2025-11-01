@@ -580,9 +580,9 @@ const Career = () => {
 
 
           <DepartmentsSection>
-            <SectionTitle>Current Openings</SectionTitle>
+            <SectionTitle >Current  Openings</SectionTitle>
             
-            <DepartmentTabs>
+        {/*     <DepartmentTabs>
               {departments.map(dept => (
                 <TabButton 
                   key={dept}
@@ -593,9 +593,11 @@ const Career = () => {
                 </TabButton>
               ))}
             </DepartmentTabs>
-            
+             */}
             <JobsGrid>
-              {jobs[activeDepartment].map((job, index) => (
+
+               <h1 style={{color: '#004AAD', fontSize:'4rem', fontWeight: '600'}}>Currently No  Openings</h1>
+             {/*  {jobs[activeDepartment].map((job, index) => (
                 <JobCard key={index}>
                   <h3>{job.title}</h3>
                   <p>{job.description}</p>
@@ -603,7 +605,7 @@ const Career = () => {
                     Apply Now
                   </button>
                 </JobCard>
-              ))}
+              ))} */}
             </JobsGrid>
           </DepartmentsSection>
 
