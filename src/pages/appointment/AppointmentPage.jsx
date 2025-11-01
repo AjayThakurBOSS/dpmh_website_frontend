@@ -8,8 +8,8 @@ import ApoiImg from '../../assets/appoint.jpg'
 
 const PageContainer = styled.div`
   min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  padding-bottom: 80px;
+  background: #fdfdfd;
+  padding-bottom: 20px;
 `;
 
 const MainContent = styled.div`
@@ -24,6 +24,12 @@ const TopGrid = styled.div`
   gap: 10px;
   margin-top: 40px;
   align-items: flex-start;
+ 
+ border-radius: 10px;
+ /* 
+  background: linear-gradient(360deg, #004AAD, #00bfff);
+   padding: 20px;
+    */
 
   @media (min-width: 768px) {
     grid-template-columns: 1fr 1fr;
@@ -34,7 +40,7 @@ const ImageContainer = styled.div`
   position: relative;
   border-radius: 10px;
   overflow: hidden;
-  max-height: 770px;
+  max-height: 730px;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
   transition: transform 0.3s ease;
 
@@ -57,12 +63,16 @@ const FormContainer = styled.div`
   background: white;
   border-radius: 10px;
 padding: 0 15px;
-  
+ background: linear-gradient(360deg, #004AAD, #00bfff);
 
   transition: all 0.3s ease;
 
   &:hover {
     box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
+  }
+
+  @media (max-width: 600px){
+    padding:0 5px;
   }
 `;
 
@@ -227,12 +237,12 @@ const AppointmentPage = () => {
       description: 'Your medical information is protected with enterprise-grade security.',
       color: '#f39c12'
     },
-    {
+/*     {
       icon: '📊',
       title: 'Digital Records',
       description: 'Access your medical history and appointment records online securely.',
       color: '#1abc9c'
-    }
+    } */
   ];
 
   return (
@@ -267,7 +277,7 @@ const AppointmentPage = () => {
         {/* Stats */}
         <StatsContainer>
           <StatItem>
-            <StatNumber>10K+</StatNumber>
+            <StatNumber>50K+</StatNumber>
             <StatLabel>Happy Patients</StatLabel>
           </StatItem>
           <StatItem>

@@ -817,7 +817,8 @@ const SubHeader = styled.p`
 `;
 
 const RequestContainer = styled.div`
-  background-color: rgba(255, 255, 255, 0.95);
+  //background-color: rgba(255, 255, 255, 0.95);
+  background-color: #fdfdfd;
   border-radius: 10px;
   border: 1px solid #3B82F6;
   padding: 1.5rem;

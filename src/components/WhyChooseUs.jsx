@@ -122,7 +122,7 @@ const WhyChooseUs = () => {
           </DifferentiatorContent>
           <StatsContainer>
             <StatItem>
-              <StatNumber>50+</StatNumber>
+              <StatNumber>200+</StatNumber>
               <StatLabel>Expert Doctors</StatLabel>
             </StatItem>
             <StatItem>

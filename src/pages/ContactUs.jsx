@@ -70,7 +70,7 @@ const ContactUs = () => {
       </HeroSection>
 
       <ContactUsForm>
-        <SectionTitle>We are Available Round the Clock</SectionTitle>
+        <SectionTitle>Write to us...</SectionTitle>
 
         {isSubmitted ? (
           <ContactUsContainer>
@@ -247,7 +247,7 @@ const ContactUsForm = styled.div`
 const SectionTitle = styled.h1`
   text-align: center;
   margin: 3rem 0;
-  color: #004AAD;
+  color: #000000;
   font-size: 2.5rem;
   font-weight: 600;
 

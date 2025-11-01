@@ -11,6 +11,7 @@ import { IoCall } from "react-icons/io5";
 
 import { Carousel } from 'antd'
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
+import { Link } from 'react-router-dom'
 
 const FreeTreatment = () => {
     const [showForm, setShowForm] = useState(false)
@@ -105,8 +106,11 @@ const FreeTreatment = () => {
             </CallNow>
             
             <WritetoUs>
-                <FormButton onClick={() => setShowForm(true)}>
+{/*                 <FormButton onClick={() => setShowForm(true)}>
                     Write to Us
+                </FormButton> */}
+                 <FormButton>
+                    <Link to='/contact-us'>Write to Us</Link>
                 </FormButton>
             </WritetoUs>
         </ContactUsSection>
