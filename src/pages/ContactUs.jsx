@@ -126,7 +126,8 @@ const ContactUs = () => {
                     <PiPhoneCallFill className="info-icon" style={{color:'#ffffff'}} />
                     <InfoContent>
                       <InfoLabel>Call us on</InfoLabel>
-                      <InfoValue> <a href='tel:+91 8406000444'>+91 8406000444</a> </InfoValue>
+                      <InfoValue> <a href='tel:+91 8406000555'>+91 8406 000 555</a> </InfoValue>
+                      <InfoValue> <a href='tel:+91 8406000444'>+91 8406 000 444</a> </InfoValue>
                     </InfoContent>
                   </CallDiv>
                 </InfoCard>

@@ -60,7 +60,8 @@ const Footer = () => {
           <ColumnTitle>Contact Us</ColumnTitle>
           <ContactInfo>
             <ContactItem><FaPhoneAlt /> <a href='tel:8406000555'>+91-840 6000 555</a> </ContactItem>
-            <ContactItem><FaEnvelope /> info@dpmhhospital.com/</ContactItem>
+            <ContactItem><FaPhoneAlt /> <a href='tel:8406000444'>+91-840 6000 444</a> </ContactItem>
+            <ContactItem><FaEnvelope /> info@dpmhhospital.com</ContactItem>
             <ContactItem address>
               <FaMapMarkerAlt /> 
               <div>
