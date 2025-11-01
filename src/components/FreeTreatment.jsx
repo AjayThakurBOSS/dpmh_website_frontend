@@ -379,7 +379,7 @@ const PhoneLinks = styled.div`
 const PhoneLink = styled.a`
     color: white;
     text-decoration: none;
-    font-size: 2.8rem;
+    font-size: 2.3rem;
     transition: color 0.3s ease;
     display: flex;
     align-items: center;
@@ -393,6 +393,7 @@ const PhoneLink = styled.a`
 
     @media (max-width: 768px) {
         justify-content: center;
+        font-size: 1.5rem;
     }
 `
 
