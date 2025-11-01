@@ -98,7 +98,7 @@ const FreeTreatment = () => {
             <CallNow>
                 <CallTitle>Call Now for Assistance</CallTitle>
                 <PhoneLinks>
-                    <PhoneLink href='tel:8406000555'><IoCall /> 8406000555</PhoneLink>
+                    <PhoneLink href='tel:8406000555'><IoCall /> 8406000555 / 444</PhoneLink>
                    {/*  <PhoneLink href='tel:8406000444'>📞 8406000444</PhoneLink>
                     <PhoneLink href='tel:6124020100'>📞 612-4020100</PhoneLink> */}
                 </PhoneLinks>
@@ -234,12 +234,13 @@ const StyledCarousel = styled(Carousel)`
 const FreeCard = styled.div`
     background: white;
     border-radius: 20px;
-    padding: 2rem;
+    padding: 1rem;
     text-align: center;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     transition: all 0.3s ease;
     height: 280px;
-    width: 220px;
+    width:17.5%;
+    //width: 220px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -361,7 +362,7 @@ const CallNow = styled.div`
 
 const CallTitle = styled.h3`
     color: white;
-    margin-bottom: 1rem;
+    flex-wrap: no-wrap;
     font-size: 1.3rem;
 `
 
@@ -384,7 +385,7 @@ const PhoneLink = styled.a`
     align-items: center;
     gap: 0.5rem;
     font-weight:600;
-
+    flex-wrap: no-wrap;
     &:hover {
         color: #f0f0f0;
         text-decoration: underline;
