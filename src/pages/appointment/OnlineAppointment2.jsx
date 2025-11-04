@@ -522,9 +522,8 @@ const submitAppointment = async (appointmentData) => {
           </DetailItem>
         </AppointmentDetails>
         <ActionButtons>
-          <PrintButton > <a href={downloadLink} > Download Receipt</a>
-           
-          </PrintButton>
+         <a href={downloadLink} > <PrintButton >  Download Receipt
+          </PrintButton></a>
           <HomeButton onClick={() => window.location.reload()}>
             Book Another Appointment
           </HomeButton>
