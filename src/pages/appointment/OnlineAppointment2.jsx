@@ -406,7 +406,7 @@ const submitAppointment = async (appointmentData) => {
     setTimeout(() => {
       setIsSubmitted(true);
       setShowSuccessAnimation(false);
-    }, 3000);
+    }, 0);
   }
 };
   const goBack = async () => {
