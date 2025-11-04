@@ -11,6 +11,9 @@ const Container = styled.div`
   font-family: Arial, sans-serif;
   line-height: 1.6;
   color: #333;
+  @media (max-width: 1430px){
+    padding: 0 15px;
+  }
 `;
 
 const ImageContainer = styled.div`

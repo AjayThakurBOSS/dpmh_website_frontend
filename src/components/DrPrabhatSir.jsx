@@ -65,7 +65,7 @@ const Title = styled.h1`
   font-weight: 600;
 
   @media (min-width: 768px) {
-    font-size: 2.0em;
+    font-size: 2.2em;
     text-align: left;
   }
 `;
@@ -130,7 +130,7 @@ const DrPrabhatSir = () => {
       <ContentWrapper>
         <Subtitle>Making Miracles Happen</Subtitle>
         <Title>
-          Prabhat Memorial Hospital | Top Multispeciality Hospital in Patna
+          Dr. Prabhat Memorial Hiramati Hospital | Top Multispeciality Hospital in Patna
         </Title>
         <Paragraph>
           Driven by the vision of Late Dr. Prabhat Kumar to establish a state-of-the-art healthcare facility in Bihar, <BoldText>Dr. Prabhat Memorial Hiramati Hospital</BoldText> was founded by distinguished alumni of AIIMS, New Delhi. Today, it stands proudly as one of the <BoldText>best hospitals in Patna</BoldText>, offering world-class medical services to patients from across the region.

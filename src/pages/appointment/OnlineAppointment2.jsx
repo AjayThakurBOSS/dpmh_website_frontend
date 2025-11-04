@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import emailjs from '@emailjs/browser';
 import styled from "styled-components";
 import axios from "axios";
-import { Col, DatePicker, Form, Input, Row, Select, Card, Tag, message } from "antd";
+import { Col, DatePicker, Form, Input, Row, Select, Card, Tag, message, Spin } from "antd";
 import dayjs from 'dayjs';
 import DonGIF from '../../assets/Done.gif'
+import Logo from '../../assets/logo.jpeg'
 
 const { Option } = Select;
 const { TextArea } = Input;
 
 const RequestAppointmentFormHero = () => {
+  const formforEmail = useRef();
   const [form] = Form.useForm();
   const [symptom, setSymptom] = useState("");
   const [departments, setDepartments] = useState([]);
@@ -16,12 +19,17 @@ const RequestAppointmentFormHero = () => {
   const [selectedDoctor, setSelectedDoctor] = useState(null);
   const [selectedDepartment, setSelectedDepartment] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [doctorsLoading, setDoctorsLoading] = useState(false); // Separate loading state for doctors
   const [step, setStep] = useState(1); // 1: Form, 2: Payment Selection, 3: Confirmation
   const [paymentMode, setPaymentMode] = useState("");
   const [formData, setFormData] = useState(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showSuccessAnimation, setShowSuccessAnimation] = useState(false);
-  
+  const [paymentStatus, setPaymentStatus] = useState('Pending')
+  const [transectionID, setTransectionID] = useState('')
+  const [downloadLink, setDownloadLink] = useState('')
+  console.log("Transection Id", transectionID)
+
   // Individual button loading states
   const [proceedToPaymentLoading, setProceedToPaymentLoading] = useState(false);
   const [onlinePaymentLoading, setOnlinePaymentLoading] = useState(false);
@@ -29,6 +37,10 @@ const RequestAppointmentFormHero = () => {
   const [confirmPayLoading, setConfirmPayLoading] = useState(false);
   const [confirmSubmitLoading, setConfirmSubmitLoading] = useState(false);
   const [backButtonLoading, setBackButtonLoading] = useState(false);
+  
+console.log("Doctors",doctors )
+
+console.log("Selected Doctors", selectedDoctor )
 
   // Dummy departments data
   const dummyDepartments = [
@@ -69,6 +81,13 @@ const RequestAppointmentFormHero = () => {
     ]
   };
 
+  // Function to generate transaction ID
+  const generateTransactionId = () => {
+    const timestamp = Date.now().toString(36);
+    const randomStr = Math.random().toString(36).substr(2, 9).toUpperCase();
+    return `TXN${timestamp}${randomStr}`;
+  };
+
   // Fetch departments on component mount
   useEffect(() => {
     fetchDepartments();
@@ -100,7 +119,8 @@ const RequestAppointmentFormHero = () => {
 
   const fetchDoctorsByDepartment = async (departmentId) => {
     try {
-      setLoading(true);
+      setDoctorsLoading(true);
+      setDoctors([]); // Clear previous doctors
       
       // REAL DATABASE REQUEST - Updated endpoint
       const response = await axios.get(`https://app.prabhatmemorialhospital.com/api/doctors?department_id=${departmentId}`);
@@ -120,7 +140,7 @@ const RequestAppointmentFormHero = () => {
       const departmentDoctors = dummyDoctors[departmentId] || [];
       setDoctors(departmentDoctors);
     } finally {
-      setLoading(false);
+      setDoctorsLoading(false);
     }
   };
   
@@ -137,12 +157,16 @@ const RequestAppointmentFormHero = () => {
     }
   };
 
-  const handleDoctorChange = (value) => {
-    const doctor = doctors.find(doc => doc.id === value);
-    setSelectedDoctor(doctor);
-  };
+const handleDoctorChange = (value) => {
+  const doctor = doctors.find(
+    (doc) => doc.id === value 
+  );
+  setSelectedDoctor(doctor);
+};
 
   const handleAppointmentRequest = async (values) => {
+      
+
     try {
       setProceedToPaymentLoading(true);
       const formattedData = {
@@ -153,10 +177,10 @@ const RequestAppointmentFormHero = () => {
         symptoms: values.symptoms,
         doctor_id: selectedDoctor?.id,
         booking_date: values.date ? dayjs(values.date).format('YYYY-MM-DD') : values.date,
-        department_name: selectedDepartment?.name,
+       /*  department_name: selectedDepartment?.name,
         doctor_name: selectedDoctor?.name,
         consultation_fee: selectedDoctor?.consultation_fee,
-        department_id: selectedDepartment?.id
+        department_id: selectedDepartment?.id */
       };
       
       setFormData(formattedData);
@@ -173,7 +197,7 @@ const RequestAppointmentFormHero = () => {
 
   const handlePaymentModeSelect = async (mode) => {
     try {
-      if (mode === "online") {
+      if (mode === "Razorpay") {
         setOnlinePaymentLoading(true);
       } else {
         setHospitalPaymentLoading(true);
@@ -192,90 +216,199 @@ const RequestAppointmentFormHero = () => {
     }
   };
 
-  const handleConfirmAndPay = async () => {
-    try {
-      setConfirmPayLoading(true);
-      // Simulate Razorpay payment initialization
-      message.info("Redirecting to payment gateway...");
-      
-      // Simulate payment processing
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // Simulate successful payment
-      const paymentResponse = {
-        razorpay_payment_id: `pay_${Math.random().toString(36).substr(2, 9)}`
-      };
+ const handleConfirmAndPay = async () => {
+  try {
+    setConfirmPayLoading(true);
+    
+    // Generate transaction ID
+    const transactionId = generateTransactionId();
+    setTransectionID(transactionId);
+    
+    // Load Razorpay script dynamically
+    const loadRazorpayScript = () => {
+      return new Promise((resolve) => {
+        const script = document.createElement('script');
+        script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+        script.onload = () => resolve(true);
+        script.onerror = () => resolve(false);
+        document.body.appendChild(script);
+      });
+    };
 
-      const appointmentData = {
-        ...formData,
-        payment_method: "Online",
-        payment_status: "Paid",
-        razorpay_payment_id: paymentResponse.razorpay_payment_id
-      };
-
-      await submitAppointment(appointmentData);
-      
-    } catch (error) {
-      console.error("Error processing payment:", error);
-      message.error("Payment failed. Please try again.");
-    } finally {
+    // Load Razorpay script
+    const scriptLoaded = await loadRazorpayScript();
+    if (!scriptLoaded) {
+      message.error('Razorpay SDK failed to load. Please check your internet connection.');
       setConfirmPayLoading(false);
+      return;
     }
-  };
 
-  const handleConfirmAndSubmit = async () => {
+    // Razorpay options
+    const options = {
+      key: "rzp_test_RbDL5BG2RHc7h6", 
+      amount: selectedDoctor?.consultation_fee * 100, // Use selectedDoctor directly
+      currency: 'INR',
+      name: formData?.patient_name,
+      description: `Appointment with Dr. ${selectedDoctor?.name}`,
+      image: Logo, 
+      
+      handler: async function (response) {
+        try {
+          // Payment successful - submit appointment with transaction ID
+          const appointmentData = {
+            ...formData,
+            payment_method: paymentMode,
+            payment_status: paymentStatus,
+            transaction_id: transactionId, 
+          };
+
+          await submitAppointment(appointmentData);
+          setPaymentStatus('Completed');
+          setStep(4); // Move to success step after payment
+        } catch (error) {
+          setPaymentStatus('Failed');
+          console.error("Payment processing error:", error);
+          message.error("Payment processing failed. Please contact support.");
+          
+        }
+      },
+      prefill: {
+        name: formData?.patient_name,
+        email: formData?.patient_email || "",
+        contact: formData?.patient_phone
+      },
+      notes: {
+        appointment: `Appointment with Dr. ${selectedDoctor?.name}`,
+        department: selectedDepartment?.name,
+        transaction_id: transactionId
+      },
+      theme: {
+        color: "#004AAD"
+      },
+      modal: {
+        ondismiss: function() {
+          setConfirmPayLoading(false);
+          message.info("Payment cancelled by user");
+        }
+      }
+    };
+
+    const razorpayInstance = new window.Razorpay(options);
+    razorpayInstance.open();
+
+  } catch (error) {
+    console.error("Error processing payment:", error);
+    
+    // For demo/development - fallback to simulated payment
+    if (process.env.NODE_ENV === 'development') {
+      message.warning("Using demo payment mode");
+      await simulateRazorpayPayment();
+    } else {
+      message.error("Payment initialization failed. Please try again.");
+    }
+  } finally {
+    setConfirmPayLoading(false);
+  }
+};
+
+  // Demo/fallback function for development
+  const simulateRazorpayPayment = async () => {
     try {
-      setConfirmSubmitLoading(true);
+      // Generate transaction ID for demo
+      const transactionId = generateTransactionId();
+      
+      // Simulate successful payment for demo
+      const paymentResponse = {
+        razorpay_payment_id: `pay_${Math.random().toString(36).substr(2, 9)}`,
+        razorpay_order_id: `order_${Math.random().toString(36).substr(2, 9)}`,
+        razorpay_signature: `sig_${Math.random().toString(36).substr(2, 16)}`
+      };
+
       const appointmentData = {
         ...formData,
-        payment_method: "Pay at Hospital",
-        payment_status: "Pending"
+        payment_method: paymentMode,
+        payment_status: paymentStatus,
+        transaction_id: transactionId, // Add generated transaction ID
+       
       };
-      
-      message.info("Submitting your appointment request...");
+
       await submitAppointment(appointmentData);
+      setPaymentStatus('Completed');
+      setStep(4); // Move to success step after payment
     } catch (error) {
-      console.error("Error submitting appointment:", error);
-      message.error("Error submitting appointment. Please try again.");
-    } finally {
-      setConfirmSubmitLoading(false);
+      console.error("Demo payment error:", error);
+      message.error("Demo payment failed");
     }
   };
 
-  const submitAppointment = async (appointmentData) => {
-    try {
-      // REAL API call to submit appointment
-      const response = await axios.post(
-        "https://app.prabhatmemorialhospital.com/api/opd-bookings",
-        appointmentData
-      );
-      
-      if (response.data.success) {
-        message.success("Appointment booked successfully!");
-        setShowSuccessAnimation(true);
-        // Show success animation for 3 seconds before showing receipt
-        setTimeout(() => {
-          setIsSubmitted(true);
-          setShowSuccessAnimation(false);
-        }, 3000);
-      } else {
-        throw new Error(response.data.message || "Failed to book appointment");
-      }
-      
-    } catch (error) {
-      console.error("Error submitting appointment:", error);
-      
-      // For demo purposes, simulate success if API fails
-      console.log("Simulating successful appointment booking for demo");
+const handleConfirmAndSubmit = async () => {
+  try {
+    setConfirmSubmitLoading(true);
+    
+    // Generate transaction ID for hospital payment
+    const transactionId = generateTransactionId();
+    setTransectionID(transactionId);
+    
+    const appointmentData = {
+      ...formData,
+      payment_method: "Pay at Hospital",
+      payment_status: "Pending",
+      transaction_id: transactionId
+    };
+    
+    message.info("Submitting your appointment request...");
+    await submitAppointment(appointmentData);
+    setStep(4); // Move to success step after submission
+  } catch (error) {
+    console.error("Error submitting appointment:", error);
+    message.error("Error submitting appointment. Please try again.");
+  } finally {
+    setConfirmSubmitLoading(false);
+  }
+};
+
+const submitAppointment = async (appointmentData) => {
+  try {
+    console.log('Submitting appointment data:', appointmentData);
+    
+    // REAL API call to submit appointment
+    const response = await axios.post(
+      "https://app.prabhatmemorialhospital.com/api/opd-bookings",
+      appointmentData
+    );
+    
+    console.log('Appointment Response:', response);
+
+    if (response.data.success) {
       message.success("Appointment booked successfully!");
       setShowSuccessAnimation(true);
+      setPaymentStatus('Completed');
+      setDownloadLink(response.data.receipt_download_link)
+    
+      // Show success animation for 3 seconds before showing receipt
       setTimeout(() => {
         setIsSubmitted(true);
         setShowSuccessAnimation(false);
-      }, 3000);
+      },0);
+    } else {
+      setPaymentStatus('Failed')
+      throw new Error(response.data.message || "Failed to book appointment");
+     
     }
-  };
-
+  } catch (error) {
+     setPaymentStatus('Failed')
+    console.error("Error submitting appointment:", error);
+    
+    // For demo purposes, simulate success if API fails but show the error
+    console.log("API failed, but continuing with success flow for demo");
+    message.warning("Appointment submitted (demo mode - check console for errors)");
+    setShowSuccessAnimation(true);
+    setTimeout(() => {
+      setIsSubmitted(true);
+      setShowSuccessAnimation(false);
+    }, 3000);
+  }
+};
   const goBack = async () => {
     try {
       setBackButtonLoading(true);
@@ -288,6 +421,34 @@ const RequestAppointmentFormHero = () => {
       setBackButtonLoading(false);
     }
   };
+
+  const sendEnquery = async (values) => {
+    try{
+      const response = await axios.post("https://app.prabhatmemorialhospital.com/api/booking-inquiry", {
+        doctor_name: selectedDoctor.name,
+        patient_name: values?.firstName,
+        booking_date: values.date 
+                            ? dayjs(values.date).format('YYYY-MM-DD') 
+                            : values.date,
+        patient_phone: values?.phone,
+        patient_email: values?.email,
+        patient_gender: values?.gender,
+        symptoms: values?.symptoms,
+      } )
+
+      if(response.data.success){
+        message.success('Email sent successfully')
+      }else{
+        throw new Error(response.data.message || 'Failed to book appointment')
+      }
+
+    }catch (error){
+      console.log("Error submitting appointment:", error)
+    }
+
+  }
+
+
 
   // Success Animation Component
   if (showSuccessAnimation) {
@@ -305,7 +466,7 @@ const RequestAppointmentFormHero = () => {
   }
 
   // Success page after submission
-  if (isSubmitted) {
+  if (isSubmitted || step === 4) {
     return (
       <ThankYouContainer>
         <SuccessIconStatic>
@@ -327,36 +488,42 @@ const RequestAppointmentFormHero = () => {
           </DetailItem>
           <DetailItem>
             <Label style={{color:'#004AAD'}}>Doctor:</Label>
-            <Value>Dr. {formData?.doctor_name}</Value>
+            <Value>Dr. {selectedDoctor.name}</Value>
           </DetailItem>
           <DetailItem>
             <Label style={{color:'#004AAD'}}>Department:</Label>
-            <Value>{formData?.department_name}</Value>
+            <Value>{selectedDepartment.name}</Value>
           </DetailItem>
           <DetailItem>
             <Label style={{color:'#004AAD'}}>Appointment Date:</Label>
             <Value>{dayjs(formData?.booking_date).format('DD-MM-YYYY')}</Value>
           </DetailItem>
           <DetailItem>
-            <Label>Payment Method:</Label>
+            <Label style={{color:'#004AAD'}}>Transaction ID:</Label>
             <Value>
-              <Tag color={formData?.payment_method === "Online" ? "green" : "blue"}>
-                {formData?.payment_method}
+              <Tag color="purple">{transectionID}</Tag>
+            </Value>
+          </DetailItem>
+          <DetailItem>
+            <Label style={{color:'#004AAD'}}>Payment Method:</Label>
+            <Value>
+              <Tag color={paymentMode === "Razorpay" ? "green" : "blue"}>
+                {paymentMode === "Pay at Hospital" ? "Pay at Hospital" : "Razorpay"}
               </Tag>
             </Value>
           </DetailItem>
           <DetailItem>
-            <Label>Payment Status:</Label>
+            <Label style={{color:'#004AAD'}}>Payment Status:</Label>
             <Value>
-              <Tag color={formData?.payment_status === "Paid" ? "green" : "orange"}>
-                {formData?.payment_status}
+              <Tag color={paymentStatus === 'Razorpay' ? "green" : "orange"}>
+                {paymentStatus === 'Completed' ? "Completed" : "Pending"}
               </Tag>
             </Value>
           </DetailItem>
         </AppointmentDetails>
         <ActionButtons>
-          <PrintButton onClick={() => window.print()}>
-            Print Receipt
+          <PrintButton > <a href={downloadLink} > Download Receipt</a>
+           
           </PrintButton>
           <HomeButton onClick={() => window.location.reload()}>
             Book Another Appointment
@@ -380,14 +547,14 @@ const RequestAppointmentFormHero = () => {
               justifyContent: "space-between",
               flexWrap: "wrap"
             }}>
-              <p><strong>Doctor:</strong> Dr. {formData?.doctor_name}</p>
-              <p><strong>Department:</strong> {formData?.department_name}</p>
-              <p><strong>Fee:</strong> ₹{formData?.consultation_fee}</p> 
+              <p><strong>Doctor:</strong> Dr. {selectedDoctor?.name}</p>
+              <p><strong>Department:</strong> {selectedDepartment?.name}</p>
+              <p><strong>Fee:</strong> ₹{selectedDoctor?.consultation_fee}</p> 
             </div>
           </CurrentAppointmentSummary>
           <PaymentOptions>
             <PaymentOptionCard 
-              onClick={() => !onlinePaymentLoading && handlePaymentModeSelect("online")}
+              onClick={() => !onlinePaymentLoading && handlePaymentModeSelect("Razorpay") && setPaymentMode('Razorpay') && setPaymentStatus('Pending') }
               className="payment-option"
               disabled={onlinePaymentLoading}
             >
@@ -403,7 +570,7 @@ const RequestAppointmentFormHero = () => {
             </PaymentOptionCard>
 
             <PaymentOptionCard 
-              onClick={() => !hospitalPaymentLoading && handlePaymentModeSelect("hospital")}
+              onClick={() => !hospitalPaymentLoading && handlePaymentModeSelect("Pay at Hospital") && setPaymentMode('Pay at Hospital') && setPaymentStatus('Pending')}
               className="payment-option"
               disabled={hospitalPaymentLoading}
             >
@@ -441,49 +608,49 @@ const RequestAppointmentFormHero = () => {
               <Value>{formData?.patient_name} | {formData?.patient_gender} </Value>
             </DetailItem>
             <DetailItem>
-              <Label>Contact:</Label>
+              <Label style={{color:'#004AAD'}}>Contact:</Label>
               <Value>{formData?.patient_phone}</Value>
             </DetailItem>
             <DetailItem>
-              <Label>Email:</Label>
+              <Label style={{color:'#004AAD'}}>Email:</Label>
               <Value>{formData?.patient_email}</Value>
             </DetailItem>
             <DetailItem>
-              <Label>Department:</Label>
-              <Value>{formData?.department_name}</Value>
+              <Label style={{color:'#004AAD'}}>Department:</Label>
+              <Value>{selectedDepartment?.name}</Value>
             </DetailItem>
             <DetailItem>
-              <Label>Doctor:</Label>
-              <Value>Dr. {formData?.doctor_name}</Value>
+              <Label style={{color:'#004AAD'}}>Doctor:</Label>
+              <Value>Dr. {selectedDoctor?.name}</Value>
             </DetailItem>
             <DetailItem>
-              <Label>Appointment Date:</Label>
+              <Label style={{color:'#004AAD'}}>Appointment Date:</Label>
               <Value>{dayjs(formData?.booking_date).format('DD-MM-YYYY')}</Value>
             </DetailItem>
             <DetailItem>
-              <Label>Consultation Fee:</Label>
-              <FeeValue>₹{formData?.consultation_fee}</FeeValue>
+              <Label style={{color:'#004AAD'}}>Consultation Fee:</Label>
+              <FeeValue>₹{selectedDoctor?.consultation_fee}</FeeValue>
             </DetailItem>
             <DetailItem>
-              <Label>Payment Method:</Label>
+              <Label style={{color:'#004AAD'}}>Payment Method:</Label>
               <Value>
-                <Tag color={paymentMode === "online" ? "green" : "orange"}>
-                  {paymentMode === "online" ? "Online" : "Pay at Hospital"}
+                <Tag color={paymentMode === "Razorpay" ? "green" : "orange"}>
+                  {paymentMode === "Razorpay" ? "Razorpay" : "Pay at Hospital"}
                 </Tag>
               </Value>
             </DetailItem>
             <DetailItem>
-              <Label>Payment Status:</Label>
+              <Label style={{color:'#004AAD'}}>Payment Status:</Label>
               <Value>
-                <Tag color={paymentMode === "online" ? "blue" : "orange"}>
-                  {paymentMode === "online" ? "Pending" : "Pending"}
+                <Tag color={paymentMode === "Razorpay" ? "orange" : "orange"}>
+                  {paymentMode === "Pay at Hospital" ? "Pending" : "Pending"}
                 </Tag>
               </Value>
             </DetailItem>
           </AppointmentDetails>
 
           <ActionButtons>
-            {paymentMode === "online" ? (
+            {paymentMode === "Razorpay" ? (
               <ConfirmPayButton 
                 onClick={handleConfirmAndPay} 
                 disabled={confirmPayLoading}
@@ -491,7 +658,7 @@ const RequestAppointmentFormHero = () => {
                 {confirmPayLoading ? (
                   <ButtonLoader text="Processing Payment..." />
                 ) : (
-                  `Confirm and Pay ₹${formData?.consultation_fee}`
+                  `Confirm and Pay ₹${selectedDoctor?.consultation_fee}`
                 )}
               </ConfirmPayButton>
             ) : (
@@ -521,10 +688,13 @@ const RequestAppointmentFormHero = () => {
   // Main Form Step
   return (
     <RequestContainer>
-      <Form layout="vertical" onFinish={handleAppointmentRequest} form={form}>
+      <Form ref={form} layout="vertical" onFinish={(values) => {
+              handleAppointmentRequest(values);
+              sendEnquery(values);
+            }}
+            form={form} >
         <Header className="text-center">Book your OPD</Header>
         <SubHeader style={{marginBottom:0}}>Book your doctor appointment in simple steps.</SubHeader>
-{/*         <SubHeader style={{marginTop:0, marginBottom:'20px', color:'red'}}>  Please fill the form with the Patients details. (all the fields are mandatory)</SubHeader> */}
 
         <hr />
         <Row gutter={[16, 8]}>
@@ -541,7 +711,7 @@ const RequestAppointmentFormHero = () => {
 
           <Col xs={24} md={12}>
             <Form.Item
-            label={<span style={{ color: "#004AAD" }}>Contact Number</span>}
+              label={<span style={{ color: "#004AAD" }}>Contact Number</span>}
               name="phone"
               required
               rules={[
@@ -555,7 +725,7 @@ const RequestAppointmentFormHero = () => {
 
           <Col xs={24} md={12}>
             <Form.Item
-            label={<span style={{ color: "#004AAD" }}>Appointment Date</span>}
+              label={<span style={{ color: "#004AAD" }}>Appointment Date</span>}
               name="date"
               rules={[{ required: true, message: "Please select a date!" }]}
             >
@@ -572,7 +742,7 @@ const RequestAppointmentFormHero = () => {
 
           <Col xs={24} md={12}>
             <Form.Item
-            label={<span style={{ color: "#004AAD" }}>Gender</span>}
+              label={<span style={{ color: "#004AAD" }}>Gender</span>}
               name="gender"
               rules={[{ required: true, message: "Please select gender" }]}
             >
@@ -589,7 +759,7 @@ const RequestAppointmentFormHero = () => {
 
           <Col xs={24} md={12}>
             <Form.Item
-            label={<span style={{ color: "#004AAD" }}>Email (Optional)</span>}
+              label={<span style={{ color: "#004AAD" }}>Email (Optional)</span>}
               name="email"
               rules={[
                 { message: "Please enter email" },
@@ -602,7 +772,7 @@ const RequestAppointmentFormHero = () => {
 
           <Col xs={24} md={12}>
             <Form.Item
-            label={<span style={{ color: "#004AAD" }}>Department</span>}
+              label={<span style={{ color: "#004AAD" }}>Department</span>}
               name="department"
               rules={[{ required: true, message: "Please select department" }]}
             >
@@ -621,26 +791,35 @@ const RequestAppointmentFormHero = () => {
             </Form.Item>
           </Col>
 
-          
-
           <Col xs={24} md={24}>
             <Form.Item
-            label={<span style={{ color: "#004AAD" }}>Select Doctor</span>}
+              label={<span style={{ color: "#004AAD" }}>Select Doctor</span>}
               name="doctor"
               rules={[{ required: true, message: "Please select doctor" }]}
             >
               <Select
-                placeholder="Choose a doctor"
+                placeholder={doctorsLoading ? "Loading doctors..." : "Choose a doctor"}
                 onChange={handleDoctorChange}
-                loading={loading}
+                loading={doctorsLoading}
                 allowClear
-                disabled={!selectedDepartment}
+                disabled={!selectedDepartment || doctorsLoading}
+                notFoundContent={
+                  doctorsLoading ? (
+                    <div style={{ textAlign: 'center', padding: '10px' }}>
+                      <Spin size="small" /> Loading doctors...
+                    </div>
+                  ) : (
+                    "No doctors available for this department"
+                  )
+                }
               >
-                {doctors.map((doctor) => (
-                  <Option key={doctor.id} value={doctor.id} style={{fontSize:'16px'}}>
-                    Dr. {doctor.name} | Exp: {doctor.experience}+Yrs 
-                  </Option>
-                ))}
+                {doctors
+                  .filter((doctor) => Number(doctor.consultation_fee) > 0)
+                  .map((doctor) => (
+                    <Option key={doctor.id} value={doctor.id} style={{ fontSize: '16px' }}>
+                      Dr. {doctor.name} | Exp: {doctor.experience}+Yrs {doctor.consultation_fee}
+                    </Option>
+                  ))}
               </Select>
             </Form.Item>
             {selectedDoctor && (
@@ -656,9 +835,9 @@ const RequestAppointmentFormHero = () => {
 
           <Col xs={24}>
             <Form.Item
-            label={<span style={{ color: "#004AAD" }}>Symptoms in brief</span>}
+              label={<span style={{ color: "#004AAD" }}>Symptoms in brief</span>}
               name="symptoms"
-              rules={[{ required: true, message: "Please describe symptoms!" }]}
+              rules={[{  message: "Please describe symptoms!" }]}
             >
               <TextArea
                 value={symptom}
@@ -675,7 +854,9 @@ const RequestAppointmentFormHero = () => {
         <div className="submit-button-container mt-5" >
           <button 
             type="submit" 
+            value="Send"
             className="submit-button" 
+            
             disabled={!selectedDoctor || !form.getFieldValue('date') || proceedToPaymentLoading}
           >
             {proceedToPaymentLoading ? (
@@ -799,13 +980,11 @@ const SuccessIconStatic = styled.div`
 
 // Rest of the styled components remain the same...
 const Header = styled.div`
-
   color: #004AAD;
   font-size: clamp(1.5rem, 4vw, 2rem);
   font-weight: 600;
   text-transform: capitalize;
   text-align: center;
- 
 `;
 
 const SubHeader = styled.p`
@@ -813,11 +992,10 @@ const SubHeader = styled.p`
   color: #6B7280;
   margin-bottom: 1.5rem;
   font-size: 1rem;
-    padding-bottom: 10px;
+  padding-bottom: 10px;
 `;
 
 const RequestContainer = styled.div`
-  //background-color: rgba(255, 255, 255, 0.95);
   background-color: #fdfdfd;
   border-radius: 10px;
   border: 1px solid #3B82F6;
