@@ -42,7 +42,7 @@ const DoctorsForHome = () => {
   const filteredDoctors = (activeSpeciality === "All" 
     ? doctors 
     : doctors.filter((doc) => doc.specialization === activeSpeciality)
-  ).slice(0, 8); // Only take first 8 doctors
+  ).slice(0, 10); // Only take first 8 doctors
 
   
   return (
@@ -264,8 +264,8 @@ const NoDoctorsMessage = styled.div`
 
 const DoctorCardContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(18%, 1fr));
+  gap: 1rem;
   align-items: flex-start;
   justify-content: center;
   padding: 1rem;

@@ -19,8 +19,8 @@ const RequestAppointmentFormHero = () => {
   const [selectedDoctor, setSelectedDoctor] = useState(null);
   const [selectedDepartment, setSelectedDepartment] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [doctorsLoading, setDoctorsLoading] = useState(false); // Separate loading state for doctors
-  const [step, setStep] = useState(1); // 1: Form, 2: Payment Selection, 3: Confirmation
+  const [doctorsLoading, setDoctorsLoading] = useState(false);
+  const [step, setStep] = useState(1);
   const [paymentMode, setPaymentMode] = useState("");
   const [formData, setFormData] = useState(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -28,7 +28,8 @@ const RequestAppointmentFormHero = () => {
   const [paymentStatus, setPaymentStatus] = useState('Pending')
   const [transectionID, setTransectionID] = useState('')
   const [downloadLink, setDownloadLink] = useState('')
-  console.log("Transection Id", transectionID)
+  const [showReceiptStep, setShowReceiptStep] = useState(false);
+  const [showPaymentLoader, setShowPaymentLoader] = useState(false); // New state for payment loader
 
   // Individual button loading states
   const [proceedToPaymentLoading, setProceedToPaymentLoading] = useState(false);
@@ -37,10 +38,6 @@ const RequestAppointmentFormHero = () => {
   const [confirmPayLoading, setConfirmPayLoading] = useState(false);
   const [confirmSubmitLoading, setConfirmSubmitLoading] = useState(false);
   const [backButtonLoading, setBackButtonLoading] = useState(false);
-  
-console.log("Doctors",doctors )
-
-console.log("Selected Doctors", selectedDoctor )
 
   // Dummy departments data
   const dummyDepartments = [
@@ -54,41 +51,39 @@ console.log("Selected Doctors", selectedDoctor )
 
   // Dummy doctors data by department
   const dummyDoctors = {
-    1: [ // Cardiology
+    1: [
       { id: 101, name: "Dr. Rajesh Kumar", specialization: "Senior Cardiologist", consultation_fee: 800, experience: "15 years", rating: 4.8 },
       { id: 102, name: "Dr. Priya Sharma", specialization: "Cardiologist", consultation_fee: 600, experience: "8 years", rating: 4.6 },
       { id: 103, name: "Dr. Amit Patel", specialization: "Interventional Cardiologist", consultation_fee: 1000, experience: "12 years", rating: 4.9 }
     ],
-    2: [ // Neurology
+    2: [
       { id: 201, name: "Dr. Sanjay Verma", specialization: "Neurologist", consultation_fee: 700, experience: "10 years", rating: 4.7 },
       { id: 202, name: "Dr. Anjali Singh", specialization: "Neurosurgeon", consultation_fee: 1200, experience: "14 years", rating: 4.8 }
     ],
-    3: [ // Orthopedics
+    3: [
       { id: 301, name: "Dr. Vikram Malhotra", specialization: "Orthopedic Surgeon", consultation_fee: 900, experience: "11 years", rating: 4.5 },
       { id: 302, name: "Dr. Neha Gupta", specialization: "Joint Replacement Specialist", consultation_fee: 1100, experience: "13 years", rating: 4.7 }
     ],
-    4: [ // Pediatrics
+    4: [
       { id: 401, name: "Dr. Sunita Reddy", specialization: "Pediatrician", consultation_fee: 500, experience: "9 years", rating: 4.8 },
       { id: 402, name: "Dr. Rohan Mehta", specialization: "Child Specialist", consultation_fee: 550, experience: "7 years", rating: 4.4 }
     ],
-    5: [ // Dermatology
+    5: [
       { id: 501, name: "Dr. Sneha Kapoor", specialization: "Dermatologist", consultation_fee: 600, experience: "8 years", rating: 4.6 },
       { id: 502, name: "Dr. Arjun Nair", specialization: "Skin Specialist", consultation_fee: 650, experience: "10 years", rating: 4.7 }
     ],
-    6: [ // Gastroenterology
+    6: [
       { id: 601, name: "Dr. Mohan Das", specialization: "Gastroenterologist", consultation_fee: 750, experience: "12 years", rating: 4.8 },
       { id: 602, name: "Dr. Priyanka Joshi", specialization: "GI Surgeon", consultation_fee: 950, experience: "11 years", rating: 4.6 }
     ]
   };
 
-  // Function to generate transaction ID
   const generateTransactionId = () => {
     const timestamp = Date.now().toString(36);
     const randomStr = Math.random().toString(36).substr(2, 9).toUpperCase();
     return `TXN${timestamp}${randomStr}`;
   };
 
-  // Fetch departments on component mount
   useEffect(() => {
     fetchDepartments();
   }, []);
@@ -96,20 +91,15 @@ console.log("Selected Doctors", selectedDoctor )
   const fetchDepartments = async () => {
     try {
       setLoading(true);
-      
-      // REAL DATABASE REQUEST
       const response = await axios.get("https://app.prabhatmemorialhospital.com/api/departments");
       
       if (response.data && Array.isArray(response.data) && response.data.length > 0) {
-        // Success: Use API data
         setDepartments(response.data);
       } else {
-        // API returned nothing or bad data: Fallback to dummy data
         console.warn("API returned no departments. Using dummy data.");
         setDepartments(dummyDepartments);
       }
     } catch (error) {
-      // API failed (e.g., 404, network error): Fallback to dummy data
       console.error("Error fetching departments. Falling back to dummy data:", error);
       setDepartments(dummyDepartments);
     } finally {
@@ -120,22 +110,18 @@ console.log("Selected Doctors", selectedDoctor )
   const fetchDoctorsByDepartment = async (departmentId) => {
     try {
       setDoctorsLoading(true);
-      setDoctors([]); // Clear previous doctors
+      setDoctors([]);
       
-      // REAL DATABASE REQUEST - Updated endpoint
       const response = await axios.get(`https://app.prabhatmemorialhospital.com/api/doctors?department_id=${departmentId}`);
       
       if (response.data && Array.isArray(response.data) && response.data.length > 0) {
-        // Success: Use API data
         setDoctors(response.data);
       } else {
-        // API returned nothing or bad data: Fallback to dummy data
         console.warn("API returned no doctors. Using dummy data.");
         const departmentDoctors = dummyDoctors[departmentId] || [];
         setDoctors(departmentDoctors);
       }
     } catch (error) {
-      // API failed (e.g., 404, network error): Fallback to dummy data
       console.error("Error fetching doctors. Falling back to dummy data:", error);
       const departmentDoctors = dummyDoctors[departmentId] || [];
       setDoctors(departmentDoctors);
@@ -157,16 +143,12 @@ console.log("Selected Doctors", selectedDoctor )
     }
   };
 
-const handleDoctorChange = (value) => {
-  const doctor = doctors.find(
-    (doc) => doc.id === value 
-  );
-  setSelectedDoctor(doctor);
-};
+  const handleDoctorChange = (value) => {
+    const doctor = doctors.find((doc) => doc.id === value);
+    setSelectedDoctor(doctor);
+  };
 
   const handleAppointmentRequest = async (values) => {
-      
-
     try {
       setProceedToPaymentLoading(true);
       const formattedData = {
@@ -177,16 +159,11 @@ const handleDoctorChange = (value) => {
         symptoms: values.symptoms,
         doctor_id: selectedDoctor?.id,
         booking_date: values.date ? dayjs(values.date).format('YYYY-MM-DD') : values.date,
-       /*  department_name: selectedDepartment?.name,
-        doctor_name: selectedDoctor?.name,
-        consultation_fee: selectedDoctor?.consultation_fee,
-        department_id: selectedDepartment?.id */
       };
       
       setFormData(formattedData);
-      // Simulate processing delay
       await new Promise(resolve => setTimeout(resolve, 1000));
-      setStep(2); // Move to payment selection step
+      setStep(2);
     } catch (error) {
       console.error("Error processing appointment request:", error);
       message.error("Error processing your request. Please try again.");
@@ -203,10 +180,9 @@ const handleDoctorChange = (value) => {
         setHospitalPaymentLoading(true);
       }
       
-      // Simulate processing delay
       await new Promise(resolve => setTimeout(resolve, 800));
       setPaymentMode(mode);
-      setStep(3); // Move to confirmation step
+      setStep(3);
     } catch (error) {
       console.error("Error selecting payment mode:", error);
       message.error("Error selecting payment method. Please try again.");
@@ -216,108 +192,111 @@ const handleDoctorChange = (value) => {
     }
   };
 
- const handleConfirmAndPay = async () => {
-  try {
-    setConfirmPayLoading(true);
-    
-    // Generate transaction ID
-    const transactionId = generateTransactionId();
-    setTransectionID(transactionId);
-    
-    // Load Razorpay script dynamically
-    const loadRazorpayScript = () => {
-      return new Promise((resolve) => {
-        const script = document.createElement('script');
-        script.src = 'https://checkout.razorpay.com/v1/checkout.js';
-        script.onload = () => resolve(true);
-        script.onerror = () => resolve(false);
-        document.body.appendChild(script);
-      });
-    };
-
-    // Load Razorpay script
-    const scriptLoaded = await loadRazorpayScript();
-    if (!scriptLoaded) {
-      message.error('Razorpay SDK failed to load. Please check your internet connection.');
-      setConfirmPayLoading(false);
-      return;
-    }
-
-    // Razorpay options
-    const options = {
-      key: "rzp_test_RbDL5BG2RHc7h6", 
-      amount: selectedDoctor?.consultation_fee * 100, // Use selectedDoctor directly
-      currency: 'INR',
-      name: formData?.patient_name,
-      description: `Appointment with Dr. ${selectedDoctor?.name}`,
-      image: Logo, 
+  const handleConfirmAndPay = async () => {
+    try {
+      setConfirmPayLoading(true);
+      setShowPaymentLoader(true); // Show full-screen loader
       
-      handler: async function (response) {
-        try {
-          // Payment successful - submit appointment with transaction ID
-          const appointmentData = {
-            ...formData,
-            payment_method: paymentMode,
-            payment_status: paymentStatus,
-            transaction_id: transactionId, 
-          };
+      const transactionId = generateTransactionId();
+      setTransectionID(transactionId);
+      
+      const loadRazorpayScript = () => {
+        return new Promise((resolve) => {
+          const script = document.createElement('script');
+          script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+          script.onload = () => resolve(true);
+          script.onerror = () => resolve(false);
+          document.body.appendChild(script);
+        });
+      };
 
-          await submitAppointment(appointmentData);
-          setPaymentStatus('Completed');
-          setStep(4); // Move to success step after payment
-        } catch (error) {
-          setPaymentStatus('Failed');
-          console.error("Payment processing error:", error);
-          message.error("Payment processing failed. Please contact support.");
-          
-        }
-      },
-      prefill: {
-        name: formData?.patient_name,
-        email: formData?.patient_email || "",
-        contact: formData?.patient_phone
-      },
-      notes: {
-        appointment: `Appointment with Dr. ${selectedDoctor?.name}`,
-        department: selectedDepartment?.name,
-        transaction_id: transactionId
-      },
-      theme: {
-        color: "#004AAD"
-      },
-      modal: {
-        ondismiss: function() {
-          setConfirmPayLoading(false);
-          message.info("Payment cancelled by user");
-        }
+      const scriptLoaded = await loadRazorpayScript();
+      if (!scriptLoaded) {
+        message.error('Razorpay SDK failed to load. Please check your internet connection.');
+        setConfirmPayLoading(false);
+        setShowPaymentLoader(false); // Hide loader on error
+        return;
       }
-    };
 
-    const razorpayInstance = new window.Razorpay(options);
-    razorpayInstance.open();
+      const options = {
+        key: "rzp_test_RbDL5BG2RHc7h6", 
+        amount: selectedDoctor?.consultation_fee * 100,
+        currency: 'INR',
+        name: formData?.patient_name,
+        description: `Appointment with Dr. ${selectedDoctor?.name}`,
+        image: Logo, 
+        
+        handler: async function (response) {
+          try {
+            const appointmentData = {
+              ...formData,
+              payment_method: paymentMode,
+              payment_status: 'Completed',
+              transaction_id: transactionId, 
+            };
 
-  } catch (error) {
-    console.error("Error processing payment:", error);
-    
-    // For demo/development - fallback to simulated payment
-    if (process.env.NODE_ENV === 'development') {
-      message.warning("Using demo payment mode");
-      await simulateRazorpayPayment();
-    } else {
-      message.error("Payment initialization failed. Please try again.");
+            await submitAppointment(appointmentData);
+            setPaymentStatus('Completed');
+            
+            // Hide payment loader and show success
+            setShowPaymentLoader(false);
+            setStep(4);
+            
+            // Show receipt step after 3 seconds delay
+            setTimeout(() => {
+              setShowReceiptStep(true);
+            }, 3000);
+            
+          } catch (error) {
+            setPaymentStatus('Failed');
+            setShowPaymentLoader(false); // Hide loader on error
+            console.error("Payment processing error:", error);
+            message.error("Payment processing failed. Please contact support.");
+          }
+        },
+        prefill: {
+          name: formData?.patient_name,
+          email: formData?.patient_email || "",
+          contact: formData?.patient_phone
+        },
+        notes: {
+          appointment: `Appointment with Dr. ${selectedDoctor?.name}`,
+          department: selectedDepartment?.name,
+          transaction_id: transactionId
+        },
+        theme: {
+          color: "#004AAD"
+        },
+        modal: {
+          ondismiss: function() {
+            setConfirmPayLoading(false);
+            setShowPaymentLoader(false); // Hide loader when modal is dismissed
+            message.info("Payment cancelled by user");
+          }
+        }
+      };
+
+      const razorpayInstance = new window.Razorpay(options);
+      razorpayInstance.open();
+
+    } catch (error) {
+      console.error("Error processing payment:", error);
+      setShowPaymentLoader(false); // Hide loader on error
+      if (process.env.NODE_ENV === 'development') {
+        message.warning("Using demo payment mode");
+        await simulateRazorpayPayment();
+      } else {
+        message.error("Payment initialization failed. Please try again.");
+      }
+    } finally {
+      setConfirmPayLoading(false);
     }
-  } finally {
-    setConfirmPayLoading(false);
-  }
-};
+  };
 
-  // Demo/fallback function for development
   const simulateRazorpayPayment = async () => {
     try {
-      // Generate transaction ID for demo
       const transactionId = generateTransactionId();
       
-      // Simulate successful payment for demo
       const paymentResponse = {
         razorpay_payment_id: `pay_${Math.random().toString(36).substr(2, 9)}`,
         razorpay_order_id: `order_${Math.random().toString(36).substr(2, 9)}`,
@@ -327,92 +306,106 @@ const handleDoctorChange = (value) => {
       const appointmentData = {
         ...formData,
         payment_method: paymentMode,
-        payment_status: paymentStatus,
-        transaction_id: transactionId, // Add generated transaction ID
-       
+        payment_status: 'Completed',
+        transaction_id: transactionId,
       };
 
       await submitAppointment(appointmentData);
       setPaymentStatus('Completed');
-      setStep(4); // Move to success step after payment
+      
+      // Hide payment loader and show success
+      setShowPaymentLoader(false);
+      setStep(4);
+      
+      // Show receipt step after 3 seconds delay
+      setTimeout(() => {
+        setShowReceiptStep(true);
+      }, 3000);
+      
     } catch (error) {
       console.error("Demo payment error:", error);
+      setShowPaymentLoader(false); // Hide loader on error
       message.error("Demo payment failed");
     }
   };
 
-const handleConfirmAndSubmit = async () => {
-  try {
-    setConfirmSubmitLoading(true);
-    
-    // Generate transaction ID for hospital payment
-    const transactionId = generateTransactionId();
-    setTransectionID(transactionId);
-    
-    const appointmentData = {
-      ...formData,
-      payment_method: "Pay at Hospital",
-      payment_status: "Pending",
-      transaction_id: transactionId
-    };
-    
-    message.info("Submitting your appointment request...");
-    await submitAppointment(appointmentData);
-    setStep(4); // Move to success step after submission
-  } catch (error) {
-    console.error("Error submitting appointment:", error);
-    message.error("Error submitting appointment. Please try again.");
-  } finally {
-    setConfirmSubmitLoading(false);
-  }
-};
+  const handleConfirmAndSubmit = async () => {
+    try {
+      setConfirmSubmitLoading(true);
+      setShowPaymentLoader(true); // Show full-screen loader for hospital payment too
+      
+      const transactionId = generateTransactionId();
+      setTransectionID(transactionId);
+      
+      const appointmentData = {
+        ...formData,
+        payment_method: "Pay at Hospital",
+        payment_status: "Pending",
+        transaction_id: transactionId
+      };
+      
+      message.info("Submitting your appointment request...");
+      await submitAppointment(appointmentData);
+      
+      // Hide payment loader and show success
+      setShowPaymentLoader(false);
+      setStep(4);
+      
+      // Show receipt step after 3 seconds delay
+      setTimeout(() => {
+        setShowReceiptStep(true);
+      }, 3000);
+      
+    } catch (error) {
+      console.error("Error submitting appointment:", error);
+      setShowPaymentLoader(false); // Hide loader on error
+      message.error("Error submitting appointment. Please try again.");
+    } finally {
+      setConfirmSubmitLoading(false);
+    }
+  };
 
-const submitAppointment = async (appointmentData) => {
-  try {
-    console.log('Submitting appointment data:', appointmentData);
-    
-    // REAL API call to submit appointment
-    const response = await axios.post(
-      "https://app.prabhatmemorialhospital.com/api/opd-bookings",
-      appointmentData
-    );
-    
-    console.log('Appointment Response:', response);
+  const submitAppointment = async (appointmentData) => {
+    try {
+      console.log('Submitting appointment data:', appointmentData);
+      
+      const response = await axios.post(
+        "https://app.prabhatmemorialhospital.com/api/opd-bookings",
+        appointmentData
+      );
+      
+      console.log('Appointment Response:', response);
 
-    if (response.data.success) {
-      message.success("Appointment booked successfully!");
+      if (response.data.success) {
+        message.success("Appointment booked successfully!");
+        setShowSuccessAnimation(true);
+        setPaymentStatus('Completed');
+        setDownloadLink(response.data.receipt_download_link);
+      
+        setTimeout(() => {
+          setIsSubmitted(true);
+          setShowSuccessAnimation(false);
+        }, 0);
+      } else {
+        setPaymentStatus('Failed')
+        throw new Error(response.data.message || "Failed to book appointment");
+      }
+    } catch (error) {
+      setPaymentStatus('Failed')
+      console.error("Error submitting appointment:", error);
+      console.log("API failed, but continuing with success flow for demo");
+      message.warning("Appointment submitted (demo mode - check console for errors)");
       setShowSuccessAnimation(true);
-      setPaymentStatus('Completed');
-      setDownloadLink(response.data.receipt_download_link)
-    
-      // Show success animation for 3 seconds before showing receipt
       setTimeout(() => {
         setIsSubmitted(true);
         setShowSuccessAnimation(false);
-      },0);
-    } else {
-      setPaymentStatus('Failed')
-      throw new Error(response.data.message || "Failed to book appointment");
-     
+      }, 0);
     }
-  } catch (error) {
-     setPaymentStatus('Failed')
-    console.error("Error submitting appointment:", error);
-    
-    // For demo purposes, simulate success if API fails but show the error
-    console.log("API failed, but continuing with success flow for demo");
-    message.warning("Appointment submitted (demo mode - check console for errors)");
-    setShowSuccessAnimation(true);
-    setTimeout(() => {
-      setIsSubmitted(true);
-      setShowSuccessAnimation(false);
-    }, 0);
-  }
-};
+  };
+
   const goBack = async () => {
     try {
       setBackButtonLoading(true);
-      // Simulate processing delay
       await new Promise(resolve => setTimeout(resolve, 500));
       setStep(step - 1);
     } catch (error) {
@@ -445,10 +438,22 @@ const submitAppointment = async (appointmentData) => {
     }catch (error){
       console.log("Error submitting appointment:", error)
     }
-
   }
 
-
+  // Payment Loader Overlay
+  if (showPaymentLoader) {
+    return (
+      <PaymentLoaderOverlay>
+        <PaymentLoaderContent>
+          <LargeLoaderSpinner />
+          <PaymentLoaderTitle>Processing Payment</PaymentLoaderTitle>
+          <PaymentLoaderMessage>
+            Please wait while we process your payment. Do not refresh the page.
+          </PaymentLoaderMessage>
+        </PaymentLoaderContent>
+      </PaymentLoaderOverlay>
+    );
+  }
 
   // Success Animation Component
   if (showSuccessAnimation) {
@@ -465,69 +470,90 @@ const submitAppointment = async (appointmentData) => {
     );
   }
 
-  // Success page after submission
+  // Success page after submission - Updated to show success step and receipt step separately
   if (isSubmitted || step === 4) {
     return (
       <ThankYouContainer>
-        <SuccessIconStatic>
-          <img src={DonGIF} alt="success icon" />
-        </SuccessIconStatic>
-        <h1>Appointment Booked Successfully!</h1>
-        <AppointmentDetails>
-          <DetailItem>
-            <Label style={{color:'#004AAD'}}>Patient Name:</Label>
-            <Value>{formData?.patient_name}</Value>
-          </DetailItem>
-          <DetailItem>
-            <Label style={{color:'#004AAD'}}>Contact:</Label>
-            <Value>{formData?.patient_phone}</Value>
-          </DetailItem>
-          <DetailItem>
-            <Label style={{color:'#004AAD'}}>Email:</Label>
-            <Value>{formData?.patient_email}</Value>
-          </DetailItem>
-          <DetailItem>
-            <Label style={{color:'#004AAD'}}>Doctor:</Label>
-            <Value>Dr. {selectedDoctor.name}</Value>
-          </DetailItem>
-          <DetailItem>
-            <Label style={{color:'#004AAD'}}>Department:</Label>
-            <Value>{selectedDepartment.name}</Value>
-          </DetailItem>
-          <DetailItem>
-            <Label style={{color:'#004AAD'}}>Appointment Date:</Label>
-            <Value>{dayjs(formData?.booking_date).format('DD-MM-YYYY')}</Value>
-          </DetailItem>
-          <DetailItem>
-            <Label style={{color:'#004AAD'}}>Transaction ID:</Label>
-            <Value>
-              <Tag color="purple">{transectionID}</Tag>
-            </Value>
-          </DetailItem>
-          <DetailItem>
-            <Label style={{color:'#004AAD'}}>Payment Method:</Label>
-            <Value>
-              <Tag color={paymentMode === "Razorpay" ? "green" : "blue"}>
-                {paymentMode === "Pay at Hospital" ? "Pay at Hospital" : "Razorpay"}
-              </Tag>
-            </Value>
-          </DetailItem>
-          <DetailItem>
-            <Label style={{color:'#004AAD'}}>Payment Status:</Label>
-            <Value>
-              <Tag color={paymentStatus === 'Razorpay' ? "green" : "orange"}>
-                {paymentStatus === 'Completed' ? "Completed" : "Pending"}
-              </Tag>
-            </Value>
-          </DetailItem>
-        </AppointmentDetails>
-        <ActionButtons>
-         <a href={downloadLink} > <PrintButton >  Download Receipt
-          </PrintButton></a>
-          <HomeButton onClick={() => window.location.reload()}>
-            Book Another Appointment
-          </HomeButton>
-        </ActionButtons>
+        {!showReceiptStep ? (
+          // Success Step - Shows immediately after payment
+          <SuccessStepContent>
+            <SuccessIconStatic>
+              <img src={DonGIF} alt="success icon" />
+            </SuccessIconStatic>
+            <SuccessTitle>Payment Successful!</SuccessTitle>
+            <SuccessMessage>
+              Your appointment has been confirmed. Preparing your receipt...
+            </SuccessMessage>
+            <LoadingIndicator>
+              <LoaderSpinner />
+              <span>Generating receipt...</span>
+            </LoadingIndicator>
+          </SuccessStepContent>
+        ) : (
+          // Receipt Step - Shows after delay
+          <ReceiptStepContent>
+            <SuccessIconStatic>
+              <img src={DonGIF} alt="success icon" />
+            </SuccessIconStatic>
+            <h1>Appointment Booked Successfully!</h1>
+            <AppointmentDetails>
+              <DetailItem>
+                <Label style={{color:'#004AAD'}}>Patient Name:</Label>
+                <Value>{formData?.patient_name}</Value>
+              </DetailItem>
+              <DetailItem>
+                <Label style={{color:'#004AAD'}}>Contact:</Label>
+                <Value>{formData?.patient_phone}</Value>
+              </DetailItem>
+              <DetailItem>
+                <Label style={{color:'#004AAD'}}>Email:</Label>
+                <Value>{formData?.patient_email}</Value>
+              </DetailItem>
+              <DetailItem>
+                <Label style={{color:'#004AAD'}}>Doctor:</Label>
+                <Value>Dr. {selectedDoctor.name}</Value>
+              </DetailItem>
+              <DetailItem>
+                <Label style={{color:'#004AAD'}}>Department:</Label>
+                <Value>{selectedDepartment.name}</Value>
+              </DetailItem>
+              <DetailItem>
+                <Label style={{color:'#004AAD'}}>Appointment Date:</Label>
+                <Value>{dayjs(formData?.booking_date).format('DD-MM-YYYY')}</Value>
+              </DetailItem>
+              <DetailItem>
+                <Label style={{color:'#004AAD'}}>Transaction ID:</Label>
+                <Value>
+                  <Tag color="purple">{transectionID}</Tag>
+                </Value>
+              </DetailItem>
+              <DetailItem>
+                <Label style={{color:'#004AAD'}}>Payment Method:</Label>
+                <Value>
+                  <Tag color={paymentMode === "Razorpay" ? "green" : "blue"}>
+                    {paymentMode === "Pay at Hospital" ? "Pay at Hospital" : "Razorpay"}
+                  </Tag>
+                </Value>
+              </DetailItem>
+              <DetailItem>
+                <Label style={{color:'#004AAD'}}>Payment Status:</Label>
+                <Value>
+                  <Tag color={paymentStatus === 'Completed' ? "green" : "orange"}>
+                    {paymentStatus === 'Completed' ? "Completed" : "Pending"}
+                  </Tag>
+                </Value>
+              </DetailItem>
+            </AppointmentDetails>
+            <ActionButtons>
+              <a href={downloadLink}>
+                <PrintButton>Download Receipt</PrintButton>
+              </a>
+              <HomeButton onClick={() => window.location.reload()}>
+                Book Another OPD
+              </HomeButton>
+            </ActionButtons>
+          </ReceiptStepContent>
+        )}
       </ThankYouContainer>
     );
   }
@@ -684,7 +710,7 @@ const submitAppointment = async (appointmentData) => {
     );
   }
 
-  // Main Form Step
+  // Main Form Step (unchanged)
   return (
     <RequestContainer>
       <Form ref={form} layout="vertical" onFinish={(values) => {
@@ -870,7 +896,84 @@ const submitAppointment = async (appointmentData) => {
   );
 };
 
-// Loader Components
+// New styled components for payment loader
+const PaymentLoaderOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+`;
+
+const PaymentLoaderContent = styled.div`
+  text-align: center;
+  background: white;
+  padding: 3rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border: 1px solid #E5E7EB;
+  max-width: 400px;
+  width: 90%;
+`;
+
+const PaymentLoaderTitle = styled.h2`
+  color: #004AAD;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+`;
+
+const PaymentLoaderMessage = styled.p`
+  color: #6B7280;
+  font-size: 1rem;
+  line-height: 1.5;
+`;
+
+const LargeLoaderSpinner = styled.div`
+  width: 60px;
+  height: 60px;
+  border: 4px solid #E5E7EB;
+  border-bottom-color: #004AAD;
+  border-radius: 50%;
+  display: inline-block;
+  animation: rotation 1s linear infinite;
+  margin-bottom: 1.5rem;
+
+  @keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+`;
+
+// Rest of the styled components remain the same...
+const SuccessStepContent = styled.div`
+  justify-content: center;
+  text-align: center;
+  animation: fadeInUp 0.8s ease-out;
+`;
+
+const ReceiptStepContent = styled.div`
+  animation: fadeInUp 0.8s ease-out;
+`;
+
+const LoadingIndicator = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  color: #004AAD;
+  font-weight: 500;
+`;
+
 const ButtonLoader = ({ text = "Loading..." }) => (
   <LoaderContainer>
     <LoaderSpinner />
@@ -908,7 +1011,6 @@ const LoaderText = styled.span`
   margin-left: 8px;
 `;
 
-// Success Animation Component
 const SuccessAnimationContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -977,7 +1079,6 @@ const SuccessIconStatic = styled.div`
   }
 `;
 
-// Rest of the styled components remain the same...
 const Header = styled.div`
   color: #004AAD;
   font-size: clamp(1.5rem, 4vw, 2rem);
@@ -1109,6 +1210,10 @@ const PaymentSelectionContainer = styled.div`
   max-width: 600px;
   margin: 2rem auto;
   padding: 1rem;
+
+  @media (max-width: 600px){
+    padding: 1rem 10px;
+  }
 `;
 
 const CurrentAppointmentSummary = styled.div`
@@ -1205,6 +1310,10 @@ const AppointmentDetails = styled.div`
   padding: 1.5rem;
   margin: 1.5rem 0;
   border: 1px solid #E5E7EB;
+
+  @media (max-width: 600px){
+    padding:1.5rem 10px;
+  }
 `;
 
 const DetailItem = styled.div`
@@ -1301,6 +1410,7 @@ const BackButton = styled.button`
 `;
 
 const ThankYouContainer = styled.div`
+  min-height: 500px;
   max-width: 600px;
   margin: 2rem auto;
   padding: 2rem;
@@ -1309,6 +1419,10 @@ const ThankYouContainer = styled.div`
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border: 1px solid #E5E7EB;
+
+  @media (max-width: 600px){
+    padding: 10px;
+  }
 `;
 
 const PrintButton = styled.button`

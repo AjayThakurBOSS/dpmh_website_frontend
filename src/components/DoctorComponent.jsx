@@ -264,8 +264,8 @@ const NoDoctorsMessage = styled.div`
 
 const DoctorCardContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
   align-items: flex-start;
   justify-content: center;
   padding: 1rem;

@@ -133,7 +133,7 @@ const DrPrabhatSir = () => {
           Dr. Prabhat Memorial Hiramati Hospital | Top Multispeciality Hospital in Patna
         </Title>
         <Paragraph>
-          Driven by the vision of Late Dr. Prabhat Kumar to establish a state-of-the-art healthcare facility in Bihar, <BoldText>Dr. Prabhat Memorial Hiramati Hospital</BoldText> was founded by distinguished alumni of AIIMS, New Delhi. Today, it stands proudly as one of the <BoldText>best hospitals in Patna</BoldText>, offering world-class medical services to patients from across the region.
+          Driven by the vision of <BoldText>Late Dr. Prabhat Kumar </BoldText> to establish a state-of-the-art healthcare facility in Bihar, <BoldText>Dr. Prabhat Memorial Hiramati Hospital</BoldText> was founded by distinguished alumni of AIIMS, New Delhi. Today, it stands proudly as one of the <BoldText>best hospitals in Patna</BoldText>, offering world-class medical services to patients from across the region.
         </Paragraph>
         <Paragraph>
           Located in the heart of <BoldText>Rajendra Nagar, Patna</BoldText>, our hospital is a beacon of hope for individuals seeking advanced treatment and compassionate care. We specialize in a wide range of services including <BoldText>Best Trauma care, Cardio care, Neuro care</BoldText>, orthopedics, critical care, and more – ensuring comprehensive healthcare under one roof.
