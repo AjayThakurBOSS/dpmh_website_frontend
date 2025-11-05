@@ -221,7 +221,7 @@ const RequestAppointmentFormHero = () => {
       }
 
       const options = {
-        key: "rzp_test_RbDL5BG2RHc7h6", 
+        key: "rzp_live_Rc3W4wr48mXZkD", 
         amount: selectedDoctor?.consultation_fee * 100,
         currency: 'INR',
         name: formData?.patient_name,

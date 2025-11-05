@@ -3,6 +3,7 @@ import styled, { keyframes, css } from 'styled-components';
 import ServicesBC from '../components/breadcrumbs/ServicesBC';
 import FreeTreatment from '../components/FreeTreatment';
 import FacilitiesComponent from '../components/FacilitiesComponent';
+import MetaTags from '../util/MetaTags';
 
 // NEW ANIMATIONS
 const slideInFromBottom = keyframes`
@@ -374,8 +375,15 @@ const ServicesPage = () => {
   // }, []);
 
   return (
-    
+
     <ServicesContainer>
+       <MetaTags
+        title="World Class Facilities available in Our Hospital | Book your Appointment | Team of Exprienced Doctor | Best Emergency Care | Best Critical Care | 24x7 Emergency Care | | Dr Prabhat memorial Hiramati Hospital, Rajendra Nager, Patna"
+        description="Book your appointment at Dr. Prabhat Memorial Hiramati Hospital, Rajendra Nagar, Patna. 24x7 Emergency Care, ICU, Critical Care, expert doctors & advanced treatment."
+        keywords="Dr Prabhat Memorial Hiramati Hospital Patna, Best hospital in Rajendra Nagar Patna, 24x7 emergency hospital in Patna, Critical care hospital in Patna, ICU and trauma care Patna, Book appointment Patna hospital, Best doctors in Patna, Emergency medical services Patna, Multispeciality hospital in Patna, Best critical care unit Patna, Best emergency care Patna, Ambulance and ICU services Patna"
+        
+        type="website"
+      />
     <ServicesBC/>
     <FacilitiesComponent />
 {/*     <PageContainer>
