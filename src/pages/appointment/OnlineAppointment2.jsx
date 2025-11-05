@@ -176,8 +176,10 @@ const RequestAppointmentFormHero = () => {
     try {
       if (mode === "Razorpay") {
         setOnlinePaymentLoading(true);
+        setPaymentStatus('Pending'); // Online payment starts as pending
       } else {
         setHospitalPaymentLoading(true);
+         setPaymentStatus('Pending'); // Hospital payment remains pending
       }
       
       await new Promise(resolve => setTimeout(resolve, 800));
@@ -232,7 +234,7 @@ const RequestAppointmentFormHero = () => {
               ...formData,
               payment_method: paymentMode,
               payment_status: 'Completed',
-              transaction_id: transactionId, 
+              payment_transaction_id: transactionId, 
             };
 
             await submitAppointment(appointmentData);
@@ -262,7 +264,7 @@ const RequestAppointmentFormHero = () => {
         notes: {
           appointment: `Appointment with Dr. ${selectedDoctor?.name}`,
           department: selectedDepartment?.name,
-          transaction_id: transactionId
+          payment_transaction_id: transactionId
         },
         theme: {
           color: "#004AAD"
@@ -307,7 +309,7 @@ const RequestAppointmentFormHero = () => {
         ...formData,
         payment_method: paymentMode,
         payment_status: 'Completed',
-        transaction_id: transactionId,
+        payment_transaction_id: transactionId,
       };
 
       await submitAppointment(appointmentData);
@@ -341,7 +343,7 @@ const RequestAppointmentFormHero = () => {
         ...formData,
         payment_method: "Pay at Hospital",
         payment_status: "Pending",
-        transaction_id: transactionId
+        payment_transaction_id: transactionId
       };
       
       message.info("Submitting your appointment request...");
@@ -350,11 +352,12 @@ const RequestAppointmentFormHero = () => {
       // Hide payment loader and show success
       setShowPaymentLoader(false);
       setStep(4);
+      setShowReceiptStep(true); 
       
       // Show receipt step after 3 seconds delay
-      setTimeout(() => {
+/*       setTimeout(() => {
         setShowReceiptStep(true);
-      }, 3000);
+      }, 3000); */
       
     } catch (error) {
       console.error("Error submitting appointment:", error);
@@ -378,14 +381,22 @@ const RequestAppointmentFormHero = () => {
 
       if (response.data.success) {
         message.success("Appointment booked successfully!");
+
+      // Only show success animation for online payments, not for Pay at Hospital
+      if (appointmentData.payment_method === "Razorpay") {
         setShowSuccessAnimation(true);
-        setPaymentStatus('Completed');
+      }
+        
+         setPaymentStatus(appointmentData.payment_status); // Use the status from appointment data
         setDownloadLink(response.data.receipt_download_link);
       
+      // Only set timeout for success animation for online payments
+      if (appointmentData.payment_method === "Razorpay") {
         setTimeout(() => {
           setIsSubmitted(true);
           setShowSuccessAnimation(false);
         }, 0);
+      }
       } else {
         setPaymentStatus('Failed')
         throw new Error(response.data.message || "Failed to book appointment");
@@ -395,11 +406,15 @@ const RequestAppointmentFormHero = () => {
       console.error("Error submitting appointment:", error);
       console.log("API failed, but continuing with success flow for demo");
       message.warning("Appointment submitted (demo mode - check console for errors)");
+
+          // Only show success animation for online payments in demo mode
+    if (appointmentData.payment_method === "Razorpay") {
       setShowSuccessAnimation(true);
       setTimeout(() => {
         setIsSubmitted(true);
         setShowSuccessAnimation(false);
       }, 0);
+    }
     }
   };
 
@@ -446,9 +461,9 @@ const RequestAppointmentFormHero = () => {
       <PaymentLoaderOverlay>
         <PaymentLoaderContent>
           <LargeLoaderSpinner />
-          <PaymentLoaderTitle>Processing Payment</PaymentLoaderTitle>
+          <PaymentLoaderTitle>Processing ...</PaymentLoaderTitle>
           <PaymentLoaderMessage>
-            Please wait while we process your payment. Do not refresh the page.
+            Please wait while we process your request. Do not refresh the page.
           </PaymentLoaderMessage>
         </PaymentLoaderContent>
       </PaymentLoaderOverlay>
