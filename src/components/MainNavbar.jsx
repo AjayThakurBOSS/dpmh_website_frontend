@@ -17,7 +17,7 @@ const MainNavbar = () => {
         setActiveNav(location.pathname);
         
         // Auto-close mobile menu when route changes
-        if (window.innerWidth <= 992) {
+        if (window.innerWidth <= 1200) {
             setIsOpen(false);
             setOpenSubmenu(null);
         }
@@ -112,13 +112,13 @@ const MainNavbar = () => {
     };
 
     const toggleSubMenu = (itemName) => {
-        if (window.innerWidth <= 992) {
+        if (window.innerWidth <= 1200) {
             setOpenSubmenu(openSubmenu === itemName ? null : itemName);
         }
     };
 
     const handleNavLinkClick = (item) => {
-        if (window.innerWidth <= 992) {
+        if (window.innerWidth <= 1200) {
             setIsOpen(false);
             setOpenSubmenu(null);
         }
@@ -151,18 +151,18 @@ const MainNavbar = () => {
                                 isSpecial={item.isSpecial} 
                                 isActive={isNavItemActive(item)}
                                 onClick={(e) => {
-                                    if (window.innerWidth <= 992) {
+                                    if (window.innerWidth <= 1200) {
                                         e.preventDefault();
                                         toggleSubMenu(item.name);
                                     }
                                 }}
                                 onMouseEnter={() => {
-                                    if (window.innerWidth > 992) {
+                                    if (window.innerWidth > 1200) {
                                         setOpenSubmenu(item.name);
                                     }
                                 }}
                                 onMouseLeave={() => {
-                                    if (window.innerWidth > 992) {
+                                    if (window.innerWidth > 1200) {
                                         setOpenSubmenu(null);
                                     }
                                 }}
@@ -186,12 +186,12 @@ const MainNavbar = () => {
                                 isSpecial={item.isSpecial}
                                 isMobileOpen={openSubmenu === item.name}
                                 onMouseEnter={() => {
-                                    if (window.innerWidth > 992) {
+                                    if (window.innerWidth > 1200) {
                                         setOpenSubmenu(item.name);
                                     }
                                 }}
                                 onMouseLeave={() => {
-                                    if (window.innerWidth > 992) {
+                                    if (window.innerWidth > 1200) {
                                         setOpenSubmenu(null);
                                     }
                                 }}
@@ -205,7 +205,7 @@ const MainNavbar = () => {
                                         backgroundColor={getSubmenuColor(item.name, index)}
                                         isActive={isSubmenuItemActive(subItem.link)}
                                         onClick={() => {
-                                            if (window.innerWidth <= 992) {
+                                            if (window.innerWidth <= 1200) {
                                                 setIsOpen(false);
                                                 setOpenSubmenu(null);
                                             }
@@ -238,7 +238,7 @@ const NavContainer = styled.nav`
     position: relative;
     min-height: 80px;
     
-    @media (max-width: 992px) {
+    @media (max-width: 1200px) {
         flex-wrap: wrap; 
         padding: 10px 15px; 
     }
@@ -250,7 +250,7 @@ const LogoSection = styled.div`
         color: #fff;
         z-index: 100;
     }
-    @media (max-width: 992px) {
+    @media (max-width: 1200px) {
         img {
             height: 50px;
         }
@@ -281,7 +281,7 @@ const SubMenu = styled.div`
         }
     `}
 
-    @media (max-width: 992px) {
+    @media (max-width: 1200px) {
         display: ${props => props.isMobileOpen ? 'block' : 'none'}; 
         position: relative;
         top: auto;
@@ -289,7 +289,7 @@ const SubMenu = styled.div`
         min-width: auto;
         box-shadow: none;
         border-top: none;
-        background-color: #ffffffff;
+        background-color: #ffffff;
         padding: 0;
     }
 `;
@@ -354,7 +354,7 @@ const SubMenuItem = styled(Link)`
         }
     `}
 
-    @media (max-width: 992px) {
+    @media (max-width: 1200px) {
         color: ${props => props.isActive ? '#00bfff' : '#000000'};
         padding-left: 30px;
         border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -378,7 +378,7 @@ const NavItem = styled.div`
         }
     }
 
-    @media (max-width: 992px) {
+    @media (max-width: 1200px) {
         width: 100%;
         background-color: ${props => props.isMobileOpen ? '#4c62a5' : 'transparent'};
     }
@@ -397,7 +397,7 @@ const NavLink = styled(Link)`
     transition: background-color 0.2s, color 0.2s;
     cursor: pointer;
     white-space: nowrap;
-    justify-content: ${props => (props.isSpecial || window.innerWidth > 992) ? 'flex-start' : 'flex-start'};
+    justify-content: ${props => (props.isSpecial || window.innerWidth > 1200) ? 'flex-start' : 'flex-start'};
     border: none;
     background: none;
     position: relative;
@@ -422,7 +422,7 @@ const NavLink = styled(Link)`
         background-color: ${props => props.isSpecial ? '#345FA5' : 'transparent'};
     }
 
-    @media (max-width: 992px) {
+    @media (max-width: 1200px) {
         width: 100%;
         justify-content: flex-start;
         text-align: left;
@@ -467,7 +467,7 @@ const NavLinks = styled.div`
     display: flex;
     align-items: center;
     
-    @media (max-width: 992px) {
+    @media (max-width: 1200px) {
         flex-direction: column;
         position: absolute;
         top: 100%; 
@@ -507,7 +507,7 @@ const AppointmentButton = styled(Link)`
         border-color: #0099cc;
     }
 
-    @media (max-width: 992px) {
+    @media (max-width: 1200px) {
         position: absolute;
         top: -52px;
         left: 10px;
@@ -534,7 +534,7 @@ const Hamburger = styled.div`
     padding: 7px 15px;
     background-color: #ffffff;
     color: #00bfff;
-    @media (max-width: 992px) {
+    @media (max-width: 1200px) {
         display: block;
     }
 `;

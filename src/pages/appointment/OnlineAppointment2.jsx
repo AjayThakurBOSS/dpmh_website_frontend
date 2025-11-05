@@ -842,7 +842,7 @@ const RequestAppointmentFormHero = () => {
                   .filter((doctor) => Number(doctor.consultation_fee) > 0)
                   .map((doctor) => (
                     <Option key={doctor.id} value={doctor.id} style={{ fontSize: '16px' }}>
-                      Dr. {doctor.name} | Exp: {doctor.experience}+Yrs {doctor.consultation_fee}
+                      Dr. {doctor.name} | Exp: {doctor.experience}+Yrs 
                     </Option>
                   ))}
               </Select>

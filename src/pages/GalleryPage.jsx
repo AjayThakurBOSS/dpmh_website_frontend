@@ -91,17 +91,17 @@ const Lightbox = ({ image, onClose }) => {
 
     return (
         <div
-            className="fixed inset-0 z-9999999 flex items-center justify-center bg-black bg-opacity-80 backdrop-blur-sm p-4 transition-opacity duration-300"
+            className="fixed inset-0 z-999999 flex items-center justify-center bg-black bg-opacity-80 backdrop-blur-sm p-4 transition-opacity duration-300"
             onClick={onClose}
         >
             <div
-                className="relative max-w-4xl w-full max-h-[90vh] rounded-xl shadow-2xl overflow-hidden transition-transform duration-300 transform scale-100"
+                className="relative z-999999 max-w-4xl w-full max-h-[90vh] rounded-xl shadow-2xl overflow-hidden transition-transform duration-300 transform scale-100"
                 onClick={(e) => e.stopPropagation()}
             >
                 {/* Close button */}
                 <button
                     onClick={onClose}
-                    className="absolute top-4 right-4 z-99999 p-2 bg-white/30 backdrop-blur-md rounded-full text-white hover:bg-white/50 transition-colors"
+                    className="absolute top-4 right-4 z-999999 p-2 bg-white/30 backdrop-blur-md rounded-full text-white hover:bg-white/50 transition-colors"
                     aria-label="Close image viewer"
                 >
                     <X size={24} />
@@ -258,7 +258,7 @@ const GalleryPage = () => {
                 </main>
 
                 {/* Lightbox Viewer */}
-                <Lightbox image={selectedImage} onClose={handleCloseLightbox} />
+                <Lightbox image={selectedImage} onClose={handleCloseLightbox}  />
             </div>
         </>
     );

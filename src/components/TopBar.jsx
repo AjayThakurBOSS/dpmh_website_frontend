@@ -137,7 +137,7 @@ const TopBarContainer = styled.div`
   position: relative;
   z-index: 1000;
 
-  @media (max-width: 992px) {
+  @media (max-width: 1200px) {
     padding: 8px 15px;
   }
 `;
@@ -146,7 +146,7 @@ const DesktopContactInfo = styled.div`
   display: flex;
   gap: 20px;
 
-  @media (max-width: 992px) {
+  @media (max-width: 1200px) {
     display: none;
   }
 `;
@@ -156,7 +156,7 @@ const SocialIconsWrapper = styled.div`
   gap: 12px;
   align-items: center;
 
-  @media (max-width: 992px) {
+  @media (max-width: 1200px) {
     gap: 10px;
     margin-left: auto;
     margin-right: 15px;
@@ -198,7 +198,7 @@ const SocialIcon = styled.a`
   &:nth-child(3) { color: #ffffff; } /* Instagram - white */
   &:nth-child(4) { color: #ffffff; } /* YouTube - white */
 
-  @media (max-width: 992px) {
+  @media (max-width: 1200px) {
     font-size: 1rem;
     width: 20px;
     height: 20px;
@@ -222,7 +222,7 @@ const MobileToggleButton = styled.button`
     background-color: rgba(255, 255, 255, 0.1);
   }
 
-  @media (max-width: 992px) {
+  @media (max-width: 1200px) {
     display: flex;
   }
 `;
@@ -243,7 +243,7 @@ const MobileMenu = styled.div`
   visibility: ${props => props.isOpen ? 'visible' : 'hidden'};
   transition: all 0.3s ease-in-out;
 
-  @media (max-width: 992px) {
+  @media (max-width: 1200px) {
     display: block;
   }
 `;
