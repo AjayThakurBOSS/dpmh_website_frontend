@@ -21,26 +21,31 @@ const FreeTreatment = () => {
             image: Img1,
             name: "Ayushman",  
             description: "Comprehensive health insurance scheme providing free treatment coverage",
+            link:'/free-treatment/ayushman-bharat'
         },
         {  
             image: Img2,
             name: "CGHS",  
             description: "Central Government Health Scheme for government employees and pensioners",
+            link:'/free-treatment/cghs'
         },
         {  
             image: Img4,
             name: "CAPF",  
             description: "Central Armed Police Forces health scheme for personnel and families",
+            link:'/free-treatment/capf'
         },
         {  
             image: Img3,
             name: "CMRF",  
             description: "Chief Minister's Relief Fund for emergency medical assistance",
+            link:'/free-treatment/cmrf'
         },
         {  
             image: Img5,
             name: "TPA",  
             description: "Third Party Administrator services for cashless treatment",
+            link:'/free-treatment/tpa'
         },
     ]
 
@@ -62,18 +67,20 @@ const FreeTreatment = () => {
         <FreeSubhead>We partner with various healthcare schemes to provide you with free treatment options</FreeSubhead>
         
         <CardsContainer>
-            {/* Desktop View - Grid */}
+            
             <DesktopView>
                 {freeProvider.map((provider, index) => (
+                    
                     <FreeCard key={index}>
+                        <Link to={provider.link}> 
                         <Name>{provider.name}</Name>
                         <CardImage src={provider.image} alt={provider.name} />
-                        
                         <DescriptionOverlay>
-                           
                             <DescriptionText>{provider.description}</DescriptionText>
                         </DescriptionOverlay>
+                        </Link>
                     </FreeCard>
+                    
                 ))}
             </DesktopView>
 
@@ -81,6 +88,7 @@ const FreeTreatment = () => {
             <MobileView>
                 <StyledCarousel {...carouselSettings}>
                     {freeProvider.map((provider, index) => (
+                        <Link to={provider.link}> 
                         <div key={index}>
                             <FreeCard>
                                 <CardImage src={provider.image} alt={provider.name} />
@@ -90,6 +98,7 @@ const FreeTreatment = () => {
                                 </CardContent>
                             </FreeCard>
                         </div>
+                        </Link>
                     ))}
                 </StyledCarousel>
             </MobileView>
@@ -184,6 +193,7 @@ const CardsContainer = styled.div`
     max-width: 1500px;
     margin: 0 auto 4rem;
     position: relative;
+    height: 320px;
 `
 
 const DesktopView = styled.div`
@@ -204,6 +214,7 @@ const MobileView = styled.div`
     @media (max-width: 768px) {
         display: block;
         padding: 0 1rem;
+        height: 320px;
     }
 `
 
@@ -211,6 +222,7 @@ const StyledCarousel = styled(Carousel)`
     .slick-dots li button {
         background: white;
         opacity: 0.5;
+        height: 320px;
     }
     
     .slick-dots li.slick-active button {

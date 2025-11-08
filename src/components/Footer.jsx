@@ -33,6 +33,7 @@ const Footer = () => {
             <LinkItem><StyledFaAngleRight /> <FooterLink to="/contact-us">Contact Us</FooterLink></LinkItem>
             <LinkItem><FaLock /> <FooterLink to="/privacy-policy">Privacy Policy</FooterLink></LinkItem>
             <LinkItem><FaLock /> <FooterLink to="/sitemap">Sitemap</FooterLink></LinkItem>
+            <LinkItem><FaLock /> <FooterLink to="/patient-welfare/complain-form">Write your Complaint</FooterLink></LinkItem>
           </LinkList>
         </Column>
 

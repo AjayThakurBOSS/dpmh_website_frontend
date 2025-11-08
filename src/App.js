@@ -49,6 +49,14 @@ import AppointmentPage from './pages/appointment/AppointmentPage';
 import LogoImg from './assets/logo.jpeg'
 import Loader from './util/Loader';
 import PrivacyPolicy from './util/PrivacyPolicy';
+import AyushmanBharat from './pages/freeTreatment/AyushmanBharat';
+import TPA from './pages/freeTreatment/TPA';
+import CGHS from './pages/freeTreatment/CGHS';
+import CAPF from './pages/freeTreatment/CAPF';
+import CMRF from './pages/freeTreatment/CMRF';
+import ComplaintForm from './components/ComplaintForm';
+import ComplaintFormPage from './pages/ComplaintFormPage';
+import TestimonialCarousel from './components/TestimonialCarousel';
 
 
 // Page Components
@@ -57,7 +65,7 @@ const Home = () => (
   <Hero />
   <DrPrabhatSir/>
   <ImageContainer>
-    <img src={DirImg} alt='direcor image' style={{weidth:'100%'}}/>
+    <img src={DirImg} alt='direcorimage' style={{weidth:'100%'}}/>
   </ImageContainer>
   <FreeTreatment/>
   <CenterofExcellance />
@@ -67,6 +75,7 @@ const Home = () => (
   <FacilitiesForHomePage/>
   <AboutUsComponent/>
   <Testimonials /> 
+  {/* <TestimonialCarousel/> */}
   
   </>
 
@@ -153,8 +162,14 @@ const AnimatedRoutes = () => {
          <Route path='/departments/pulmonology' element={<Pulmonology/>} />
          <Route path='/departments/trauma' element={<TraumaCarePage/>} />
          <Route path='/departments/critical-care' element={<CriticalCarePage/>} />
-          <Route path='/sitemap' element={<Sitemap/>} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+         <Route path='/sitemap' element={<Sitemap/>} />
+         <Route path="/free-treatment/ayushman-bharat" element={<AyushmanBharat />} />
+         <Route path="/free-treatment/tpa" element={<TPA />} />
+         <Route path="/free-treatment/cghs" element={<CGHS />} />
+         <Route path="/free-treatment/capf" element={<CAPF />} />
+        <Route path="/free-treatment/cmrf" element={<CMRF />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/patient-welfare/complain-form" element={<ComplaintFormPage/>}/>
 
       </Routes>
     </AnimatePresence>
