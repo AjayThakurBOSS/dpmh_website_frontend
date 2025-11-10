@@ -57,6 +57,7 @@ import CMRF from './pages/freeTreatment/CMRF';
 import ComplaintForm from './components/ComplaintForm';
 import ComplaintFormPage from './pages/ComplaintFormPage';
 import TestimonialCarousel from './components/TestimonialCarousel';
+import ClientFeedback from './components/ClientFeedback';
 
 
 // Page Components
@@ -75,8 +76,8 @@ const Home = () => (
   <FacilitiesForHomePage/>
   <AboutUsComponent/>
   <Testimonials /> 
-  {/* <TestimonialCarousel/> */}
-  
+{/*    <TestimonialCarousel/> 
+  <ClientFeedback/> */}
   </>
 
 );

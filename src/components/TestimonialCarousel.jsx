@@ -1,422 +1,354 @@
-import React, { useState, useEffect } from 'react';
-import styled, { keyframes } from 'styled-components';
+import React, { useState, useEffect, useCallback } from "react";
+import styled, { keyframes, css } from "styled-components";
 
 const testimonials = [
-  { id: 1, quote: "The design quality is unmatched. It boosted our conversion rate by 30% almost instantly!", name: "Sarah K.", title: "CEO, TechNova", rating: 5 },
-  { id: 2, quote: "Truly exceptional service and attention to detail. The team delivered ahead of schedule.", name: "Mark L.", title: "Head of Marketing, Global Corp", rating: 5 },
-  { id: 3, quote: "A seamless, beautiful integration. Our users love the new look and feel.", name: "Jenna T.", title: "Product Manager, CreativeFlow", rating: 4 },
-  { id: 4, quote: "Highly recommend! Professional, responsive, and the results speak for themselves.", name: "Alex B.", title: "Founder, Startup Hub", rating: 5 },
+  {
+    id: 1,
+    name: "Jhone Wick",
+    role: "Founder Of Company",
+    text: "Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+    rating: 5,
+    image: "https://picsum.photos/200/200?random=1",
+  },
+  {
+    id: 2,
+    name: "Alice Johnson",
+    role: "Marketing Director",
+    text: "This service exceeded all my expectations. The results were delivered quickly and professionally. Highly recommended!",
+    rating: 4,
+    image: "https://picsum.photos/200/200?random=2",
+  },
+  {
+    id: 3,
+    name: "Bob Smith",
+    role: "Lead Developer",
+    text: "An absolute pleasure to work with. The team was responsive, creative, and nailed the design brief perfectly.",
+    rating: 5,
+    image: "https://picsum.photos/200/200?random=3",
+  },
 ];
 
-const TestimonialCarousel = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
-  useEffect(() => {
-    if (!isAutoPlaying) return;
-    
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % testimonials.length);
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [isAutoPlaying]);
-
-  const goToSlide = (index) => {
-    setActiveIndex(index);
-    setIsAutoPlaying(false);
-    setTimeout(() => setIsAutoPlaying(true), 10000);
-  };
-
-  const nextSlide = () => {
-    setActiveIndex((prev) => (prev + 1) % testimonials.length);
-  };
-
-  const prevSlide = () => {
-    setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
-
-  return (
-    <Section>
-      <BackgroundPattern />
-      <Container>
-        <Header>
-          <SectionTitle>Trusted by Industry Leaders</SectionTitle>
-          <SectionSubtitle>Don't just take our word for it</SectionSubtitle>
-        </Header>
-
-        <ContentWrapper>
-          <TestimonialDisplay>
-            <QuoteMark>“</QuoteMark>
-            <ActiveQuote>{testimonials[activeIndex].quote}</ActiveQuote>
-            <AuthorSection>
-              <Avatar>
-                {testimonials[activeIndex].name.split(' ').map(n => n[0]).join('')}
-              </Avatar>
-              <AuthorInfo>
-                <AuthorName>{testimonials[activeIndex].name}</AuthorName>
-                <AuthorTitle>{testimonials[activeIndex].title}</AuthorTitle>
-                <StarRating rating={testimonials[activeIndex].rating} />
-              </AuthorInfo>
-            </AuthorSection>
-          </TestimonialDisplay>
-
-          <Navigation>
-            <NavButton onClick={prevSlide}>
-              <ArrowIcon>←</ArrowIcon>
-            </NavButton>
-            
-            <IndicatorContainer>
-              {testimonials.map((_, index) => (
-                <Indicator
-                  key={index}
-                  active={index === activeIndex}
-                  onClick={() => goToSlide(index)}
-                />
-              ))}
-            </IndicatorContainer>
-            
-            <NavButton onClick={nextSlide}>
-              <ArrowIcon>→</ArrowIcon>
-            </NavButton>
-          </Navigation>
-
-         {/*  <TestimonialGrid>
-            {testimonials.map((testimonial, index) => (
-              <GridCard 
-                key={testimonial.id}
-                active={index === activeIndex}
-                onClick={() => goToSlide(index)}
-              >
-                <GridQuote>"{testimonial.quote}"</GridQuote>
-                <GridAuthor>
-                  <GridName>{testimonial.name}</GridName>
-                  <GridTitle>{testimonial.title}</GridTitle>
-                </GridAuthor>
-              </GridCard>
-            ))}
-          </TestimonialGrid> */}
-        </ContentWrapper>
-
-        <CTASection>
-          <CTATitle>Ready to experience the difference?</CTATitle>
-          <CTAButton>Get Started Today</CTAButton>
-        </CTASection>
-      </Container>
-    </Section>
-  );
-};
-
-const StarRating = ({ rating }) => (
-  <StarContainer>
-    {[1, 2, 3, 4, 5].map((star) => (
-      <Star key={star} filled={star <= rating}>★</Star>
-    ))}
-  </StarContainer>
-);
-
-export default TestimonialCarousel;
-
-// Styled Components
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
-
-const Section = styled.section`
-  padding: 100px 0;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+const TestimonialCard = styled.div`
+  min-width: 400px;
+  aspect-ratio: 1 / 1;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
   position: relative;
   overflow: hidden;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-`;
-
-const BackgroundPattern = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
-    radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
-`;
-
-const Container = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-  position: relative;
-  z-index: 1;
+  margin: 0 10px;
+  height: 400px;
+  border: 1px solid #004aad;
 `;
 
 const Header = styled.div`
   text-align: center;
-  margin-bottom: 80px;
-  animation: ${fadeIn} 0.8s ease-out;
-`;
-
-const SectionTitle = styled.h2`
-  font-size: 3.5rem;
-  color: white;
   margin-bottom: 20px;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 700;
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-`;
-
-const SectionSubtitle = styled.p`
-  font-size: 1.3rem;
-  color: rgba(255, 255, 255, 0.9);
-  font-family: 'Inter', sans-serif;
-  font-weight: 300;
-`;
-
-const ContentWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 60px;
-  align-items: center;
-`;
-
-const TestimonialDisplay = styled.div`
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
-  border-radius: 24px;
-  padding: 60px 50px;
-  text-align: center;
   position: relative;
-  box-shadow: 
-    0 20px 60px rgba(0, 0, 0, 0.1),
-    0 0 0 1px rgba(255, 255, 255, 0.2);
-  animation: ${fadeIn} 0.6s ease-out;
-  transition: all 0.3s ease;
-  
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 
-      0 30px 80px rgba(0, 0, 0, 0.15),
-      0 0 0 1px rgba(255, 255, 255, 0.3);
-  }
 `;
-
-const QuoteMark = styled.div`
-  font-size: 8rem;
-  color: #667eea;
+const Title = styled.h2`
+  font-family: "Playfair Display", serif;
+  color: #4a90e2;
+  font-size: 2.2em;
+  margin: 0;
   line-height: 1;
-  margin-bottom: 20px;
-  font-family: serif;
-  opacity: 0.3;
 `;
-
-const ActiveQuote = styled.p`
-  font-size: 1.5rem;
-  line-height: 1.6;
+const Subtitle = styled.p`
+  font-family: "Arial", sans-serif;
   color: #333;
-  margin-bottom: 40px;
-  font-style: italic;
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
-`;
-
-const AuthorSection = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-`;
-
-const Avatar = styled.div`
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
+  font-size: 1.5em;
   font-weight: bold;
-  font-size: 1.2rem;
-  font-family: 'Poppins', sans-serif;
+  letter-spacing: 2px;
+  margin-top: 5px;
+  line-height: 1;
 `;
-
-const AuthorInfo = styled.div`
-  text-align: left;
+const DottedLine = styled.div`
+  position: absolute;
+  top: 10px;
+  width: 2px;
+  height: 20px;
+  border-left: 2px dotted #ccc;
+  ${(props) => (props.left ? "left: 0;" : "right: 0;")}
 `;
-
-const AuthorName = styled.h4`
-  font-size: 1.2rem;
+const CornerElement = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 70%;
+    height: 70%;
+    background-color: #e6f0ff;
+    border-radius: 0 100% 0 0;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 55%;
+    height: 55%;
+    background-color: #004d66;
+    border-radius: 0 100% 0 0;
+  }
+`;
+const ContentArea = styled.div`
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding-top: 30px;
+`;
+const TestimonialBubble = styled.div`
+  background-color: #b0e0e6;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+  margin-bottom: 20px;
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -15px;
+    right: 80px;
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid #b0e0e6;
+  }
+`;
+const TestimonialText = styled.p`
   color: #333;
-  margin: 0 0 5px 0;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
+  font-style: italic;
+  font-size: 0.9em;
+  margin: 0;
 `;
-
-const AuthorTitle = styled.p`
-  font-size: 0.9rem;
+const QuoteMark = styled.span`
+  font-size: 2em;
+  line-height: 0;
+  color: #004d66;
+  display: inline-block;
+  ${(props) => (props.start ? "margin-right: 5px;" : "margin-left: 5px;")}
+  position: relative;
+  top: ${(props) => (props.start ? "-0.2em" : "0.2em")};
+`;
+const Rating = styled.div`
+  color: #ffcc00;
+  font-size: 1.5em;
+  letter-spacing: 5px;
+  text-align: right;
+  margin-bottom: 20px;
+`;
+const Profile = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: auto;
+  justify-content: flex-end;
+  transform: translateY(30px) translateX(-50px);
+`;
+const ProfileImageWrapper = styled.div`
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 5px solid #fff;
+  box-shadow: 0 0 0 3px #4a90e2;
+  z-index: 2;
+`;
+const ProfileImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
+const ProfileInfo = styled.div`
+  text-align: right;
+  margin-left: 15px;
+  transform: translateY(10px) translateX(-130px);
+  z-index: 3;
+`;
+const Name = styled.h3`
+  color: #333;
+  font-size: 1.1em;
+  margin: 0;
+  font-weight: bold;
+`;
+const TitleRole = styled.p`
   color: #666;
-  margin: 0;
-  font-family: 'Inter', sans-serif;
+  font-size: 0.8em;
+  margin: 2px 0 0 0;
 `;
 
-const Navigation = styled.div`
+const renderStars = (count) => {
+  return Array(5)
+    .fill()
+    .map((_, i) => (
+      <span key={i} role="img" aria-label="star">
+        {i < count ? "⭐" : "☆"}
+      </span>
+    ));
+};
+
+const ClientTestimonial = ({ data }) => {
+  return (
+    <TestimonialCard>
+      <CornerElement />
+
+      <ContentArea>
+        <TestimonialBubble>
+          <TestimonialText>
+            <QuoteMark start>“</QuoteMark>
+            {data.text}
+            <QuoteMark end>”</QuoteMark>
+          </TestimonialText>
+        </TestimonialBubble>
+        <Rating>{renderStars(data.rating)}</Rating>
+        <Profile>
+          <ProfileImageWrapper>
+            <ProfileImage src={data.image} alt={data.name} />
+          </ProfileImageWrapper>
+          <ProfileInfo>
+            <Name>{data.name}</Name>
+            <TitleRole>{data.role}</TitleRole>
+          </ProfileInfo>
+        </Profile>
+      </ContentArea>
+    </TestimonialCard>
+  );
+};
+
+
+const CarouselWrapper = styled.div`
+  max-width: 1200px; 
+  overflow: hidden;
+  position: relative;
+  margin: 30px auto;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+`;
+
+const CarouselContainer = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 30px;
+  transition: transform 0.5s ease-in-out;
+  /* The number of items here is the original array + 1 (the duplicated first item) */
+  width: ${({ itemCount }) => `${itemCount * 500}px`};
+  /* Total width = (Number of Slides) * (Wrapper Width) */
+
+  /* Applying the transform to move the slides */
+  transform: translateX(${({ translateValue }) => `-${translateValue}px`});
 `;
 
-const NavButton = styled.button`
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
+const NavigationButton = styled.button`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
   color: white;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  
-  &:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.5);
-    transform: scale(1.1);
-  }
-`;
-
-const ArrowIcon = styled.span`
-  font-size: 1.5rem;
-  font-weight: bold;
-`;
-
-const IndicatorContainer = styled.div`
-  display: flex;
-  gap: 15px;
-`;
-
-const Indicator = styled.button`
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
   border: none;
+  padding: 10px 15px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  background: ${props => props.active ? 'white' : 'rgba(255, 255, 255, 0.3)'};
-  transform: ${props => props.active ? 'scale(1.2)' : 'scale(1)'};
-  
+  z-index: 10;
+  border-radius: 50%;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+
   &:hover {
-    background: white;
-    transform: scale(1.2);
+    opacity: 1;
   }
+
+  ${({ direction }) => (direction === "prev" ? "left: 10px;" : "right: 10px;")}
 `;
 
-const TestimonialGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 30px;
-  margin-top: 40px;
-`;
 
-const GridCard = styled.div`
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border-radius: 16px;
-  padding: 30px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  
-  ${props => props.active && `
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.4);
-    transform: translateY(-5px);
-  `}
-  
-  &:hover {
-    background: rgba(255, 255, 255, 0.15);
-    transform: translateY(-3px);
-  }
-`;
+const TestimonialCarousel = ({ interval = 5000 }) => {
+  const slides = [...testimonials, testimonials[0]];
+  const slideWidth = 400; 
+  const [currentIndex, setCurrentIndex] = useState(0); 
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
-const GridQuote = styled.p`
-  color: white;
-  font-style: italic;
-  line-height: 1.5;
-  margin-bottom: 20px;
-  font-size: 0.95rem;
-  font-family: 'Inter', sans-serif;
-`;
+  const translateValue = currentIndex * slideWidth;
 
-const GridAuthor = styled.div`
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  padding-top: 15px;
-`;
+  const goToNext = useCallback(() => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
 
-const GridName = styled.h5`
-  color: white;
-  margin: 0 0 5px 0;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-`;
+    if (currentIndex < testimonials.length) {
+      setCurrentIndex((prevIndex) => prevIndex + 1);
+    }
+  }, [currentIndex, isTransitioning, testimonials.length]);
 
-const GridTitle = styled.p`
-  color: rgba(255, 255, 255, 0.8);
-  margin: 0;
-  font-size: 0.85rem;
-  font-family: 'Inter', sans-serif;
-`;
+  const goToPrev = () => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
 
-const CTASection = styled.div`
-  text-align: center;
-  margin-top: 80px;
-  animation: ${fadeIn} 0.8s ease-out;
-`;
+    if (currentIndex === 0) {
+      setCurrentIndex(testimonials.length); 
+    }
+    setCurrentIndex((prevIndex) => prevIndex - 1);
+  };
 
-const CTATitle = styled.h3`
-  font-size: 2rem;
-  color: white;
-  margin-bottom: 30px;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-`;
+  useEffect(() => {
+    if (isTransitioning) {
+      const timer = setTimeout(() => {
+        setIsTransitioning(false);
 
-const CTAButton = styled.button`
-  background: white;
-  color: #667eea;
-  border: none;
-  padding: 18px 40px;
-  border-radius: 50px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: 'Poppins', sans-serif;
-  
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  }
-`;
+        if (currentIndex === slides.length - 1) {
+          setCurrentIndex(0);
+        }
 
-const StarContainer = styled.div`
-  display: flex;
-  gap: 2px;
-  margin-top: 8px;
-`;
+        if (currentIndex === -1) {
+          setCurrentIndex(slides.length - 2); 
+        }
+      }, 500); 
+      return () => clearTimeout(timer);
+    }
+  }, [isTransitioning, currentIndex, slides.length]);
 
-const Star = styled.span`
-  color: ${props => props.filled ? '#FFD700' : '#ddd'};
-  font-size: 0.9rem;
-`;
+  useEffect(() => {
+    const autoSlide = setInterval(goToNext, interval);
+    return () => clearInterval(autoSlide);
+  }, [goToNext, interval]);
+
+  return (
+    <CarouselWrapper>
+      <Header>
+        <DottedLine left />
+        <Title>Patient</Title>
+        <Subtitle>TESTIMONIAL</Subtitle>
+        <DottedLine right />
+      </Header>
+      <CarouselContainer
+        itemCount={slides.length}
+        translateValue={translateValue}
+        style={{
+          transition: isTransitioning ? "transform 0.5s ease-in-out" : "none",
+        }}
+      >
+        {slides.map((testimonial, index) => (
+          <ClientTestimonial key={index} data={testimonial} />
+        ))}
+      </CarouselContainer>
+
+      <NavigationButton direction="prev" onClick={goToPrev}>
+        &#10094;
+      </NavigationButton>
+      <NavigationButton direction="next" onClick={goToNext}>
+        &#10095;
+      </NavigationButton>
+    </CarouselWrapper>
+  );
+};
+
+export default TestimonialCarousel;
+
+
