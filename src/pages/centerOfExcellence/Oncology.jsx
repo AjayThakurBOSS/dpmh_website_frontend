@@ -6,12 +6,20 @@ import EachDeparmentDoctor from '../../components/EachDeparmentDoctor'
 import RequestAppointmentFormHero from '../appointment/OnlineAppointment2'
 import FreeTreatment from '../../components/FreeTreatment'
 import OncologyComponent from '../../components/deparmentComponent/OncologyComponent'
+import MetaTags from '../../util/MetaTags'
 
 
 const Oncology = () => {
 
   return (
     <PageContainer>
+       <MetaTags
+            title=" Oncology & Cancer Care | Advanced Cancer Treatment, Chemotherapy & Diagnosis | Dr Prabhat Memorial Hiramati Hospital, Rajendra Nagar, Patna"
+            description="Comprehensive cancer care with expert oncologists, chemotherapy, cancer surgery, radiation therapy support, tumor diagnosis, and palliative care. Early detection and advanced treatment at our multispecialty hospital."
+            keywords="oncology hospital, cancer specialist, chemotherapy center, tumor treatment, cancer diagnosis, cancer surgery, radiation therapy support, oncologist near me, breast cancer treatment, lung cancer care"                    
+            type="website"
+        />
+
       <DiparmantContainer>
        	 <DepartmentHero
             breadcrumbs={[

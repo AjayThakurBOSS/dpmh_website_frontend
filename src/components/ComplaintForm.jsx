@@ -494,6 +494,7 @@ const FormTitle = styled.h1`
   text-align: center;
   font-size: 1.8rem;
   font-weight: 600;
+  padding-top: 1.3rem;
 `;
 
 const StyledForm = styled.form`

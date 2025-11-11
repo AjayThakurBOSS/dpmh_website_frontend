@@ -6,12 +6,19 @@ import EachDeparmentDoctor from '../../components/EachDeparmentDoctor'
 import RequestAppointmentFormHero from '../appointment/OnlineAppointment2'
 import FreeTreatment from '../../components/FreeTreatment'
 import GeneralMadicine from '../../components/deparmentComponent/GeneralMadicine'
+import MetaTags from '../../util/MetaTags'
 
 
 const GeneralMedicine=() => {
 
   return (
     <PageContainer>
+       <MetaTags
+            title="General Medicine | Expert Physicians for Fever, Infection & Chronic Disease Care | Emergency and Crotical Care | ✅ Our General Medicine Department provides comprehensive care for fever, infections, diabetes, hypertension, allergies, headaches, gastric issues, and chronic diseases. With expert physicians, accurate diagnostics, and personalized treatment plans, we ensure faster recovery and better long-term health."
+            description="Comprehensive General Medicine care with experienced physicians for fever, infections, diabetes, hypertension, allergies, and chronic diseases. Accurate diagnosis, modern investigations, preventive checkups, and personalized treatment at our multispecialty hospital."
+            keywords="general medicine hospital, physician near me, fever treatment, infection treatment, diabetes management, hypertension treatment, cold and cough specialist, allergy treatment, chronic disease care, OPD consultation, best physician hospital, multispecialty hospital general medicine"                    
+            type="website"
+        />
       <DiparmantContainer>
         <DepartmentHero
           breadcrumbs={[

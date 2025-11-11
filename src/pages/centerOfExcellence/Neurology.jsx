@@ -6,12 +6,20 @@ import EachDeparmentDoctor from '../../components/EachDeparmentDoctor'
 import RequestAppointmentFormHero from '../appointment/OnlineAppointment2'
 import FreeTreatment from '../../components/FreeTreatment'
 import NeurologyComponent from '../../components/deparmentComponent/NeurologyComponent'
+import MetaTags from '../../util/MetaTags'
 
 
 const Neurology = () => {
 
   return (
     <PageContainer>
+       <MetaTags
+          title="Best Neurology Care | Expert Neurologists for Brain, Spine & Nerve Disorders | Dr Prabhat Memorial Hiramati Hospital, Rajendra Nagar, Patna"
+          description="Advanced Neurology care for stroke, paralysis, epilepsy, migraine, spine disorders, nerve diseases, and neurological emergencies. Experienced neurologists, neuro ICU support, MRI, CT-scan, and modern diagnostics for accurate treatment."
+          keywords="neurology hospital, neurologist near me, brain specialist, stroke treatment, paralysis treatment, spine disorder, epilepsy treatment, migraine specialist, nerve disorder treatment, neuro ICU"                    
+          type="website"
+      />
+
       <DiparmantContainer>
        	 <DepartmentHero
               breadcrumbs={[

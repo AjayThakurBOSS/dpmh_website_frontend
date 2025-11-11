@@ -366,17 +366,17 @@ const ContactInfoBase = styled.div`
 `;
 
 const CallDiv = styled(ContactInfoBase)`
-  background: linear-gradient(180deg, rgba(25, 81, 248, 0.8) 0%, rgba(20, 155, 210, 0.8) 100%);
+  background: linear-gradient(90deg, #004AAD, #00BFFF);
   color: white;
 `;
 
 const EmailDiv = styled(ContactInfoBase)`
-  background: linear-gradient(180deg, rgba(25, 81, 248, 0.8) 0%, rgba(20, 155, 210, 0.8) 100%);
+  background: linear-gradient(90deg, #004AAD, #00BFFF);
   color: white;
 `;
 
 const AddressDiv = styled(ContactInfoBase)`
-  background: linear-gradient(180deg, rgba(25, 81, 248, 0.8) 0%, rgba(20, 155, 210, 0.8) 100%);
+  background: linear-gradient(90deg, #004AAD, #00BFFF);
   color: white;
   min-height: 140px;
 
@@ -433,7 +433,7 @@ const InfoValue = styled.div`
 
 const ContactUsFormDiv = styled.form`
   width: 50%;
-  background: linear-gradient(180deg, rgba(25, 81, 248, 0.8) 0%, rgba(20, 155, 210, 0.8) 100%);
+  background: linear-gradient(180deg, #004AAD, #00BFFF);
   padding: 3rem;
   border-radius: 20px;
   box-shadow: 0 15px 35px rgba(25, 81, 248, 0.3);

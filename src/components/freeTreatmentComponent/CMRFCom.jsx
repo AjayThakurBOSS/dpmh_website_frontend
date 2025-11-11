@@ -25,6 +25,7 @@ import {
   Donate
 } from 'lucide-react';
 import CMRFImg from '../../assets/cmrf_hero.jpeg'
+import MetaTags from '../../util/MetaTags';
 
 // Styled Components
 const HeroSection = styled.section`
@@ -252,6 +253,12 @@ const CMRFCom = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+       <MetaTags
+          title="Chief Minister’s Relief Fund | Financial Help for Medical Emergencies & Disasters | Dr. Prabhat Memorial Hiramati Hospital Patna"
+          description="Get immediate financial assistance for medical emergencies, critical surgeries, cancer treatment, accidents, and disaster relief under the Chief Minister’s Relief Fund (CMRF). 100% transparent utilization, quick approval, and tax benefits under Section 80G. Contact Dr. Prabhat Memorial Hiramati Hospital, Rajendra Nagar, Patna for guidance and application support."
+          keywords="Chief Minister’s Relief Fund, CMRF Medical Assistance, CMRF Help in Patna, Apply for CMRF Bihar, Financial Help for Surgery, Cancer Treatment Assistance, Emergency Medical Funding, Free Treatment Scheme Patna, Hospital CMRF Support Patna, Government Medical Assistance India, Tax Benefit Under 80G Donation, Natural Disaster Relief Fund India, Urgent Medical Funding Bihar"                    
+          type="website"
+      />
       {/* Hero Section */}
       <HeroSection className="text-[#000000] py-12 md:py-20">
         <Container>

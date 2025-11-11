@@ -6,12 +6,19 @@ import EachDeparmentDoctor from '../../components/EachDeparmentDoctor'
 import RequestAppointmentFormHero from '../appointment/OnlineAppointment2'
 import FreeTreatment from '../../components/FreeTreatment'
 import GeneralSurgeryComponent from '../../components/deparmentComponent/GeneralSurgeryComponent'
+import MetaTags from '../../util/MetaTags'
 
 
 const GeneralSurgery = () => {
 
   return (
     <PageContainer>
+       <MetaTags
+            title="General Surgery | Skilled Surgeons for Minor & Major Surgical Procedures | Surgery Expert | Dr Prabhat Memorial Hiramati Hospital, Rajendra Nagar Patna"
+            description="Expert general surgeons for minor and major surgical procedures including hernia, appendix, gallbladder, piles, fistula, trauma care, and abdominal surgeries. Advanced OT, modern technology, and faster recovery at our multispecialty hospital."
+            keywords="general surgery hospital, best surgeon near me, hernia operation, appendix surgery, gallbladder surgery, piles treatment, fistula treatment, abdominal surgery, trauma surgery, multispecialty hospital surgery"                    
+            type="website"
+        />
       <DiparmantContainer>
         <DepartmentHero
             breadcrumbs={[

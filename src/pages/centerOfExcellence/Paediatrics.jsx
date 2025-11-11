@@ -6,12 +6,20 @@ import EachDeparmentDoctor from '../../components/EachDeparmentDoctor'
 import RequestAppointmentFormHero from '../appointment/OnlineAppointment2'
 import FreeTreatment from '../../components/FreeTreatment'
 import PaediatricsNeonatology from '../../components/deparmentComponent/PaediatricsNeonatology'
+import MetaTags from '../../util/MetaTags'
 
 
 const Paediatrics = () => {
 
   return (
     <PageContainer>
+       <MetaTags
+            title=" Pediatrics & Child Care | Neonatal Care, Vaccination & Child Specialists | Dr Prabhat Memorial Hiramati Hospital, Rajendra Nagar, Patna"
+            description="Comprehensive pediatric care with child specialists for newborns, infants, and children. Vaccination, growth monitoring, child infections, neonatal care, pediatric ICU and emergency treatment."
+            keywords="pediatric hospital, child specialist doctor, pediatrician near me, newborn care, vaccination center, child infection treatment, pediatric ICU, child emergency, growth monitoring, kids hospital"                    
+            type="website"
+        />
+
       <DiparmantContainer>
        	<DepartmentHero
             breadcrumbs={[

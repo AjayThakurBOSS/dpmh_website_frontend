@@ -6,12 +6,19 @@ import EachDeparmentDoctor from '../../components/EachDeparmentDoctor'
 import RequestAppointmentFormHero from '../appointment/OnlineAppointment2'
 import FreeTreatment from '../../components/FreeTreatment'
 import GastroComponent from '../../components/deparmentComponent/GastroComponent'
+import MetaTags from '../../util/MetaTags'
 
 
 const Gastroenteorology=() => {
 
   return (
     <PageContainer>
+      <MetaTags
+                title="Best Gastroenterology Care | Expert Gastro Specialist & Advanced Digestive Treatment | Dr Prabhat Memorial Hiramati Hospital"
+                description="Advanced gastroenterology care for stomach, liver, intestinal and digestive disorders. Expert gastro specialists offering endoscopy, colonoscopy, liver disease treatment, acidity, abdominal pain, jaundice, and gastric emergency care with modern diagnostic facilities."
+                keywords="gastroenterology hospital, gastro specialist, gastro doctor near me, stomach pain treatment, liver disease treatment, acidity and gas treatment, endoscopy, colonoscopy, jaundice treatment, gastric emergency, digestive disorder care, multispecialty hospital gastro"                    
+                type="website"
+            />
       <DiparmantContainer>
          <DepartmentHero
           breadcrumbs={[

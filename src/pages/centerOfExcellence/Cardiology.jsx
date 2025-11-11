@@ -6,12 +6,20 @@ import EachDeparmentDoctor from '../../components/EachDeparmentDoctor'
 import RequestAppointmentFormHero from '../appointment/OnlineAppointment2'
 import FreeTreatment from '../../components/FreeTreatment'
 import CardiologyComponent from '../../components/deparmentComponent/CardiologyComponent'
+import MetaTags from '../../util/MetaTags'
 
 
 const Cardiology = () => {
 
   return (
     <PageContainer>
+      
+      <MetaTags
+          title="Best Cardiology Care & Heart Specialists | Advanced Heart Treatment & Diagnostics | Dr Prabhat Memorial Hiramati Hospital"
+          description="Get expert cardiology care with advanced heart diagnostics, angiography, angioplasty, ECG, ECHO, and 24x7 emergency support. Experienced cardiologists offering treatment for heart attack, chest pain, hypertension, and other cardiac conditions with modern facilities and ICU support."
+          keywords="best cardiology hospital, heart specialist, cardiologist near me, heart treatment, angiography, angioplasty, heart attack treatment, chest pain emergency, ECHO, ECG test, cardiac ICU, heart care center, multispecialty hospital cardiology"                    
+          type="website"
+      />
       <DiparmantContainer>
         <DepartmentHero
           breadcrumbs={[

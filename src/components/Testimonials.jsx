@@ -207,7 +207,7 @@ const Testimonials = () => {
                 Help others by sharing your journey with us
               </CardDescription>
               <TestimonialButton to='https://g.page/r/CcfZy0nmjEznEBM/review'>
-                <FcGoogle  className="mr-2"/> Give Testimonials
+                <FcGoogle  className="mr-2"/> Give Feedback
               </TestimonialButton>
             </CardTwo>
           </RatingCard>
@@ -349,7 +349,7 @@ const AuthorInfo = styled.div`
   justify-content: space-between;
   gap: 8px;
   margin-bottom: auto;
-  
+
 `;
 
 const AuthorName = styled.p`

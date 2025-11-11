@@ -23,6 +23,7 @@ import {
   Home
 } from 'lucide-react';
 import AyushImage from '../../assets/ayush.jpg'
+import MetaTags from '../../util/MetaTags';
 
 // Styled Components
 const HeroSection = styled.section`
@@ -185,6 +186,12 @@ const AyushCom = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <MetaTags
+                title="Ayushman Bharat Yojana | ₹5 Lakh Free Treatment | Cashless Hospitalization | PMJAY | Ayushman Enabled Hospital  | Dr Prabhat Memorial Hiramati Hospital, Rajendra Nagar, Patna"
+                description="Get cashless treatment up to ₹5 lakh per family under Ayushman Bharat – PMJAY. Check eligibility, services, benefits, documents required, and how to avail treatment at empaneled hospitals. No age or family size limit. Call now to know eligibility."
+                keywords="Ayushman Bharat Yojana, PMJAY scheme, ₹5 lakh free treatment, cashless hospitalization India, Ayushman Bharat eligibility, PMJAY card apply, government health scheme, free health insurance India, empaneled Ayushman hospitals, Ayushman Bharat benefits, Ayushman Bharat registration, PM Jan Arogya Yojana"                    
+                type="website"
+            />
       {/* Hero Section */}
       <HeroSection className="text-[#000000] py-12 md:py-20">
         <Container>

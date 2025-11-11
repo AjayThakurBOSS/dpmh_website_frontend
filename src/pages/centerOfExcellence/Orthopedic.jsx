@@ -6,12 +6,20 @@ import EachDeparmentDoctor from '../../components/EachDeparmentDoctor'
 import RequestAppointmentFormHero from '../appointment/OnlineAppointment2'
 import FreeTreatment from '../../components/FreeTreatment'
 import OrthopedicComponent from '../../components/deparmentComponent/OrthopedicComponent'
+import MetaTags from '../../util/MetaTags'
 
 
 const Orthopedic  = () => {
 
   return (
     <PageContainer>
+       <MetaTags
+          title=" Orthopedics & Joint Care | Bone Fracture, Joint Pain & Replacement Surgery  | Dr Prabhat Memorial Hiramati Hospital, Rajendra Nagar, Patna"
+          description="Expert orthopedic surgeons for fractures, sports injuries, arthritis, spine issues, joint pain, and knee/hip replacement surgery. Modern OT, digital X-ray, physiotherapy, and trauma care for faster recovery."
+          keywords="orthopedic hospital, orthopedic doctor near me, bone fracture treatment, joint pain treatment, arthritis care, sports injury, spine treatment, knee replacement, hip replacement, orthopedic surgery"                    
+          type="website"
+      />
+
       <DiparmantContainer>
        	 <DepartmentHero
             breadcrumbs={[

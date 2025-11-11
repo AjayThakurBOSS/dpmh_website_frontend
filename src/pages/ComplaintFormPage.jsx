@@ -39,7 +39,7 @@ const ComplaintFormPage = () => {
               When you submit a complaint, our dedicated Patient Relations team will:
             </p>
             <ul>
-              <li> <FaArrowAltCircleRight className='mr-3'/> Acknowledge your complaint within <strong>24 hours</strong>.</li>
+              <li> <FaArrowAltCircleRight className='mr-3'/> Acknowledge your complaint within <strong className='pl-1'> 24 hours</strong>.</li>
               <li> <FaArrowAltCircleRight className='mr-3'/> Conduct a thorough and impartial investigation.</li>
               <li> <FaArrowAltCircleRight className='mr-3'/> Work with the relevant departments to address the issue.</li>
               <li> <FaArrowAltCircleRight className='mr-3'/> Provide you with a formal response and resolution.</li>
@@ -96,13 +96,16 @@ const ContentWrapper = styled.div`
   }
 `;
 
-const LeftContentSection = styled.aside``;
+const LeftContentSection = styled.aside`
+  height:620px;
+`;
 
 const SupportImage = styled.img`
   width: 100%;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   margin-bottom: 1.5rem;
+  height:100%;
 `;
 
 const SupportContent = styled.div`
@@ -134,7 +137,6 @@ const SupportContent = styled.div`
 
 const FormSection = styled.section`
   background: #fff;
-  padding: rem;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 `;

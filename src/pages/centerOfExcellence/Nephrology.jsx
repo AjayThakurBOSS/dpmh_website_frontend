@@ -7,12 +7,20 @@ import RequestAppointmentFormHero from '../appointment/OnlineAppointment2'
 import FreeTreatment from '../../components/FreeTreatment'
 import EmergencyComponent from '../../components/deparmentComponent/EmergencyComponent'
 import NepherologyComponent from '../../components/deparmentComponent/NepherologyComponent'
+import MetaTags from '../../util/MetaTags'
 
 
 const Nephrology = () => {
 
   return (
     <PageContainer>
+       <MetaTags
+            title=" Nephrology & Kidney Care | Kidney Disease, Dialysis & Hypertension Treatment | Dr Prabhat Memorial Hiramati Hospital, Rajendra Nagar, Patna"
+            description="Expert nephrologists for kidney disease treatment, dialysis care, kidney failure management, kidney stone treatment, hypertension management, and urinary problems. Modern dialysis units and ICU backup available."
+            keywords="nephrology hospital, nephrologist near me, kidney disease treatment, dialysis center, kidney stone treatment, chronic kidney disease, acute kidney failure, hypertension kidney, urinary disorder treatment"                    
+            type="website"
+        />
+
       <DiparmantContainer>
        	  <DepartmentHero
             breadcrumbs={[

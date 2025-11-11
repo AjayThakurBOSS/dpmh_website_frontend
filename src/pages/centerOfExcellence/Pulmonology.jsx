@@ -6,12 +6,20 @@ import EachDeparmentDoctor from '../../components/EachDeparmentDoctor'
 import RequestAppointmentFormHero from '../appointment/OnlineAppointment2'
 import FreeTreatment from '../../components/FreeTreatment'
 import PulmoComponent from '../../components/deparmentComponent/PulmoComponent'
+import MetaTags from '../../util/MetaTags'
 
 
 const Pulmonology = () => {
 
   return (
     <PageContainer>
+       <MetaTags
+          title=" Pulmonology & Lung Care | Asthma, TB, COPD & Respiratory Specialist | Dr Prabhat Memorial Hiramati Hospital, Rajendra Nagar, Patna"
+          description="Expert pulmonologists for asthma, TB, lung infection, COPD, pneumonia, sleep apnea, bronchitis, and breathing problems. Advanced lung function tests, chest X-ray, ventilator support and respiratory care."
+          keywords="pulmonology hospital, pulmonologist near me, lung specialist, asthma treatment, TB treatment, COPD care, pneumonia treatment, bronchitis, lung infection doctor, ventilator support"                    
+          type="website"
+      />
+
       <DiparmantContainer>
         <DepartmentHero
             breadcrumbs={[

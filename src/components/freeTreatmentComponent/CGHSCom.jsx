@@ -22,6 +22,7 @@ import {
   Microscope
 } from 'lucide-react';
 import CGHSImg from '../../assets/cghs_hero.jpeg'
+import MetaTags from '../../util/MetaTags';
 
 // Styled Components
 const HeroSection = styled.section`
@@ -205,6 +206,13 @@ const CGHSCom = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+       <MetaTags
+          title=" CGHS Empaneled Hospital | Cashless Treatment for Central Govt Employees & Pensioners | Dr Prabhat Memorial Hiramati Hospital, Rajendra Nagar, Patna"
+          description="Get cashless treatment under CGHS for Central Government employees, pensioners, retired officials, MPs, judges and dependents. OPD, emergency care, surgeries, medicines, investigations, maternity care & cashless hospitalization availabl"
+          keywords="CGHS empaneled hospital, CGHS cashless treatment,Central Government Health Scheme, CGHS for pensioners, CGHS hospital for central govt employees, Best CGHS approved hospital, CGHS OPD services, CGHS emergency care, CGHS cashless hospitalization, CGHS maternity benefits, CGHS in Patna, CGHS wellness center referral, CGHS medical reimbursement, CGHS treatment for retired employees, CGHS health card"                    
+          type="website"
+      />
+
       {/* Hero Section */}
       <HeroSection className="text-[#000000] py-12 md:py-20">
         <Container>

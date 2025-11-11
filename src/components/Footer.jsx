@@ -1,7 +1,15 @@
 // Footer.js
 import React from 'react';
 import styled from 'styled-components';
-import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaWhatsapp, FaFacebookF, FaInstagram, FaYoutube, FaLinkedinIn, FaAngleRight, FaRegCalendarAlt, FaUserMd, FaBriefcase, FaLock } from 'react-icons/fa';
+import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaWhatsapp, FaFacebookF, FaInstagram, FaYoutube, FaLinkedinIn, FaAngleRight, FaRegCalendarAlt, FaUserMd, FaBriefcase, FaLock , Home} from 'react-icons/fa';
+import { AiFillHome } from "react-icons/ai";
+import { BiDetail } from "react-icons/bi";
+import { MdMedicalServices } from "react-icons/md";
+import { MdOutlinePermContactCalendar } from "react-icons/md";
+import { FaSitemap } from "react-icons/fa";
+import { LuBadgeHelp } from "react-icons/lu";
+
+
 
 // Assuming your logo path is correct
 import Logo from '../../src/assets/logo-3.png'; // Update this path to your actual logo image
@@ -26,14 +34,14 @@ const Footer = () => {
           <ColumnTitle>Quick Links</ColumnTitle>
           <LinkList>
             <LinkItem><FaRegCalendarAlt /> <FooterLink to="/book-appointment">Appointments</FooterLink></LinkItem>
-            <LinkItem><StyledFaAngleRight /> <FooterLink to="/">Home</FooterLink></LinkItem>
-            <LinkItem><StyledFaAngleRight /> <FooterLink to="/about-us">About</FooterLink></LinkItem>
-            <LinkItem><StyledFaAngleRight /> <FooterLink to="/facilities">Facilities</FooterLink></LinkItem>
+            <LinkItem><AiFillHome /> <FooterLink to="/">Home</FooterLink></LinkItem>
+            <LinkItem><BiDetail /> <FooterLink to="/about-us">About</FooterLink></LinkItem>
+            <LinkItem><MdMedicalServices /> <FooterLink to="/facilities">Facilities</FooterLink></LinkItem>
             <LinkItem><FaUserMd /> <FooterLink to="/doctors">Our Doctors</FooterLink></LinkItem>
-            <LinkItem><StyledFaAngleRight /> <FooterLink to="/contact-us">Contact Us</FooterLink></LinkItem>
+            <LinkItem><MdOutlinePermContactCalendar /> <FooterLink to="/contact-us">Contact Us</FooterLink></LinkItem>
+            <LinkItem><LuBadgeHelp /> <FooterLink to="/patient-welfare/complain-form">Write your Complaint</FooterLink></LinkItem>
             <LinkItem><FaLock /> <FooterLink to="/privacy-policy">Privacy Policy</FooterLink></LinkItem>
-            <LinkItem><FaLock /> <FooterLink to="/sitemap">Sitemap</FooterLink></LinkItem>
-            <LinkItem><FaLock /> <FooterLink to="/patient-welfare/complain-form">Write your Complaint</FooterLink></LinkItem>
+            <LinkItem><FaSitemap /> <FooterLink to="/sitemap">Sitemap</FooterLink></LinkItem>
           </LinkList>
         </Column>
 

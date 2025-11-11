@@ -6,12 +6,21 @@ import EachDeparmentDoctor from '../../components/EachDeparmentDoctor'
 import RequestAppointmentFormHero from '../appointment/OnlineAppointment2'
 import FreeTreatment from '../../components/FreeTreatment'
 import EmergencyComponent from '../../components/deparmentComponent/EmergencyComponent'
+import MetaTags from '../../util/MetaTags'
 
 
 const Emergency= () => {
 
   return (
     <PageContainer>
+       <MetaTags
+                    title="24x7 Critical, Trauma & Emergency Care | Best Multispecialty Hospital for Emergency Treatment, 🚨 Facing a medical emergency? Our multispecialty hospital provides 24x7 Critical & Trauma Care with a high-end ICU, emergency specialists, and rapid life-saving response. From accident injuries to medical emergencies, our team ensures immediate and expert treatment when every second counts."
+                    description="Get immediate 24x7 emergency care, trauma management, ICU support, and advanced critical care by expert doctors and trained emergency response teams. Fast admission, life-saving treatment, and round-the-clock medical assistance at our multispecialty hospital."
+                    keywords="Dr Prabhat Memorial Hiramati Hospital Patna, Best hospital in Rajendra Nagar Patna, emergency care hospital, trauma care center, critical care ICU, 24x7 emergency service, best emergency hospital, trauma treatment, emergency doctor near me, critical care specialist, intensive care unit, emergency ambulance service, multispecialty hospital emergency"
+                    
+                    type="website"
+                  />
+      
       <DiparmantContainer>
          <DepartmentHero
             breadcrumbs={[

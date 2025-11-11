@@ -6,12 +6,20 @@ import EachDeparmentDoctor from '../../components/EachDeparmentDoctor'
 import RequestAppointmentFormHero from '../appointment/OnlineAppointment2'
 import FreeTreatment from '../../components/FreeTreatment'
 import UrologyComponent from '../../components/deparmentComponent/UrologyComponent'
+import MetaTags from '../../util/MetaTags'
 
 
 const Urology = () => {
 
   return (
     <PageContainer>
+       <MetaTags
+            title=" Urology & Kidney Stone Care | Expert Urologist for Urine, Prostate & Stone Treatment | Dr Prabhat Memorial Hiramati Hospital, Rajendra Nagar, Patna"
+            description="Advanced urology treatment for kidney stones, urine infection, prostate enlargement, urinary blockage, male infertility, and bladder problems. Expert urologists with modern diagnostics, lithotripsy, endoscopy and minimally invasive surgery."
+            keywords="urology hospital, urologist near me, kidney stone treatment, prostate enlargement treatment, urine infection doctor, urinary blockage, male infertility treatment, lithotripsy, endoscopy urology, urinary system care"                    
+            type="website"
+        />
+
       <DiparmantContainer>
        	 <DepartmentHero
               breadcrumbs={[

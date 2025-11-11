@@ -6,12 +6,19 @@ import EachDeparmentDoctor from '../../components/EachDeparmentDoctor'
 import RequestAppointmentFormHero from '../appointment/OnlineAppointment2'
 import FreeTreatment from '../../components/FreeTreatment'
 import LaproScopyComponent from '../../components/deparmentComponent/LaproScopyComponent'
+import MetaTags from '../../util/MetaTags'
 
 
 const LaproscopicSurgery = () => {
 
   return (
     <PageContainer>
+       <MetaTags
+            title=" Advanced Laparoscopic Surgery | Minimal Cuts, Faster Healing & Less Pain | Dr Prabhat Memorial Hiramati Hospital, Rajendra Nagar, Patna"
+            description="Minimally invasive laparoscopic surgery for appendix, gallbladder, hernia, uterus, and abdominal procedures. Less pain, smaller incisions, faster recovery, and reduced hospital stay under expert laparoscopic surgeons."
+            keywords="laparoscopic surgery hospital, minimally invasive surgery, gallbladder laparoscopic, hernia laparoscopic, appendix laparoscopic, uterus laparoscopic surgery, laparoscopic specialist, best laparoscopic surgeon near me"                    
+            type="website"
+        />
       <DiparmantContainer>
        	  <DepartmentHero
             breadcrumbs={[

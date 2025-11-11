@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import EmpanelmentList from './EmpanelmentList';
 import TPAImg from '../../assets/tpa/TPA-Full-Form.jpg'
+import MetaTags from '../../util/MetaTags';
 
 // Styled Components
 const HeroSection = styled.section`
@@ -195,6 +196,12 @@ const TPACom = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+       <MetaTags
+          title="Third Party Administrator (TPA) | Cashless Treatment & Health Insurance Claim Support | Dr. Prabhat Memorial Hiramati Hospital Patna"
+          description="Get seamless cashless hospitalization and hassle-free insurance claim processing through our trusted TPAs. Quick pre-authorization, 24/7 support, wide hospital network, and fast reimbursement services for patients."
+          keywords="TPA help desk, TPA claim settlement, insurance help hospital, Paramount TPA hospital, Raksha TPA hospital, Vipul Medcorp hospital, cashless emergency admission, how to claim health insurance, hospital TPA department"                    
+          type="website"
+      />
       {/* Hero Section */}
       <HeroSection className="text-black py-12 md:py-20">
         <Container>

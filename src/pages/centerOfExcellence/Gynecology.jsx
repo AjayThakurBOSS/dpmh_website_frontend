@@ -6,12 +6,19 @@ import EachDeparmentDoctor from '../../components/EachDeparmentDoctor'
 import RequestAppointmentFormHero from '../appointment/OnlineAppointment2'
 import FreeTreatment from '../../components/FreeTreatment'
 import GyaneComponent from '../../components/deparmentComponent/GyaneComponent'
+import MetaTags from '../../util/MetaTags'
 
 
 const Gynecology= () => {
 
   return (
     <PageContainer>
+       <MetaTags
+          title="Best Gynecology & Women's Health Care | Pregnancy, Infertility & Female Wellness | Dr Prabhat Memorial Hiramati Hospital, Rajendra Nagar, Patna"
+          description="Expert gynecologists providing pregnancy care, infertility treatment, menstrual disorder care, PCOD/PCOS management, high-risk pregnancy support, and normal/C-section delivery facilities with modern diagnostics and NICU support."
+          keywords="gynecology hospital, gynecologist near me, pregnancy care, infertility treatment, menstrual disorder treatment, pcod pcos treatment, cesarean delivery, normal delivery hospital, women's health specialist, maternity hospital"                    
+          type="website"
+      />
       <DiparmantContainer>
        	  <DepartmentHero
               breadcrumbs={[
