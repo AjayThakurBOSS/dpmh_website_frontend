@@ -4,6 +4,7 @@ import { ChevronRight } from "lucide-react";
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import BlogContent from './BlogContent';
 import RightSideLink from './RightSideLink';
+import Loader2 from '../util/Loader2';
 
 const BlogsPage = ({ onBlogTitleChange }) => {
     const [blogs, setBlogs] = useState([]);
@@ -143,14 +144,12 @@ const BlogsPage = ({ onBlogTitleChange }) => {
                 <BlogContainer>
                     <LayoutGrid>
                         <MainContentArea>
-                            <LoaderText>Loading blog content...</LoaderText>
+                            <LoaderText>  <Loader2/>  </LoaderText>
                         </MainContentArea>
 
                         <SidebarArea>
-                           <RightSideLink      
-                            blogs={blogs}
-                            selectedBlog={selectedBlog}
-                            formatDate={formatDate}/>
+                             <BlogListTitle>📚 All Blog Articles</BlogListTitle>
+                           <LoaderText><Loader2/> </LoaderText>
                         </SidebarArea>
                     </LayoutGrid>
                 </BlogContainer>
@@ -189,7 +188,7 @@ const BlogsPage = ({ onBlogTitleChange }) => {
                             />
                         ) : (
                             <LoaderText>
-                                Loading blog content ..
+                                <Loader2/> 
                             </LoaderText>
                         )}
 
@@ -197,7 +196,7 @@ const BlogsPage = ({ onBlogTitleChange }) => {
                             <ContentOverlay>
                                 <ContentLoader>
                                     <LoaderSpinner />
-                                    <LoaderText>Loading blog content...</LoaderText>
+                                    <LoaderText><Loader2/> </LoaderText>
                                 </ContentLoader>
                             </ContentOverlay>
                         )}
@@ -220,7 +219,8 @@ const BlogsPage = ({ onBlogTitleChange }) => {
                                 .map(blog => (
                                     <BlogCard
                                         key={blog.id}
-                                        onClick={() => handleBlogSelect(blog.slug)}
+                                        to={`/resources/blogs/${blog.slug}`}
+                                        //onClick={() => handleBlogSelect(blog.slug)}
                                     >
                                         <BlogCardImage
                                             src={blog.featured_image_url}
@@ -498,7 +498,7 @@ const RelatedBlogsGrid = styled.div`
     gap: 20px;
 `;
 
-const BlogCard = styled.div`
+const BlogCard = styled(Link)`
     background: #fff;
     border: 1px solid #dee2e6;
     border-radius: 8px;
