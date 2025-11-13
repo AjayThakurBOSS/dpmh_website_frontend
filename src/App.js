@@ -58,7 +58,8 @@ import ComplaintForm from './components/ComplaintForm';
 import ComplaintFormPage from './pages/ComplaintFormPage';
 import TestimonialCarousel from './components/TestimonialCarousel';
 import ClientFeedback from './components/ClientFeedback';
-
+import CookieConsent from "react-cookie-consent";
+import Blogss from './pages/resource/Blogs';
 
 // Page Components
 const Home = () => (
@@ -83,9 +84,13 @@ const Home = () => (
 );
 
 const About = () => (
- <>
+ <motion.div
+    initial={{ opacity: 0, scale: 0.9 }}
+    animate={{ opacity: 1, scale: 1 }}
+    exit={{ opacity: 0, scale: 1.1 }}
+    >
   <Aboutus />
- </>
+ </motion.div>
 );
 
 const Services = () => (
@@ -108,6 +113,12 @@ const Contact = () => (
   >
    <ContactUs/>
   </motion.div>
+);
+const Blogs = () => (
+  <
+  >
+   <BlogsPage/>
+  </>
 );
 
 // Navigation Component
@@ -135,14 +146,23 @@ const AnimatedRoutes = () => {
   const location = useLocation();
 
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence>
+       <CookieConsent
+        location="bottom"
+        buttonText="Accept"
+        style={{ background: "#222", color: "#fff" }}
+        buttonStyle={{ background: "#4CAF50", color: "white" }}
+      >
+        🍪 This website uses cookies to improve your experience.
+      </CookieConsent>
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
         <Route path="/about-us" element={<About />} />
         <Route path="/facilities" element={<Services />} />
         <Route path="/contact-us" element={<Contact />} />
         <Route path="/careers" element={<Career />} />
-        <Route path="/resources/blogs" element={<BlogsPage />} />
+        <Route path="/resources/blogs" element={<Blogss />} />
+        <Route path="/resources/blogs/:slug" element={<Blogss />} />
         <Route path='/resources/gallery' element={<GalleryPage/>} />
         <Route path='/book-appointment' element={<AppointmentPage/>} />
          <Route path='/doctors' element={<DoctorPage/>} />

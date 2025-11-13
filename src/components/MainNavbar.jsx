@@ -91,7 +91,7 @@ const MainNavbar = () => {
             name: 'Resources', 
             dropdown: true, 
             submenu: [
-                /* { name: 'Blog', link: '/resources/blogs' }, */
+            { name: 'Blog', link: '/resources/blogs' },
                 { name: 'Gallery', link: '/resources/gallery' },
                 { name: 'Career', link: '/careers' },
               /*   { name: 'News-Latter', link: '/resources/newsletter' },

@@ -1,200 +1,380 @@
-// BlogPage.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
-import BlogBC from '../components/breadcrumbs/BlogBC';
+import { ChevronRight } from "lucide-react";
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import BlogContent from './BlogContent';
+import RightSideLink from './RightSideLink';
 
-// --- Mock Data (Replace with real API call or context) ---
-const blogData = [
-  { id: 1, title: "Understanding Telemedicine: The Future of Care", category: "Technology", content: "..." },
-  { id: 2, title: "The Importance of Preventive Health Screenings", category: "Wellness", content: "..." },
-  { id: 3, title: "New Guidelines for Diabetes Management", category: "Diseases", content: "..." },
-  { id: 4, title: "Mental Health: Addressing Stigma in Healthcare", category: "Wellness", content: "..." },
-  { id: 5, title: "Vaccine Development: A Look Behind the Scenes", category: "Research", content: "..." },
-    {
-    id: 6,
-    title: "Understanding Telemedicine: The Future of Care",
-    excerpt: "Telemedicine is rapidly transforming healthcare delivery...",
-    content: "The full, in-depth content about telemedicine, its benefits, challenges, and future outlook in the healthcare sector...",
-    category: "Technology",
-    date: "2023-10-15",
-    isFeatured: true,
-  },
-  {
-    id: 7,
-    title: "The Importance of Preventive Health Screenings",
-    excerpt: "Regular check-ups can catch problems early...",
-    content: "Detailed content on various preventive screenings (mammograms, colonoscopies, etc.).",
-    category: "Wellness",
-    date: "2023-10-01",
-    isFeatured: false,
-  },
-];
-// --- End Mock Data ---
-// A conceptual data file (e.g., data/blogs.js)
-const blogDataa = [
-  {
-    id: 1,
-    title: "Understanding Telemedicine: The Future of Care",
-    excerpt: "Telemedicine is rapidly transforming healthcare delivery...",
-    content: "The full, in-depth content about telemedicine, its benefits, challenges, and future outlook in the healthcare sector...",
-    category: "Technology",
-    date: "2023-10-15",
-    isFeatured: true,
-  },
-  {
-    id: 2,
-    title: "The Importance of Preventive Health Screenings",
-    excerpt: "Regular check-ups can catch problems early...",
-    content: "Detailed content on various preventive screenings (mammograms, colonoscopies, etc.).",
-    category: "Wellness",
-    date: "2023-10-01",
-    isFeatured: false,
-  },
-  // ... more blog objects
-];
+const BlogsPage = ({ onBlogTitleChange }) => {
+    const [blogs, setBlogs] = useState([]);
+    const [selectedBlog, setSelectedBlog] = useState(null);
+    const [pageLoading, setPageLoading] = useState(true); // For initial page/blog list load
+    const [contentLoading, setContentLoading] = useState(false); // For loading single blog content
+    const [error, setError] = useState(null);
+    const [currentBlogTitle, setCurrentBlogTitle] = useState('');
 
-// Helper to get the content of the currently selected blog
-const getBlogContent = (id) => {
-    return blogData.find(blog => blog.id === id);
-};
+    const { slug } = useParams();
+    const navigate = useNavigate();
 
-// --- Sub-Components ---
+    // Flag to track if blogs list has been fetched
+    const blogsFetchedRef = React.useRef(false);
 
-const MainContent = ({ blog }) => (
-    <MainContentArea>
-        <h1>{blog.title}</h1>
-        <p><em>Published: October 15, 2023 | Category: {blog.category}</em></p>
-        <hr/>
-        <h2>Introduction</h2>
-        <p>The **healthcare landscape** is continually evolving, driven by technological advancements and changing patient needs. One of the most significant shifts in recent years has been the widespread adoption of telemedicine.</p>
-        <h2>Detailed Analysis</h2>
-        <p>Telemedicine, at its core, is the use of telecommunication and information technology to provide clinical health care from a distance. It eliminates geographical barriers, making specialist consultations accessible to rural and underserved populations. This is not just a temporary fix; it represents a fundamental change in how primary and specialized care is delivered. Advanced features like **remote patient monitoring (RPM)** allow clinicians to track vital signs of high-risk patients outside the clinic, leading to early intervention and better outcomes.</p>
-        <p>However, implementation requires careful consideration of data security (HIPAA compliance) and ensuring equitable access for those without reliable internet. The future points towards integrated digital health platforms.</p>
+    // Fetch detailed content for a specific blog
+    const fetchBlogDetails = async (targetSlug, shouldNavigate = true) => {
+        if (selectedBlog && selectedBlog.slug === targetSlug) {
+            // Avoid refetching if already selected
+            return;
+        }
         
-        {/* Advanced Feature Placeholder */}
-        <blockquote style={{borderLeft: '4px solid #28a745', paddingLeft: '15px', background: '#e9f7eb'}}>
-            <p>🌟 **Advanced Feature: Interactive Patient Poll**</p>
-            <p>Did this article clarify your understanding of telemedicine? [Yes/No/Mostly]</p>
-        </blockquote>
+        try {
+            //setContentLoading(true);
+            
+            // Only navigate if we are *not* in the initial load or if explicitly told to
+        /*     if (shouldNavigate) {
+                navigate(`/resources/blogs/${targetSlug}`);
+            } */
 
-    </MainContentArea>
-);
+            // Request 1 (Individual Blog Details)
+            const response = await fetch(`https://app.prabhatmemorialhospital.com/api/blogs/${targetSlug}`);
+            
+            if (!response.ok) {
+                throw new Error('Failed to fetch blog details');
+            }
+            const data = await response.json();
+            setSelectedBlog(data);
+            setCurrentBlogTitle(data.title);
+            
+            if (onBlogTitleChange) {
+                onBlogTitleChange(data.title);
+            }
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setContentLoading(false);
+        }
+    };
 
+    // Fetch all blogs on component mount - ONLY ONCE
+    useEffect(() => {
+        let isMounted = true;
 
-const Sidebar = ({ blogs, currentId, onBlogSelect }) => (
-    <SidebarArea>
-        <BlogListTitle>📚 All Blog Articles</BlogListTitle>
-        <nav>
-            <ul>
-                {blogs.map(blog => (
-                    <BlogListItem key={blog.id} $isActive={blog.id === currentId}>
-                        <a href="#" onClick={() => onBlogSelect(blog.id)}>
-                            {blog.title}
-                        </a>
-                    </BlogListItem>
-                ))}
-            </ul>
-        </nav>
-        {/* Advanced Feature Placeholder */}
-        <div style={{marginTop: '30px', padding: '15px', border: '1px dashed #0056b3', borderRadius: '5px'}}>
-            <p>🔍 **Advanced Feature: Search/Filter**</p>
-            <input 
-                type="text" 
-                placeholder="Search by keyword or category..." 
-                style={{width: '100%', padding: '8px', border: '1px solid #ccc', borderRadius: '4px'}}
-            />
-        </div>
-    </SidebarArea>
-);
+        const fetchBlogsList = async () => {
+            try {
+                // Request 2 (Total Blog List) - Only runs once on mount
+                const listResponse = await fetch('https://app.prabhatmemorialhospital.com/api/blogs');
+                if (!listResponse.ok) {
+                    throw new Error('Failed to fetch blogs list');
+                }
+                const blogListData = await listResponse.json();
+                
+                if (isMounted) {
+                    setBlogs(blogListData);
+                    blogsFetchedRef.current = true; // Mark as fetched
+                    
+                    // Determine which blog to load initially
+                    let initialSlug = slug;
+                    
+                    if (!initialSlug && blogListData.length > 0) {
+                        initialSlug = blogListData[0].slug;
+                    }
 
-const RelatedBlogs = ({ blogs, currentId }) => {
-    // Filter out the current blog and get a couple of related ones
-    const related = blogs.filter(b => b.id !== currentId).slice(0, 3);
-    
-    return (
-        <>
-          
-        <RelatedBlogsSection>
-            <h2>Related Health Topics</h2>
-            <div>
-                {related.map(blog => (
-                    <BlogCard key={blog.id}>
-                        <h3>{blog.title}</h3>
-                        <p>Category: {blog.category}</p>
-                        <a href="#">Read More &rarr;</a>
-                    </BlogCard>
-                ))}
-            </div>
-        </RelatedBlogsSection>
-        </>
+                    if (initialSlug) {
+                        await fetchBlogDetails(initialSlug, false);
+                    }
+                }
+                
+            } catch (err) {
+                if (isMounted) {
+                    setError(err.message);
+                }
+            } finally {
+                if (isMounted) {
+                    setPageLoading(false);
+                }
+            }
+        };
 
-    );
-};
+        // Only fetch blogs list if it hasn't been fetched before
+        if (!blogsFetchedRef.current) {
+            fetchBlogsList();
+        }
 
-// --- Main Page Component ---
+        return () => {
+            isMounted = false;
+        };
+    }, []); // Empty dependency array - runs only once on mount
 
-const BlogsPage = () => {
-    // State to track which blog is currently featured/viewed
-    const [featuredBlogId, setFeaturedBlogId] = useState(1); 
-    const featuredBlog = getBlogContent(featuredBlogId);
+    // Handle slug changes when blogs are already loaded
+    useEffect(() => {
+        if (blogs.length > 0 && slug && (!selectedBlog || selectedBlog.slug !== slug)) {
+            fetchBlogDetails(slug, false);
+        }
+    }, [slug, blogs.length, selectedBlog]); // Only run when slug changes and blogs are loaded
 
-    if (!featuredBlog) {
-        return <BlogContainer>Blog post not found.</BlogContainer>;
+    const handleBlogSelect = async (targetSlug) => {
+        await fetchBlogDetails(targetSlug, true);
+    };
+
+    // Format date for display
+    const formatDate = (dateString) => {
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        return new Date(dateString).toLocaleDateString(undefined, options);
+    };
+
+    // Display global page loader/error only during initial fetch
+    if (pageLoading && blogs.length === 0) {
+        return (       
+            <BlogsHome>
+                <HeroContainer>
+                    <Breadcrumb>
+                        <a href="/">Home</a>
+                        <ChevronRight size={18} />
+                        <span>Blogs</span>
+                        {currentBlogTitle && (
+                            <>
+                                <ChevronRight size={18} />
+                                <span>{currentBlogTitle}</span>
+                            </>
+                        )}
+                    </Breadcrumb>
+                    <Title>Stay updated with our Healthcare Blogs</Title>
+                </HeroContainer>
+
+                <BlogContainer>
+                    <LayoutGrid>
+                        <MainContentArea>
+                            <LoaderText>Loading blog content...</LoaderText>
+                        </MainContentArea>
+
+                        <SidebarArea>
+                           <RightSideLink      
+                            blogs={blogs}
+                            selectedBlog={selectedBlog}
+                            formatDate={formatDate}/>
+                        </SidebarArea>
+                    </LayoutGrid>
+                </BlogContainer>
+            </BlogsHome>
+        );
+    }
+
+    if (error && blogs.length === 0) {
+        return <BlogContainer>Error: {error}</BlogContainer>;
     }
 
     return (
-        <>
-          <BlogBC/>
-                  <BlogContainer>
-            
-            {/* Main Layout Grid (Main Content + Sidebar) */}
-            <LayoutGrid>
-                {/* 70% Section: Main Blog Content */}
-                <MainContent blog={featuredBlog} /> 
+        <BlogsHome>
+            <HeroContainer>
+                <Breadcrumb>
+                    <a href="/">Home</a>
+                    <ChevronRight size={18} />
+                    <span>Blogs</span>
+                    {currentBlogTitle && (
+                        <>
+                            <ChevronRight size={18} />
+                            <span>{currentBlogTitle}</span>
+                        </>
+                    )}
+                </Breadcrumb>
+                <Title>Stay updated with our Healthcare Blogs</Title>
+            </HeroContainer>
 
-                {/* 30% Section: All Blog Headings/Links */}
-                <Sidebar 
-                    blogs={blogData} 
-                    currentId={featuredBlogId} 
-                    onBlogSelect={setFeaturedBlogId} 
-                />
-            </LayoutGrid>
+            <BlogContainer>
+                <LayoutGrid>
+                    <MainContentArea>
+                        {selectedBlog ? (
+                            <BlogContent 
+                                blog={selectedBlog} 
+                                loading={contentLoading}
+                            />
+                        ) : (
+                            <LoaderText>
+                                Loading blog content ..
+                            </LoaderText>
+                        )}
 
-            {/* Related Blogs Section */}
-            <RelatedBlogs blogs={blogData} currentId={featuredBlogId} />
+                        {contentLoading && (
+                            <ContentOverlay>
+                                <ContentLoader>
+                                    <LoaderSpinner />
+                                    <LoaderText>Loading blog content...</LoaderText>
+                                </ContentLoader>
+                            </ContentOverlay>
+                        )}
+                    </MainContentArea>
 
-        </BlogContainer>
-        </>
+                    <SidebarArea>
+                        <RightSideLink        blogs={blogs}
+                        selectedBlog={selectedBlog}
+                        formatDate={formatDate}/>
+                    </SidebarArea>
+                </LayoutGrid>
 
+                {selectedBlog && blogs.length > 1 && (
+                    <RelatedBlogsSection>
+                        <h2>Related Health Blogs for you</h2>
+                        <RelatedBlogsGrid>
+                            {blogs
+                                .filter(blog => blog.slug !== selectedBlog.slug)
+                                .slice(0, 3)
+                                .map(blog => (
+                                    <BlogCard
+                                        key={blog.id}
+                                        onClick={() => handleBlogSelect(blog.slug)}
+                                    >
+                                        <BlogCardImage
+                                            src={blog.featured_image_url}
+                                            alt={blog.title}
+                                            onError={(e) => {
+                                                e.target.style.display = 'none';
+                                            }}
+                                        />
+                                        <BlogCardContent>
+                                            <h3>{blog.title}</h3>
+                                            <p>{formatDate(blog.published_at)}</p>
+                                            <ReadMoreLink>Read More &rarr;</ReadMoreLink>
+                                        </BlogCardContent>
+                                    </BlogCard>
+                                ))}
+                        </RelatedBlogsGrid>
+                    </RelatedBlogsSection>
+                )}
+            </BlogContainer>
+        </BlogsHome>
     );
 };
 
 export default BlogsPage;
 
-
-// styles/BlogStyles.js
-
-
-// Color Palette
-const colors = {
-    primary: '#0056b3', // Professional Blue
-    secondary: '#28a745', // Green for accents/links
-    background: '#f8f9fa', // Light Gray Background
-    text: '#343a40', // Dark Text
-    border: '#dee2e6', // Light Border
-};
-
-// Global Layout Container
-const BlogContainer = styled.div`
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 0 20px;
-    font-family: 'Arial', sans-serif;
-    color: ${colors.text};
+// Styles remain the same...
+const ContentOverlay = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    border-radius: 8px;
+    transition: opacity 0.2s ease;
 `;
 
-// Flex container for Main Content and Sidebar
-  const LayoutGrid = styled.div`
+const ContentLoader = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+`;
+
+const LoaderSpinner = styled.div`
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #0056b3;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+`;
+
+const LoaderText = styled.p`
+    color: #6c757d;
+    font-size: 1.1em;
+    text-align: center;
+`;
+
+const BlogsHome = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
+
+const HeroContainer = styled.section`
+  width: 100%;
+  height: 40vh;
+  background-image: linear-gradient(to bottom, #2C4B98, #149BD2);
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  
+
+  @media (max-width: 768px) {
+    height: 40vh;
+  }
+`;
+
+const Breadcrumb = styled.nav`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  position: absolute;
+  top: 50px;
+  left: 30px;
+
+  a {
+    color: #fff;
+    text-decoration: none;
+    transition: opacity 0.2s ease-in-out;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  span {
+    opacity: 0.8;
+  }
+`;
+
+const Title = styled.h1`
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  text-align: left;
+  margin-top: 10px;
+  position: absolute;
+  top: 70px;
+  left: 30px;
+  @media (max-width: 768px) {
+    font-size: 1.8rem;
+  }
+`;
+
+const BlogContainer = styled.div`
+    z-index: 9;
+    background-color: #ffffff;
+    width: 100vw;
+    margin: 40px auto;
+    padding: 30px 20px 10px 20px;
+    font-family: 'Arial', sans-serif;
+    color: #343a40;
+    position: relative;
+    margin-top:-100px;
+    border-top-right-radius: 40px ;
+    border-top-left-radius: 40px ;
+    min-height: 100vh;
+    @media (min-width: 900px){
+        max-width: 1300px;
+    }
+
+`;
+
+const LayoutGrid = styled.div`
     display: flex;
     gap: 30px;
     margin-bottom: 50px;
@@ -204,24 +384,26 @@ const BlogContainer = styled.div`
     }
 `;
 
-// 70% width for the main article
-  const MainContentArea = styled.section`
+const MainContentArea = styled.section`
     flex: 7;
     background: #fff;
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    position: relative;
+    min-height: 500px; 
 
     h1 {
-        color: ${colors.primary};
+        color: #0056b3;
         font-size: 2.5em;
         margin-bottom: 0.4em;
+        font-weight: 600;
     }
     
     h2 {
-        color: ${colors.text};
+        color: #343a40;
         font-size: 1.8em;
-        border-bottom: 2px solid ${colors.border};
+        border-bottom: 2px solid #dee2e6;
         padding-bottom: 10px;
         margin-top: 30px;
     }
@@ -233,101 +415,135 @@ const BlogContainer = styled.div`
     }
 `;
 
-// 30% width for the sidebar
-  const SidebarArea = styled.aside`
+const SidebarArea = styled.aside`
     flex: 3;
     padding: 20px;
-    background: ${colors.background};
+    background: #f8f9fa;
     border-radius: 8px;
+    max-height: 600px;
+    overflow-y: auto;
     
     @media (max-width: 992px) {
-        order: -1; /* Puts sidebar on top on mobile */
+        order: -1;
+        max-height: none;
     }
 `;
 
-// Related Blogs Section
-  const RelatedBlogsSection = styled.section`
-    padding-top: 20px;
-
-    h2 {
-        color: ${colors.primary};
-        font-size: 1.8em;
-        border-bottom: 3px solid ${colors.secondary};
-        padding-bottom: 5px;
-        margin-bottom: 25px;
-    }
-
-    /* Container for the related blog cards */
-    div {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 20px;
-    }
-`;
-
-// Individual Related Blog Card Style
-  const BlogCard = styled.article`
-    background: #fff;
-    border: 1px solid ${colors.border};
-    border-radius: 6px;
-    padding: 15px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-
-    &:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    h3 {
-        color: ${colors.primary};
-        font-size: 1.2em;
-        margin-bottom: 10px;
-    }
-
-    a {
-        text-decoration: none;
-        color: ${colors.secondary};
-        font-weight: bold;
-        &:hover {
-            text-decoration: underline;
-        }
-    }
-`;
-
-// Sidebar List Styles
-  const BlogListTitle = styled.h3`
-    color: ${colors.text};
+const BlogListTitle = styled.h3`
+    color: #343a40;
     font-size: 1.4em;
     margin-bottom: 15px;
     padding-bottom: 5px;
-    border-bottom: 2px solid ${colors.border};
+    border-bottom: 2px solid #dee2e6;
 `;
 
-  const BlogListItem = styled.li`
+const BlogListItem = styled.li`
     list-style: none;
-    margin-bottom: 10px;
-    padding: 5px 0;
+    margin-bottom: 15px;
+    padding: 10px;
     border-left: 3px solid transparent;
+    background: #fff;
+    border-radius: 5px;
+    transition: all 0.3s ease;
 
     a {
         text-decoration: none;
-        color: ${colors.text};
+        color: #343a40;
         font-size: 0.95em;
-        transition: color 0.2s;
+        font-weight: 500;
+        display: block;
+        margin-bottom: 5px;
+        cursor: pointer;
     }
 
     &:hover {
-        border-left-color: ${colors.primary};
-        background-color: rgba(0, 86, 179, 0.05); /* Light hover effect */
+        border-left-color: #0056b3;
+        background-color: rgba(0, 86, 179, 0.05);
+        transform: translateX(5px);
     }
     
-    /* Style for the currently active/featured blog */
     ${props => props.$isActive && css`
-        border-left-color: ${colors.secondary};
-        font-weight: bold;
+        border-left-color: #28a745;
+        background-color: rgba(40, 167, 69, 0.1);
         a {
-            color: ${colors.primary};
+            color: #0056b3;
+            font-weight: bold;
         }
     `}
+`;
+
+const BlogDate = styled.small`
+    color: #6c757d;
+    font-size: 0.8em;
+`;
+
+const RelatedBlogsSection = styled.section`
+    padding-top: 20px;
+    margin-top: 40px;
+    border-top: 2px solid #dee2e6;
+
+    h2 {
+        color: #0056b3;
+        font-size: 1.8em;
+        border-bottom: 3px solid #28a745;
+        padding-bottom: 5px;
+        margin-bottom: 25px;
+        font-weight: 600;
+    }
+`;
+
+const RelatedBlogsGrid = styled.div`
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+`;
+
+const BlogCard = styled.div`
+    background: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    max-width: 320px;
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+`;
+
+const BlogCardImage = styled.img`
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+`;
+
+const BlogCardContent = styled.div`
+    padding: 20px;
+ 
+    h3 {
+        color: #0056b3;
+        font-size: 1.2em;
+        margin-bottom: 10px;
+        line-height: 1.4;
+        font-weight: 600;
+    }
+
+    p {
+        color: #6c757d;
+        font-size: 0.9em;
+        margin-bottom: 15px;
+    }
+`;
+
+const ReadMoreLink = styled.span`
+    text-decoration: none;
+    color: #28a745;
+    font-weight: bold;
+    font-size: 0.9em;
+    
+    &:hover {
+        text-decoration: underline;
+    }
 `;

@@ -1,9 +1,14 @@
 import React from 'react'
+import NewBlogBC from '../../components/breadcrumbs/NewBlogBC'
+import BlogsPage from '../BlogsPage'
 
-const Blogs = () => {
+const Blogss = () => {
   return (
-    <div>Blogs</div>
+    <div>
+     
+      <BlogsPage/>
+    </div>
   )
 }
 
-export default Blogs
+export default Blogss

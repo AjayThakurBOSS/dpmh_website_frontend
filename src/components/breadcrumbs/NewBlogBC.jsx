@@ -9,14 +9,13 @@ const HeroContainer = styled.section`
   height: 40vh;
   background-image: linear-gradient(to bottom, #2C4B98, #149BD2);
   display: flex;
-  align-items: start;
+  align-items: center;
   justify-content: center;
   text-align: center;
   color: white;
   flex-direction: column;
   position: relative;
   overflow: hidden;
-  z-index: 1;
 
   @media (max-width: 768px) {
     height: 40vh;
@@ -30,9 +29,6 @@ const Breadcrumb = styled.nav`
   gap: 8px;
   font-size: 1.1rem;
   font-weight: 500;
-  position: absolute;
-  top: 50px;
-  left: 30px;
 
   a {
     color: #fff;
@@ -53,11 +49,7 @@ const Title = styled.h1`
   font-size: 2.8rem;
   font-weight: 700;
   margin-bottom: 12px;
-  text-align: left;
-  margin-top: 10px;
-  position: absolute;
-  top: 70px;
-  left: 30px;
+
   @media (max-width: 768px) {
     font-size: 1.8rem;
   }
@@ -74,7 +66,7 @@ const SubText = styled.p`
 
 // ===== React Component =====
 
-const BlogBC = () => {
+const NewBlogBC = () => {
   return (
     <HeroContainer>
       <Breadcrumb>
@@ -87,6 +79,8 @@ const BlogBC = () => {
   );
 };
 
-export default BlogBC;
+export default NewBlogBC;
+
+
 
 

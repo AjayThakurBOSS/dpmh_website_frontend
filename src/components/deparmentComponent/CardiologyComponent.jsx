@@ -98,9 +98,6 @@ const FAQAnswer = styled.p`
 const CardiologyComponent = () => {
   return (
     <>
-      {/* 1. Hero Image */}
-  
-
       <SectionTitle>
         Cardiology & Cardiothoracic Vascular Surgery (CTVS) at Dr. Prabhat Memorial Hiramati Hospital, Patna
       </SectionTitle>
